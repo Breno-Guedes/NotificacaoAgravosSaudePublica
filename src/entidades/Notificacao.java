@@ -17,7 +17,7 @@ public abstract class Notificacao {
     public String gerarResumo() {
         return "Paciente: " + dadosIndividuais.getNome() +
                "Idade: " + dadosIndividuais.getIdade() +
-               "Diagnóstico: " + dadosEpidemiologicos.getDiagnostico();
+               "Diagnóstico: " + dadosEpidemiologicos.getDadosDoExame();
     }
 
 
