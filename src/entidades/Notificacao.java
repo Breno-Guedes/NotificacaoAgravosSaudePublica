@@ -3,6 +3,7 @@ package entidades;
 import entidadesDeDados.*;
 
 public abstract class Notificacao {
+    protected Integer codigo = 1;
     protected DadosGerais dadosGerais;
     protected DadosIndividuais dadosIndividuais;
     protected DadosResidenciais dadosResidenciais;

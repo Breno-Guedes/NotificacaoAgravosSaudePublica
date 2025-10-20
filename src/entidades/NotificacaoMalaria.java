@@ -1,14 +1,19 @@
 package entidades;
 
-public class NotificacaoMalaria extends Notificacao{
+public class NotificacaoMalaria extends Notificacao {
 
-    @Override
-    public void registrarNotificacao() {
+  NotificacaoMalaria(){
+    // #TODO
+    this.codigo++;
+  }
 
-    }
+  @Override
+  public void registrarNotificacao() {
 
-    @Override
-    public void gerarRelatorio() {
+  }
 
-    }
+  @Override
+  public void gerarRelatorio() {
+
+  }
 }

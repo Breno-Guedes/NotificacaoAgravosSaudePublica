@@ -1,6 +1,6 @@
 package enums;
 
-public enum ResultadoEnxame {
+public enum ResultadoExame {
     POSITIVO,
     NEGATIVO,
     INDETERMINADO
