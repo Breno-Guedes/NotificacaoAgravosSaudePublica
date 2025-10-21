@@ -16,7 +16,7 @@ public class DadosIndividuais {
   private String cartaoSUS;
   private String nomeMae;
 
-  DadosIndividuais(){}
+  public DadosIndividuais(){}
 
   DadosIndividuais(
       String nome,

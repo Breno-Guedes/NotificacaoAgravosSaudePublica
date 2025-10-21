@@ -11,7 +11,7 @@ public class DadosGerais {
   private String ubs;
   private LocalDate dataSintomas;
 
-  DadosGerais() {
+  public DadosGerais() {
   }
 
   DadosGerais(

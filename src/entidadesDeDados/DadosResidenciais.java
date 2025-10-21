@@ -13,16 +13,7 @@ public class DadosResidenciais {
   private Integer ddd;
   private Zona zona;
 
-  public DadosResidenciais(
-      String uf,
-      String municipio,
-      String distrito,
-      String bairro,
-      String logradouro,
-      String numero,
-      Integer cep,
-      Integer ddd,
-      Zona zona) {
+  public DadosResidenciais() {
     this.uf = uf;
     this.municipio = municipio;
     this.distrito = distrito;

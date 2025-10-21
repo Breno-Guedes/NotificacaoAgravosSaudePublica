@@ -9,9 +9,7 @@ public class DadosTratamento {
   private EsquemaTratamento esquemaTratamento;
   private LocalDate dataInicioTratamento;
 
-  public DadosTratamento(
-      EsquemaTratamento esquemaTratamento,
-      LocalDate dataInicioTratamento) {
+  public DadosTratamento() {
 
     this.esquemaTratamento = esquemaTratamento;
     this.dataInicioTratamento = dataInicioTratamento;

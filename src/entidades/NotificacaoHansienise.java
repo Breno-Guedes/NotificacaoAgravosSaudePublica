@@ -1,5 +1,7 @@
 package entidades;
 
+import java.util.Scanner;
+
 public class NotificacaoHansienise extends Notificacao {
 
   NotificacaoHansienise(){
@@ -8,11 +10,17 @@ public class NotificacaoHansienise extends Notificacao {
   }
 
   @Override
-  public void registrarNotificacao() {
+  public void registrarNotificacao(Scanner scanner) {
+    // #TODO
 
   }
 
-  @Override
+    @Override
+    public void consultarNotificacao(Scanner sc) {
+
+    }
+
+    @Override
   public void gerarRelatorio() {
 
   }

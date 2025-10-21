@@ -2,6 +2,10 @@ package entidades;
 
 import entidadesDeDados.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public abstract class Notificacao {
     protected Integer codigo = 1;
     protected DadosGerais dadosGerais;
@@ -11,21 +15,18 @@ public abstract class Notificacao {
     protected DadosTratamento dadosTratamento;
     protected ConclusaoEncerramento conclusaoEncerramento;
 
-    public abstract void registrarNotificacao();
-    public abstract void gerarRelatorio();
+    Scanner scanner = new Scanner(System.in);
+    public static List<NotificacaoMalaria> todasNotificacoes = new ArrayList<>();
 
-    public String gerarResumo() {
-        return "Paciente: " + dadosIndividuais.getNome() +
-               "Idade: " + dadosIndividuais.getIdade() +
-               "Diagnóstico: " + dadosEpidemiologicos.getDadosDoExame();
-    }
+    public abstract void registrarNotificacao(Scanner scanner);
+    public abstract void consultarNotificacao(Scanner scanner);
+    public abstract void gerarRelatorio();
 
 
     // Getters and Setters
     public DadosGerais getDadosGerais() {
         return dadosGerais;
     }
-
     public void setDadosGerais(DadosGerais dadosGerais) {
         this.dadosGerais = dadosGerais;
     }
@@ -33,7 +34,6 @@ public abstract class Notificacao {
     public DadosIndividuais getDadosIndividuais() {
         return dadosIndividuais;
     }
-
     public void setDadosIndividuais(DadosIndividuais dadosIndividuais) {
         this.dadosIndividuais = dadosIndividuais;
     }
@@ -41,7 +41,6 @@ public abstract class Notificacao {
     public DadosResidenciais getDadosResidenciais() {
         return dadosResidenciais;
     }
-
     public void setDadosResidenciais(DadosResidenciais dadosResidenciais) {
         this.dadosResidenciais = dadosResidenciais;
     }
@@ -49,7 +48,6 @@ public abstract class Notificacao {
     public DadosEpidemiologicos getDadosEpidemiologicos() {
         return dadosEpidemiologicos;
     }
-
     public void setDadosEpidemiologicos(DadosEpidemiologicos dadosEpidemiologicos) {
         this.dadosEpidemiologicos = dadosEpidemiologicos;
     }
@@ -57,7 +55,6 @@ public abstract class Notificacao {
     public DadosTratamento getDadosTratamento() {
         return dadosTratamento;
     }
-
     public void setDadosTratamento(DadosTratamento dadosTratamento) {
         this.dadosTratamento = dadosTratamento;
     }
@@ -65,7 +62,6 @@ public abstract class Notificacao {
     public ConclusaoEncerramento getConclusaoEncerramento() {
         return conclusaoEncerramento;
     }
-
     public void setConclusaoEncerramento(ConclusaoEncerramento conclusaoEncerramento) {
         this.conclusaoEncerramento = conclusaoEncerramento;
     }
