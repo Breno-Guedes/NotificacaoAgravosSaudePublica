@@ -4,71 +4,74 @@ import entidadesDeDados.*;
 import enums.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class NotificacaoMalaria extends Notificacao {
 
-  NotificacaoMalaria(){
-    // #TODO
-    this.codigo++;
+  public static List<NotificacaoMalaria> todasNotificacoes = new ArrayList<>();
+
+  public NotificacaoMalaria(){
+    this.codigo = contadorCodigo++;
   }
 
   @Override
   public void registrarNotificacao(Scanner sc) {
 
-      IO.println("=== REGISTRO DE NOTIFICAÇÃO: MALÁRIA ===");
+      System.out.println("=== REGISTRO DE NOTIFICAÇÃO: MALÁRIA ===");
 
       // --- DADOS GERAIS ---
-      DadosGerais dadosGerais = new DadosGerais();
-      dadosGerais.setAgravo(Doenca.MALARIA);
+      this.dadosGerais = new DadosGerais();
+      this.dadosGerais.setAgravo(Doenca.MALARIA);
 
-      IO.print("Data da Notificação: ");
+      System.out.print("Data da Notificação: ");
       String dataNotificacaoStr = sc.nextLine();
-      dadosGerais.setDataNotificacao(LocalDate.parse(dataNotificacaoStr));
+      this.dadosGerais.setDataNotificacao(LocalDate.parse(dataNotificacaoStr));
 
-      IO.print("UF: ");
-      dadosGerais.setUf(sc.nextLine());
+      System.out.print("UF: ");
+      this.dadosGerais.setUf(sc.nextLine());
 
-      IO.print("Município de Notificação: ");
-      dadosGerais.setMunicipio(sc.nextLine());
+      System.out.print("Município de Notificação: ");
+      this.dadosGerais.setMunicipio(sc.nextLine());
 
-      IO.print("Unidade de Saúde: ");
-      dadosGerais.setUbs(sc.nextLine());
+      System.out.print("Unidade de Saúde: ");
+      this.dadosGerais.setUbs(sc.nextLine());
 
-      IO.print("Data dos primeiros sintomas: ");
+      System.out.print("Data dos primeiros sintomas: ");
       String dataSintomasStr = sc.nextLine();
-      dadosGerais.setDataSintomas(LocalDate.parse(dataSintomasStr));
+      this.dadosGerais.setDataSintomas(LocalDate.parse(dataSintomasStr));
 
       // --- DADOS INDIVIDUAIS ---
-      DadosIndividuais dadosIndividuais = new DadosIndividuais();
+      this.dadosIndividuais = new DadosIndividuais();
 
-      IO.print("Nome do paciente: ");
-      dadosIndividuais.setNome(sc.nextLine());
+      System.out.print("Nome do paciente: ");
+      this.dadosIndividuais.setNome(sc.nextLine());
 
-      IO.print("Data de nascimento: ");
-      dadosIndividuais.setDataNascimento(sc.nextLine());
+      System.out.print("Data de nascimento: ");
+      this.dadosIndividuais.setDataNascimento(sc.nextLine());
 
-      IO.print("Idade: ");
-      dadosIndividuais.setIdade(sc.nextInt());
+      System.out.print("Idade: ");
+      this.dadosIndividuais.setIdade(sc.nextInt());
       sc.nextLine();
 
-      IO.print("Sexo (M/F): ");
-      dadosIndividuais.setSexo(Sexo.valueOf(sc.nextLine().toUpperCase()));
+      System.out.print("Sexo (M/F): ");
+      this.dadosIndividuais.setSexo(Sexo.valueOf(sc.nextLine().toUpperCase()));
 
 
-      IO.println("""
+      System.out.println("""
                 0 - 1º trimestre
                 1 - 2º trimestre
                 2 - 3º trimestre
                 3 - Idade gestacional ignorada
                 4 - Não gestante
               """);
-      IO.print("Gestante (0-4): ");
-      dadosIndividuais.setGestante(Gestante.values()[sc.nextInt() - 1]);
+      System.out.print("Gestante (0-4): ");
+      this.dadosIndividuais.setGestante(Gestante.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
 
-      IO.println("""
+      System.out.println("""
                   0 - Branca
                   1 - Preta
                   2 - Parda
@@ -76,11 +79,11 @@ public class NotificacaoMalaria extends Notificacao {
                   4 - Indígena
                   5 - Não informado
               """);
-      IO.print("Raça/Cor (0-5): ");
-      dadosIndividuais.setRacaCor(RacaCor.values()[sc.nextInt() - 1]);
+      System.out.print("Raça/Cor (0-5): ");
+      this.dadosIndividuais.setRacaCor(RacaCor.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
-      IO.println("""
+      System.out.println("""
                   0 - Fundamental incompleto
                   1 - Fundamental completo
                   2 - Médio incompleto
@@ -92,55 +95,55 @@ public class NotificacaoMalaria extends Notificacao {
                   8 - Doutorado
                   9 - Não informado
               """);
-      IO.print("Escolaridade (0-9): ");
-      dadosIndividuais.setEscolaridade(Escolaridade.values()[sc.nextInt()]);
+      System.out.print("Escolaridade (0-9): ");
+      this.dadosIndividuais.setEscolaridade(Escolaridade.values()[sc.nextInt()]);
       sc.nextLine();
 
-      IO.print("Nome da mãe: ");
-      dadosIndividuais.setNomeMae(sc.nextLine());
+      System.out.print("Nome da mãe: ");
+      this.dadosIndividuais.setNomeMae(sc.nextLine());
 
       // --- DADOS RESIDENCIAIS ---
-      DadosResidenciais dadosResidenciais = new DadosResidenciais();
-      IO.print("UF de residência: ");
-      dadosResidenciais.setUf(sc.nextLine());
+      this.dadosResidenciais = new DadosResidenciais();
+      System.out.print("UF de residência: ");
+      this.dadosResidenciais.setUf(sc.nextLine());
 
-      IO.print("Município de residência: ");
-      dadosResidenciais.setMunicipio(sc.nextLine());
+      System.out.print("Município de residência: ");
+      this.dadosResidenciais.setMunicipio(sc.nextLine());
 
-      IO.print("Bairro: ");
-      dadosResidenciais.setBairro(sc.nextLine());
+      System.out.print("Bairro: ");
+      this.dadosResidenciais.setBairro(sc.nextLine());
 
-      IO.print("Logradouro: ");
-      dadosResidenciais.setLogradouro(sc.nextLine());
+      System.out.print("Logradouro: ");
+      this.dadosResidenciais.setLogradouro(sc.nextLine());
 
-      IO.print("Número: ");
-      dadosResidenciais.setNumero(sc.nextLine());
+      System.out.print("Número: ");
+      this.dadosResidenciais.setNumero(sc.nextLine());
 
-      IO.print("CEP: ");
-      dadosResidenciais.setCep(sc.nextInt());
+      System.out.print("CEP: ");
+      this.dadosResidenciais.setCep(sc.nextInt());
 
-      IO.print("Telefone: ");
-      dadosResidenciais.setDdd(sc.nextInt());
+      System.out.print("Telefone: ");
+      this.dadosResidenciais.setDdd(sc.nextInt());
 
-      IO.println("""
+      System.out.println("""
                   0 - Urbana
                   1 - Rural
                 """);
-      IO.print("Zona (0-1): ");
-      dadosResidenciais.setZona(Zona.values()[sc.nextInt() - 1]);
+      System.out.print("Zona (0-1): ");
+      this.dadosResidenciais.setZona(Zona.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
       // --- DADOS EPIDEMIOLÓGICOS ---
-      DadosEpidemiologicos dadosEpidemiologicos = new DadosEpidemiologicos();
+      this.dadosEpidemiologicos = new DadosEpidemiologicos();
 
-      IO.print("Data da Investigação: ");
+      System.out.print("Data da Investigação: ");
       String dataInvestigacaoStr = sc.nextLine();
-      dadosEpidemiologicos.setDataInvestigacao(LocalDate.parse(dataInvestigacaoStr));
+      this.dadosEpidemiologicos.setDataInvestigacao(LocalDate.parse(dataInvestigacaoStr));
 
 
-      IO.print("Ocupação: ");
-      dadosEpidemiologicos.setOcupacao(sc.nextLine());
-      IO.println(""" 
+      System.out.print("Ocupação: ");
+      this.dadosEpidemiologicos.setOcupacao(sc.nextLine());
+      System.out.println(""" 
                   0 - Agricultura
                   1 - Pecuária
                   2 - Doméstica
@@ -154,48 +157,49 @@ public class NotificacaoMalaria extends Notificacao {
                   10 - Motorista
                   11 - Outros
               """);
-      IO.print("Atividade últimos 15 dias (0-11): ");
-      dadosEpidemiologicos.setAtividade(AtividadesUltimos15Dias.values()[sc.nextInt() - 1]);
+      System.out.print("Atividade últimos 15 dias (0-11): ");
+      this.dadosEpidemiologicos.setAtividade(AtividadesUltimos15Dias.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
       // --- DADOS DO EXAME ---
-      IO.println("""
+      System.out.println("""
                   0 - BP
                   1 - BA
                   2 - LVC
                   3 - IGNORADO
               """);
-      IO.print("Tipo de lâmina (0-3): ");
-      dadosEpidemiologicos.setTipoLamina(TiposLamina.values()[sc.nextInt() - 1]);
+      System.out.print("Tipo de lâmina (0-3): ");
+      this.dadosEpidemiologicos.setTipoLamina(TiposLamina.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
-      IO.println("""
+      System.out.println("""
                   0 - Com sintomas
                   1 - Sem sintomas
               """);
-      IO.print("Sintomas (0-1): ");
-      dadosEpidemiologicos.setSintomas(Sintomas.values()[sc.nextInt() - 1]);
+      System.out.print("Sintomas (0-1): ");
+      this.dadosEpidemiologicos.setSintomas(Sintomas.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
-      IO.print("Data do exame: ");
+      System.out.print("Data do exame: ");
       String dataExameStr = sc.nextLine();
-      dadosEpidemiologicos.setDataExame(LocalDate.parse(dataExameStr));
+      this.dadosEpidemiologicos.setDataExame(LocalDate.parse(dataExameStr));
 
 
-      IO.println("""
+      System.out.println("""
                   0 - Positivo
                   1 - Negativo
                   2 - Indeterminado
               """);
-      IO.print("Resultado do exame (0-9): ");
-      dadosEpidemiologicos.setResultadoExame(ResultadoExame.values()[sc.nextInt() - 1]);
+      System.out.print("Resultado do exame (0-9): ");
+      this.dadosEpidemiologicos.setResultadoExame(ResultadoExame.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
-      IO.print("Parasitos por mm³: ");
-      dadosEpidemiologicos.setParasitasMetroCubico(sc.nextFloat());
+      System.out.print("Parasitos por mm³: ");
+      this.dadosEpidemiologicos.setParasitasMetroCubico(sc.nextFloat());
+      sc.nextLine();
 
 
-      IO.println("""
+      System.out.println("""
                   0 - Menor que meia cruz
                   1 - Meia cruz
                   2 - Uma cruz
@@ -203,14 +207,14 @@ public class NotificacaoMalaria extends Notificacao {
                   4 - Três cruzes
                   5 - Quatro cruzes  
               """);
-      IO.print("Parasitemia (0-5): ");
-      dadosEpidemiologicos.setParasitemia(Parasitemia.values()[sc.nextInt() - 1]);
+      System.out.print("Parasitemia (0-5): ");
+      this.dadosEpidemiologicos.setParasitemia(Parasitemia.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
       // --- DADOS DO TRATAMENTO ---
-      DadosTratamento dadosTratamento = new DadosTratamento();
+      this.dadosTratamento = new DadosTratamento();
 
-      IO.println("""
+      System.out.println("""
                   0 - Pv Cloroquina Primaquina
                   1 - Pf Quinina Doxiciclina Primaquina
                   2 - Mistas Pv Pf Mefloquina Primaquina
@@ -225,76 +229,76 @@ public class NotificacaoMalaria extends Notificacao {
                   11 - Pf Artemeter Lumerfantrina
                   12 - Outro
                """);
-      IO.print("Esquema de tratamento (1-12): ");
-      dadosTratamento.setEsquemaTratamento(EsquemaTratamento.values()[sc.nextInt() - 1]);
+      System.out.print("Esquema de tratamento (1-12): ");
+      this.dadosTratamento.setEsquemaTratamento(EsquemaTratamento.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
-      IO.print("Data de início do tratamento: ");
+      System.out.print("Data de início do tratamento: ");
       String dataInicioStr = sc.nextLine();
-      dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
+      this.dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
 
 
       // --- CONCLUSÃO / ENCERRAMENTO ---
-      ConclusaoEncerramento conclusaoEncerramento = new ConclusaoEncerramento();
+      this.conclusaoEncerramento = new ConclusaoEncerramento();
 
-      IO.println("""
+      System.out.println("""
                   0 - Caso confirmado
                   1 - Caso descartado
               """);
-      IO.print("Classificação final (0-1): ");
-      conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[sc.nextInt() - 1]);
+      System.out.print("Classificação final (0-1): ");
+      this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
-      IO.println("""
+      System.out.println("""
                    0 - Sim
                    1 - Não
                    2 - Indeterminado
                 """);
-      IO.print("Caso autóctone (0-2): ");
-      conclusaoEncerramento.setAutoctone(Autoctone.values()[sc.nextInt() - 1]);
+      System.out.print("Caso autóctone (0-2): ");
+      this.conclusaoEncerramento.setAutoctone(Autoctone.values()[sc.nextInt() - 1]);
       sc.nextLine();
 
-      IO.print("UF provável de infecção: ");
-      conclusaoEncerramento.setProvavelUFinfeccao(sc.nextLine());
+      System.out.print("UF provável de infecção: ");
+      this.conclusaoEncerramento.setProvavelUFinfeccao(sc.nextLine());
 
-      IO.print("Município provável de infecção: ");
-      conclusaoEncerramento.setProvavelMunicipioInfeccao(sc.nextLine());
+      System.out.print("Município provável de infecção: ");
+      this.conclusaoEncerramento.setProvavelMunicipioInfeccao(sc.nextLine());
 
-      IO.print("Data de encerramento: ");
+      System.out.print("Data de encerramento: ");
       String dataEncerramentoStr = sc.nextLine();
-      conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
+      this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
 
-      IO.println("\nNotificação de MALÁRIA registrada com sucesso!");
+      System.out.println("\nNotificação de MALÁRIA registrada com sucesso!");
       todasNotificacoes.add(this);
   }
 
     @Override
     public void consultarNotificacao(Scanner sc) {
         if (todasNotificacoes.isEmpty()) {
-            IO.println("Não há notificações registradas.");
+            System.out.println("Não há notificações registradas.");
             return;
         }
 
-        IO.println("\n=== CONSULTAR NOTIFICAÇÕES ===");
-        IO.println("1 - Consultar pelo nome do paciente");
-        IO.println("2 - Consultar por bairro");
-        IO.println("3 - Consultar por período");
-        IO.println("4 - Consultar por agravo");
-        IO.print("Escolha uma opção: ");
+        System.out.println("\n=== CONSULTAR NOTIFICAÇÕES ===");
+        System.out.println("1 - Consultar pelo nome do paciente");
+        System.out.println("2 - Consultar por bairro");
+        System.out.println("3 - Consultar por período");
+        System.out.println("4 - Consultar por agravo");
+        System.out.print("Escolha uma opção: ");
         int opcao = sc.nextInt();
         sc.nextLine();
 
         switch (opcao) {
             case 1 -> {
-                IO.print("Digite o nome do paciente: ");
+                System.out.print("Digite o nome do paciente: ");
                 String nome = sc.nextLine();
 
-                IO.println("\nResultados da consulta pelo nome: " + nome);
+                System.out.println("\nResultados da consulta pelo nome: " + nome);
 
                 int encontrados = 0;
                 for (NotificacaoMalaria n : todasNotificacoes) {
                     if (n.dadosIndividuais.getNome().equalsIgnoreCase(nome)) {
-                        IO.println("-> " + n.dadosIndividuais.getNome()
+                        System.out.println("-> " + n.dadosIndividuais.getNome()
                                 + " | Bairro: " + n.dadosResidenciais.getBairro()
                                 + " | Data Notificação: " + n.dadosGerais.getDataNotificacao());
                         encontrados++;
@@ -302,47 +306,47 @@ public class NotificacaoMalaria extends Notificacao {
                 }
 
                 if (encontrados == 0) {
-                    IO.println("Nenhuma notificação encontrada para o paciente: " + nome);
+                    System.out.println("Nenhuma notificação encontrada para o paciente: " + nome);
                 } else {
-                    IO.println("Total de notificações encontradas: " + encontrados);
+                    System.out.println("Total de notificações encontradas: " + encontrados);
                 }
             }
             case 2 -> {
-                IO.print("Digite o bairro: ");
+                System.out.print("Digite o bairro: ");
                 String bairro = sc.nextLine();
 
-                IO.println("\nResultados da consulta pelo bairro: " + bairro);
+                System.out.println("\nResultados da consulta pelo bairro: " + bairro);
 
                 int encontrados = 0;
                 for (NotificacaoMalaria n : todasNotificacoes) {
                     if (n.dadosResidenciais.getBairro().equalsIgnoreCase(bairro)) {
-                        IO.println("->" + n.dadosIndividuais.getNome()
+                        System.out.println("->" + n.dadosIndividuais.getNome()
                                 + " | Data Notificação: " + n.dadosGerais.getDataNotificacao());
                         encontrados++;
                     }
                 }
 
                 if (encontrados == 0) {
-                    IO.println("Nenhuma notificação encontrada para o bairro: " + bairro);
+                    System.out.println("Nenhuma notificação encontrada para o bairro: " + bairro);
                 } else {
-                    IO.println("Total de notificações encontradas: " + encontrados);
+                    System.out.println("Total de notificações encontradas: " + encontrados);
                 }
             }
             case 3 -> {
-                IO.print("Digite a data inicial (AAAA-MM-DD): ");
+                System.out.print("Digite a data inicial (AAAA-MM-DD): ");
                 LocalDate inicio = LocalDate.parse(sc.nextLine());
 
-                IO.print("Digite a data final (AAAA-MM-DD): ");
+                System.out.print("Digite a data final (AAAA-MM-DD): ");
                 LocalDate fim = LocalDate.parse(sc.nextLine());
 
-                IO.println("\nResultados da consulta por período: " + inicio + " a " + fim);
+                System.out.println("\nResultados da consulta por período: " + inicio + " a " + fim);
 
                 int encontrados = 0;
                 for (NotificacaoMalaria n : todasNotificacoes) {
                     LocalDate data = n.dadosGerais.getDataNotificacao();
                     if ((data.isEqual(inicio) || data.isAfter(inicio)) &&
                             (data.isEqual(fim) || data.isBefore(fim))) {
-                        IO.println("->" + n.dadosIndividuais.getNome()
+                        System.out.println("->" + n.dadosIndividuais.getNome()
                                 + " | Bairro: " + n.dadosResidenciais.getBairro()
                                 + " | Data Notificação: " + data);
                         encontrados++;
@@ -350,13 +354,13 @@ public class NotificacaoMalaria extends Notificacao {
                 }
 
                 if (encontrados == 0) {
-                    IO.println("Nenhuma notificação encontrada no período especificado.");
+                    System.out.println("Nenhuma notificação encontrada no período especificado.");
                 } else {
-                    IO.println("Total de notificações encontradas: " + encontrados);
+                    System.out.println("Total de notificações encontradas: " + encontrados);
                 }
             }
             case 4 -> {
-                IO.println("""
+                System.out.println("""
                              Opções de agravo:
                              +--------------+
                              | MALARIA      |
@@ -364,16 +368,16 @@ public class NotificacaoMalaria extends Notificacao {
                              | TUBERCULOSE  |
                              +--------------+  
                         """);
-                IO.print("Digite o agravo: ");
+                System.out.print("Digite o agravo: ");
                 String doenca = sc.nextLine().toUpperCase();
                 Doenca agravo = Doenca.valueOf(doenca);
 
-                IO.println("\nResultados da consulta por agravo: " + agravo);
+                System.out.println("\nResultados da consulta por agravo: " + agravo);
 
                 int encontrados = 0;
                 for (NotificacaoMalaria n : todasNotificacoes) {
                     if (n.dadosGerais.getAgravo() == agravo) {
-                        IO.println("- " + n.dadosIndividuais.getNome()
+                        System.out.println("- " + n.dadosIndividuais.getNome()
                                 + " | Bairro: " + n.dadosResidenciais.getBairro()
                                 + " | Data Notificação: " + n.dadosGerais.getDataNotificacao());
                         encontrados++;
@@ -381,19 +385,19 @@ public class NotificacaoMalaria extends Notificacao {
                 }
 
                 if (encontrados == 0) {
-                    IO.println("Nenhuma notificação encontrada para o agravo: " + agravo);
+                    System.out.println("Nenhuma notificação encontrada para o agravo: " + agravo);
                 } else {
-                    IO.println("Total de notificações encontradas: " + encontrados);
+                    System.out.println("Total de notificações encontradas: " + encontrados);
                 }
             }
-            default -> IO.println("Opção inválida!");
+            default -> System.out.println("Opção inválida!");
         }
 
     }
 
     @Override
   public void gerarRelatorio() {
-      IO.println("\n=== RELATÓRIO ESTATÍSTICO DE MALÁRIA ===");
+      System.out.println("\n=== RELATÓRIO ESTATÍSTICO DE MALÁRIA ===");
 
       int totalAgravo = 0;
       int totalBairro = 0;
@@ -408,24 +412,24 @@ public class NotificacaoMalaria extends Notificacao {
       int totalNaoInformadoRaca = 0;
       int totalEscolaridade = 0;
 
-      IO.println("\nTotal de notificações por agravo:");
+      System.out.println("\nTotal de notificações por agravo:");
       totalAgravo = todasNotificacoes.size();
-      IO.println("Malária: " + totalAgravo);
+      System.out.println("Malária: " + totalAgravo);
 
-      IO.println("\nTotal de notificações por bairro:");
+      System.out.println("\nTotal de notificações por bairro:");
       for (NotificacaoMalaria n : todasNotificacoes) {
-          IO.println("-> " + n.dadosResidenciais.getBairro());
+          System.out.println("-> " + n.dadosResidenciais.getBairro());
       }
 
-      IO.println("\nTotal de notificações por sexo:");
+      System.out.println("\nTotal de notificações por sexo:");
       for (NotificacaoMalaria n : todasNotificacoes) {
           if (n.dadosIndividuais.getSexo() == Sexo.M) totalSexoM++;
           if (n.dadosIndividuais.getSexo() == Sexo.F) totalSexoF++;
       }
-      IO.println("Masculino: " + totalSexoM);
-      IO.println("Feminino: " + totalSexoF);
+      System.out.println("Masculino: " + totalSexoM);
+      System.out.println("Feminino: " + totalSexoF);
 
-      IO.println("\nTotal de notificações por raça/cor:");
+      System.out.println("\nTotal de notificações por raça/cor:");
       for (NotificacaoMalaria n : todasNotificacoes) {
           switch (n.dadosIndividuais.getRacaCor()) {
               case BRANCA -> totalBranca++;
@@ -436,18 +440,18 @@ public class NotificacaoMalaria extends Notificacao {
               case NAO_INFORMADO -> totalNaoInformadoRaca++;
           }
       }
-      IO.println("Branca: " + totalBranca);
-      IO.println("Preta: " + totalPreta);
-      IO.println("Parda: " + totalParda);
-      IO.println("Amarela: " + totalAmarela);
-      IO.println("Indígena: " + totalIndigena);
-      IO.println("Não informado: " + totalNaoInformadoRaca);
+      System.out.println("Branca: " + totalBranca);
+      System.out.println("Preta: " + totalPreta);
+      System.out.println("Parda: " + totalParda);
+      System.out.println("Amarela: " + totalAmarela);
+      System.out.println("Indígena: " + totalIndigena);
+      System.out.println("Não informado: " + totalNaoInformadoRaca);
 
-      IO.println("\nTotal de notificações por escolaridade:");
+      System.out.println("\nTotal de notificações por escolaridade:");
       for (NotificacaoMalaria n : todasNotificacoes) {
-          IO.println("- " + n.dadosIndividuais.getEscolaridade());
+          System.out.println("- " + n.dadosIndividuais.getEscolaridade());
       }
 
-      IO.println("\nRelatório gerado!");
+      System.out.println("\nRelatório gerado!");
   }
 }

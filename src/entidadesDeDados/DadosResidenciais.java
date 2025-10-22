@@ -13,7 +13,18 @@ public class DadosResidenciais {
   private Integer ddd;
   private Zona zona;
 
-  public DadosResidenciais() {
+  public DadosResidenciais(){}
+  public DadosResidenciais(
+      String uf,
+      String municipio,
+      String distrito,
+      String bairro,
+      String logradouro,
+      String numero,
+      Integer cep,
+      Integer ddd,
+      Zona zona) {
+
     this.uf = uf;
     this.municipio = municipio;
     this.distrito = distrito;
@@ -30,6 +41,7 @@ public class DadosResidenciais {
   public String getUf() {
     return uf;
   }
+
   public void setUf(String uf) {
     this.uf = uf;
   }
@@ -37,6 +49,7 @@ public class DadosResidenciais {
   public String getMunicipio() {
     return municipio;
   }
+
   public void setMunicipio(String municipio) {
     this.municipio = municipio;
   }
@@ -44,6 +57,7 @@ public class DadosResidenciais {
   public String getDistrito() {
     return distrito;
   }
+
   public void setDistrito(String distrito) {
     this.distrito = distrito;
   }
@@ -51,6 +65,7 @@ public class DadosResidenciais {
   public String getBairro() {
     return bairro;
   }
+
   public void setBairro(String bairro) {
     this.bairro = bairro;
   }
@@ -58,6 +73,7 @@ public class DadosResidenciais {
   public String getLogradouro() {
     return logradouro;
   }
+
   public void setLogradouro(String logradouro) {
     this.logradouro = logradouro;
   }
@@ -65,6 +81,7 @@ public class DadosResidenciais {
   public String getNumero() {
     return numero;
   }
+
   public void setNumero(String numero) {
     this.numero = numero;
   }
@@ -72,6 +89,7 @@ public class DadosResidenciais {
   public Integer getCep() {
     return cep;
   }
+
   public void setCep(Integer cep) {
     this.cep = cep;
   }
@@ -79,6 +97,7 @@ public class DadosResidenciais {
   public Integer getDdd() {
     return ddd;
   }
+
   public void setDdd(Integer ddd) {
     this.ddd = ddd;
   }
@@ -86,6 +105,7 @@ public class DadosResidenciais {
   public Zona getZona() {
     return zona;
   }
+
   public void setZona(Zona zona) {
     this.zona = zona;
   }

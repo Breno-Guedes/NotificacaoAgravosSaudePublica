@@ -16,7 +16,18 @@ public class DadosEpidemiologicos {
   private Float parasitasMetroCubico;
   private Parasitemia parasitemia;
 
-  public DadosEpidemiologicos() {
+  public DadosEpidemiologicos(){}
+  public DadosEpidemiologicos(
+      LocalDate dataInvestigacao,
+      String ocupacao,
+      AtividadesUltimos15Dias atividade,
+      String dadosDoExame,
+      TiposLamina tipoLamina,
+      Sintomas sintomas,
+      LocalDate dataExame,
+      ResultadoExame resultadoExame,
+      Float parasitasMetroCubico,
+      Parasitemia parasitemia) {
 
     this.dataInvestigacao = dataInvestigacao;
     this.ocupacao = ocupacao;

@@ -1,13 +1,11 @@
 package entidades;
 
 import entidadesDeDados.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public abstract class Notificacao {
-    protected Integer codigo = 1;
+    protected static Integer contadorCodigo = 1;
+    protected Integer codigo;
     protected DadosGerais dadosGerais;
     protected DadosIndividuais dadosIndividuais;
     protected DadosResidenciais dadosResidenciais;
@@ -16,7 +14,6 @@ public abstract class Notificacao {
     protected ConclusaoEncerramento conclusaoEncerramento;
 
     Scanner scanner = new Scanner(System.in);
-    public static List<NotificacaoMalaria> todasNotificacoes = new ArrayList<>();
 
     public abstract void registrarNotificacao(Scanner scanner);
     public abstract void consultarNotificacao(Scanner scanner);
@@ -24,6 +21,13 @@ public abstract class Notificacao {
 
 
     // Getters and Setters
+    public Integer getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
     public DadosGerais getDadosGerais() {
         return dadosGerais;
     }

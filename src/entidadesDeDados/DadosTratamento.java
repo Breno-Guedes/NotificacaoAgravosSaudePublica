@@ -9,7 +9,10 @@ public class DadosTratamento {
   private EsquemaTratamento esquemaTratamento;
   private LocalDate dataInicioTratamento;
 
-  public DadosTratamento() {
+  public DadosTratamento(){}
+  public DadosTratamento(
+      EsquemaTratamento esquemaTratamento,
+      LocalDate dataInicioTratamento) {
 
     this.esquemaTratamento = esquemaTratamento;
     this.dataInicioTratamento = dataInicioTratamento;
@@ -20,6 +23,7 @@ public class DadosTratamento {
   public void setEsquemaTratamento(EsquemaTratamento esquemaTratamento) {
     this.esquemaTratamento = esquemaTratamento;
   }
+
   public EsquemaTratamento getEsquemaTratamento() {
     return esquemaTratamento;
   }
@@ -27,6 +31,7 @@ public class DadosTratamento {
   public void setDataInicioTratamento(LocalDate dataInicioTratamento) {
     this.dataInicioTratamento = dataInicioTratamento;
   }
+
   public LocalDate getDataInicioTratamento() {
     return dataInicioTratamento;
   }

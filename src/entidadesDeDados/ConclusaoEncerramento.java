@@ -15,7 +15,16 @@ public class ConclusaoEncerramento {
   private String matriculaExaminador;
   private String nomeExaminador;
 
-  public ConclusaoEncerramento() {
+  public ConclusaoEncerramento(){}
+  public ConclusaoEncerramento(
+    ClassificacaoFinal classificacaoFinal, 
+    Autoctone autoctone, 
+    String provavelUFinfeccao, 
+    String provavelPaisInfeccao, 
+    String provavelMunicipioInfeccao, 
+    LocalDate dataEncerramento, 
+    String matriculaExaminador, 
+    String nomeExaminador) {
 
     this.classificacaoFinal = classificacaoFinal;
     this.autoctone = autoctone;
