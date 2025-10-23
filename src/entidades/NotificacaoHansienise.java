@@ -354,10 +354,11 @@ public class NotificacaoHansienise extends Notificacao {
             } else {
                 idoso++;
             }
-            System.out.println("Total de crianças e adolescentes: " + criancaAdolescente);
-            System.out.println("Total de Adultos: " + adulto);
-            System.out.println("Total de idosos: " + idoso);
         }
+
+        System.out.println("Total de crianças e adolescentes: " + criancaAdolescente);
+        System.out.println("Total de Adultos: " + adulto);
+        System.out.println("Total de idosos: " + idoso);
 
         System.out.println("\nTotal de notificações por raça/cor:");
         for (NotificacaoHansienise n : todasNotificacoes) {
@@ -379,7 +380,7 @@ public class NotificacaoHansienise extends Notificacao {
 
         System.out.println("\nTotal de notificações por escolaridade:");
         for (NotificacaoHansienise n : todasNotificacoes) {
-            System.out.println("- " + n.dadosIndividuais.getEscolaridade());
+            System.out.println("-> " + n.dadosIndividuais.getEscolaridade());
         }
 
         System.out.println("\nRelatório gerado!");

@@ -438,10 +438,11 @@ public class NotificacaoMalaria extends Notificacao {
             } else {
                 idoso++;
             }
-            System.out.println("Total de crianças e adolescentes: " + criancaAdolescente);
-            System.out.println("Total de Adultos: " + adulto);
-            System.out.println("Total de idosos: " + idoso);
         }
+
+        System.out.println("Total de crianças e adolescentes: " + criancaAdolescente);
+        System.out.println("Total de Adultos: " + adulto);
+        System.out.println("Total de idosos: " + idoso);
 
         System.out.println("\nTotal de notificações por raça/cor:");
         for (NotificacaoMalaria n : todasNotificacoes) {
@@ -454,6 +455,7 @@ public class NotificacaoMalaria extends Notificacao {
                 case NAO_INFORMADO -> totalNaoInformadoRaca++;
             }
         }
+
         System.out.println("Branca: " + totalBranca);
         System.out.println("Preta: " + totalPreta);
         System.out.println("Parda: " + totalParda);
@@ -463,7 +465,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         System.out.println("\nTotal de notificações por escolaridade:");
         for (NotificacaoMalaria n : todasNotificacoes) {
-            System.out.println("- " + n.dadosIndividuais.getEscolaridade());
+            System.out.println("-> " + n.dadosIndividuais.getEscolaridade());
         }
 
         System.out.println("\nRelatório gerado!");
