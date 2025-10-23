@@ -25,7 +25,7 @@ public class Main {
 
     private static void exibirMenu() {
         System.out.println("\n╔════════════════════════════════════════════════════════╗");
-        System.out.println("║  SISTEMA DE NOTIFICAÇÃO DE AGRAVOS DE SAÚDE PÚBLICA   ║");
+        System.out.println("║  SISTEMA DE NOTIFICAÇÃO DE AGRAVOS DE SAÚDE PÚBLICA    ║");
         System.out.println("╚════════════════════════════════════════════════════════╝");
         System.out.println("1 - Registrar notificação");
         System.out.println("2 - Consultar notificação");
