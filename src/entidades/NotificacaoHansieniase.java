@@ -1,8 +1,8 @@
 package entidades;
 
+import GerenciadorDeArquivos.GerenciadorDeArquivos;
 import entidadesDeDados.*;
 import enums.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class NotificacaoHansieniase extends Notificacao {
     @Override
     public void registrarNotificacao(Scanner sc) {
 
-        System.out.println("=== REGISTRO DE NOTIFICAÇÃO: HANSENÍASE ===");
+        System.out.println("\n=== REGISTRO DE NOTIFICAÇÃO: HANSENÍASE ===");
 
         // --- DADOS GERAIS ---
         DadosGerais dadosGerais = new DadosGerais();
@@ -464,6 +464,8 @@ public class NotificacaoHansieniase extends Notificacao {
 
         System.out.println("\nNotificação de HANSENÍASE registrada com sucesso!");
         todasNotificacoes.add(this);
+
+        GerenciadorDeArquivos.salvarNotificacao(this);
     }
 
     @Override
@@ -471,7 +473,7 @@ public class NotificacaoHansieniase extends Notificacao {
         int opcao;
 
         if (todasNotificacoes.isEmpty()) {
-            System.out.println("Não há notificações registradas.");
+            System.out.println("Não há notificações de Hansieníase registradas.");
             return;
         }
 

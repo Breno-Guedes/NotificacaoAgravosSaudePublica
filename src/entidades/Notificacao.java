@@ -13,11 +13,13 @@ public abstract class Notificacao {
     protected DadosTratamento dadosTratamento;
     protected ConclusaoEncerramento conclusaoEncerramento;
 
-    Scanner scanner = new Scanner(System.in);
-
-    public abstract void registrarNotificacao(Scanner scanner);
-    public abstract void consultarNotificacao(Scanner scanner);
+    public abstract void registrarNotificacao(Scanner sc);
+    public abstract void consultarNotificacao(Scanner sc);
     public abstract void gerarRelatorio();
+
+    public static void setContadorCodigo(Integer contador) {
+        contadorCodigo = contador;
+    }
 
 
     // Getters and Setters

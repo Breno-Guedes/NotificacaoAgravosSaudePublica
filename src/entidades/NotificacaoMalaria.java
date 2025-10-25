@@ -1,8 +1,8 @@
 package entidades;
 
+import GerenciadorDeArquivos.GerenciadorDeArquivos;
 import entidadesDeDados.*;
 import enums.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -18,7 +18,7 @@ public class NotificacaoMalaria extends Notificacao {
     @Override
     public void registrarNotificacao(Scanner sc) {
 
-        System.out.println("=== REGISTRO DE NOTIFICAÇÃO: MALÁRIA ===");
+        System.out.println("\n=== REGISTRO DE NOTIFICAÇÃO: MALÁRIA ===");
 
         // --- DADOS GERAIS ---
         DadosGerais dadosGerais = new DadosGerais();
@@ -530,7 +530,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data de início do tratamento (AAAA-MM-DD): ");
+                System.out.print("Data de início do tratamento: ");
                 String dataInicioStr = sc.nextLine();
 
                 if (dataInicioStr.isEmpty()) {
@@ -623,6 +623,8 @@ public class NotificacaoMalaria extends Notificacao {
 
         System.out.println("\nNotificação de MALÁRIA registrada com sucesso!");
         todasNotificacoes.add(this);
+
+        GerenciadorDeArquivos.salvarNotificacao(this);
     }
 
     @Override
@@ -786,7 +788,7 @@ public class NotificacaoMalaria extends Notificacao {
         System.out.println("\n=== RELATÓRIO ESTATÍSTICO DE MALÁRIA ===");
 
         if (todasNotificacoes.isEmpty()) {
-            System.out.println("Não há notificações de Hanseníase para gerar relatório.");
+            System.out.println("Não há notificações de Malária para gerar relatório.");
             return;
         }
 
@@ -805,7 +807,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         System.out.println("\nTotal de notificações por agravo:");
         totalAgravo = todasNotificacoes.size();
-        System.out.println("Hanseníase: " + totalAgravo);
+        System.out.println("Malária: " + totalAgravo);
 
         System.out.println("\nTotal de notificações por bairro:");
         for (NotificacaoMalaria n : todasNotificacoes) {

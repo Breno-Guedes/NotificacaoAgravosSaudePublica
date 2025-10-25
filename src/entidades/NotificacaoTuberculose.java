@@ -1,8 +1,8 @@
 package entidades;
 
+import GerenciadorDeArquivos.GerenciadorDeArquivos;
 import entidadesDeDados.*;
 import enums.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -17,7 +17,7 @@ public class NotificacaoTuberculose extends Notificacao {
 
     @Override
     public void registrarNotificacao(Scanner sc) {
-        System.out.println("=== REGISTRO DE NOTIFICAÇÃO: TUBERCULOSE ===");
+        System.out.println("\n=== REGISTRO DE NOTIFICAÇÃO: TUBERCULOSE ===");
 
         // --- DADOS GERAIS ---
         DadosGerais dadosGerais = new DadosGerais();
@@ -458,6 +458,8 @@ public class NotificacaoTuberculose extends Notificacao {
 
         todasNotificacoes.add(this);
         System.out.println("\nNotificação de TUBERCULOSE registrada com sucesso!");
+
+        GerenciadorDeArquivos.salvarNotificacao(this);
     }
 
     @Override
@@ -600,6 +602,8 @@ public class NotificacaoTuberculose extends Notificacao {
             return;
         }
 
+        System.out.println("\n=== RELATÓRIO ESTATÍSTICO DE TUBERCULOSE ===");
+
         int totalAgravo;
         int totalSexoM = 0;
         int totalSexoF = 0;
@@ -615,7 +619,7 @@ public class NotificacaoTuberculose extends Notificacao {
 
         System.out.println("\nTotal de notificações por agravo:");
         totalAgravo = todasNotificacoes.size();
-        System.out.println("Hanseníase: " + totalAgravo);
+        System.out.println("Tuberculose: " + totalAgravo);
 
         System.out.println("\nTotal de notificações por bairro:");
         for (NotificacaoTuberculose n : todasNotificacoes) {
