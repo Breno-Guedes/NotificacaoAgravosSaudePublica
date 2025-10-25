@@ -9,7 +9,7 @@ public class DadosResidenciais {
   private String bairro;
   private String logradouro;
   private String numero;
-  private Integer cep;
+  private String cep;
   private Integer ddd;
   private Zona zona;
 
@@ -21,7 +21,7 @@ public class DadosResidenciais {
       String bairro,
       String logradouro,
       String numero,
-      Integer cep,
+      String cep,
       Integer ddd,
       Zona zona) {
 
@@ -86,11 +86,11 @@ public class DadosResidenciais {
     this.numero = numero;
   }
 
-  public Integer getCep() {
+  public String getCep() {
     return cep;
   }
 
-  public void setCep(Integer cep) {
+  public void setCep(String cep) {
     this.cep = cep;
   }
 

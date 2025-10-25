@@ -48,7 +48,7 @@ public class Main {
 
         switch (tipoAgravo) {
             case 1 -> notificacao = new NotificacaoMalaria();
-            case 2 -> notificacao = new NotificacaoHansienise();
+            case 2 -> notificacao = new NotificacaoHansieniase();
             case 3 -> notificacao = new NotificacaoTuberculose();
             default -> {
                 System.out.println("Opção inválida!");
@@ -78,7 +78,7 @@ public class Main {
 
         switch (tipoAgravo) {
             case 1 -> notificacao = new NotificacaoMalaria();
-            case 2 -> notificacao = new NotificacaoHansienise();
+            case 2 -> notificacao = new NotificacaoHansieniase();
             case 3 -> notificacao = new NotificacaoTuberculose();
             default -> {
                 System.out.println("Opção inválida!");
@@ -107,7 +107,7 @@ public class Main {
 
         switch (tipoAgravo) {
             case 1 -> notificacao = new NotificacaoMalaria();
-            case 2 -> notificacao = new NotificacaoHansienise();
+            case 2 -> notificacao = new NotificacaoHansieniase();
             case 3 -> notificacao = new NotificacaoTuberculose();
             default -> {
                 System.out.println("Opção inválida!");

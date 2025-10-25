@@ -5,29 +5,32 @@ import enums.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
-public class NotificacaoTuberculose extends Notificacao {
+public class NotificacaoHansieniase extends Notificacao {
 
-    public static List<NotificacaoTuberculose> todasNotificacoes = new ArrayList<>();
+    public static List<NotificacaoHansieniase> todasNotificacoes = new ArrayList<>();
 
-    public NotificacaoTuberculose() {
+    public NotificacaoHansieniase() {
         this.codigo = contadorCodigo++;
     }
 
     @Override
     public void registrarNotificacao(Scanner sc) {
-        System.out.println("=== REGISTRO DE NOTIFICAÇÃO: TUBERCULOSE ===");
+
+        System.out.println("=== REGISTRO DE NOTIFICAÇÃO: HANSENÍASE ===");
 
         // --- DADOS GERAIS ---
         DadosGerais dadosGerais = new DadosGerais();
         this.dadosGerais = dadosGerais;
-
-        dadosGerais.setAgravo(Doenca.TUBERCULOSE);
+        dadosGerais.setAgravo(Doenca.HANSENIASE);
 
         while (true) {
             try {
-                System.out.print("Data da Notificação (AAAA-MM-DD): ");
+                System.out.print("Data da Notificação: ");
                 String dataNotificacaoStr = sc.nextLine();
 
                 if (dataNotificacaoStr.isEmpty()) {
@@ -76,7 +79,7 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data dos primeiros sintomas (AAAA-MM-DD): ");
+                System.out.print("Data dos primeiros sintomas: ");
                 String dataSintomasStr = sc.nextLine();
 
                 if (dataSintomasStr.isEmpty()) {
@@ -107,7 +110,7 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data de nascimento (AAAA-MM-DD): ");
+                System.out.print("Data de nascimento: ");
                 String dataNascimentoStr = sc.nextLine();
 
                 if (dataNascimentoStr.isEmpty()) {
@@ -158,7 +161,7 @@ public class NotificacaoTuberculose extends Notificacao {
                             3 - 3º trimestre
                             4 - Idade gestacional ignorada
                             5 - Não gestante
-                            """);
+                        """);
                     System.out.print("Gestante (1-5): ");
                     dadosIndividuais.setGestante(Gestante.values()[sc.nextInt() - 1]);
                     sc.nextLine();
@@ -174,12 +177,12 @@ public class NotificacaoTuberculose extends Notificacao {
             try {
                 System.out.println("\n------------------ RAÇA/COR ------------------");
                 System.out.println("""
-                        1 - Branca
-                        2 - Preta
-                        3 - Parda
-                        4 - Amarela
-                        5 - Indígena
-                        6 - Não informado
+                            1 - Branca
+                            2 - Preta
+                            3 - Parda
+                            4 - Amarela
+                            5 - Indígena
+                            6 - Não informado
                         """);
                 System.out.print("Raça/Cor (1-6): ");
                 dadosIndividuais.setRacaCor(RacaCor.values()[sc.nextInt() - 1]);
@@ -195,16 +198,16 @@ public class NotificacaoTuberculose extends Notificacao {
             try {
                 System.out.println("\n------------------ ESCOLARIDADE ------------------");
                 System.out.println("""
-                        1 - Fundamental incompleto
-                        2 - Fundamental completo
-                        3 - Médio incompleto
-                        4 - Médio completo
-                        5 - Superior incompleto
-                        6 - Superior completo
-                        7 - Pós-graduação
-                        8 - Mestrado
-                        9 - Doutorado
-                        10 - Não informado
+                            1 - Fundamental incompleto
+                            2 - Fundamental completo
+                            3 - Médio incompleto
+                            4 - Médio completo
+                            5 - Superior incompleto
+                            6 - Superior completo
+                            7 - Pós-graduação
+                            8 - Mestrado
+                            9 - Doutorado
+                            10 - Não informado
                         """);
                 System.out.print("Escolaridade (1-10): ");
                 dadosIndividuais.setEscolaridade(Escolaridade.values()[sc.nextInt() - 1]);
@@ -219,6 +222,7 @@ public class NotificacaoTuberculose extends Notificacao {
         while (true) {
             System.out.print("Nome da mãe: ");
             dadosIndividuais.setNomeMae(sc.nextLine());
+
             if (dadosIndividuais.getNomeMae().isEmpty()) {
                 System.out.println("O campo Nome da mãe é obrigatório, tente novamente!");
             } else {
@@ -244,6 +248,7 @@ public class NotificacaoTuberculose extends Notificacao {
         while (true) {
             System.out.print("Município de residência: ");
             dadosResidenciais.setMunicipio(sc.nextLine());
+
             if (dadosResidenciais.getMunicipio().isEmpty()) {
                 System.out.println("O campo Município de residência é obrigatório, tente novamente!");
             } else {
@@ -286,12 +291,11 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             System.out.print("CEP: ");
-            String cepStr = sc.nextLine();
+            dadosResidenciais.setCep(sc.nextLine());
 
-            if (cepStr.length() != 8 || !cepStr.matches("\\d+")) {
-                System.out.println("CEP inválido, tente novamente! Deve conter 8 dígitos.");
+            if (dadosResidenciais.getCep().length() != 8) {
+                System.out.println("CEP inválido, tente novamente!");
             } else {
-                dadosResidenciais.setCep(cepStr);
                 break;
             }
         }
@@ -320,8 +324,8 @@ public class NotificacaoTuberculose extends Notificacao {
             try {
                 System.out.println("\n------------------ ZONA ------------------");
                 System.out.println("""
-                        1 - Urbana
-                        2 - Rural
+                          1 - Urbana
+                          2 - Rural
                         """);
                 System.out.print("Zona (1-2): ");
                 dadosResidenciais.setZona(Zona.values()[sc.nextInt() - 1]);
@@ -339,9 +343,8 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data da Investigação (AAAA-MM-DD): ");
+                System.out.print("Data da Investigação: ");
                 String dataInvestigacaoStr = sc.nextLine();
-
                 if (dataInvestigacaoStr.isEmpty()) {
                     System.out.println("O campo Data da Investigação é obrigatório, tente novamente!");
                 } else {
@@ -356,7 +359,6 @@ public class NotificacaoTuberculose extends Notificacao {
         while (true) {
             System.out.print("Ocupação: ");
             dadosEpidemiologicos.setOcupacao(sc.nextLine());
-
             if (dadosEpidemiologicos.getOcupacao().isEmpty()) {
                 System.out.println("O campo Ocupação é obrigatório, tente novamente!");
             } else {
@@ -366,9 +368,8 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data do exame (AAAA-MM-DD): ");
+                System.out.print("Data do exame: ");
                 String dataExameStr = sc.nextLine();
-
                 if (dataExameStr.isEmpty()) {
                     System.out.println("O campo Data do exame é obrigatório, tente novamente!");
                 } else {
@@ -384,10 +385,10 @@ public class NotificacaoTuberculose extends Notificacao {
             try {
                 System.out.println("\n------------------ RESULTADO DO EXAME ------------------");
                 System.out.println("""
-                        1 - Positivo
-                        2 - Negativo
-                        3 - Indeterminado
-                        """);
+                          1 - Positivo
+                          2 - Negativo
+                          3 - Indeterminado
+                      """);
                 System.out.print("Resultado do exame (1-3): ");
                 dadosEpidemiologicos.setResultadoExame(ResultadoExame.values()[sc.nextInt() - 1]);
                 sc.nextLine();
@@ -404,9 +405,8 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data de início do tratamento (AAAA-MM-DD): ");
+                System.out.print("Data de início do tratamento: ");
                 String dataInicioStr = sc.nextLine();
-
                 if (dataInicioStr.isEmpty()) {
                     System.out.println("O campo Data de início do tratamento é obrigatório, tente novamente!");
                 } else {
@@ -426,9 +426,9 @@ public class NotificacaoTuberculose extends Notificacao {
             try {
                 System.out.println("\n------------------ CLASSIFICAÇÃO FINAL ------------------");
                 System.out.println("""
-                        1 - Caso confirmado
-                        2 - Caso descartado
-                        """);
+                          1 - Caso confirmado
+                          2 - Caso descartado
+                      """);
                 System.out.print("Classificação final (1-2): ");
                 conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[sc.nextInt() - 1]);
                 sc.nextLine();
@@ -441,9 +441,8 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data de encerramento (AAAA-MM-DD): ");
+                System.out.print("Data de encerramento: ");
                 String dataEncerramentoStr = sc.nextLine();
-
                 if (dataEncerramentoStr.isEmpty()) {
                     System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
                 } else {
@@ -455,8 +454,8 @@ public class NotificacaoTuberculose extends Notificacao {
             }
         }
 
+        System.out.println("\nNotificação de HANSENÍASE registrada com sucesso!");
         todasNotificacoes.add(this);
-        System.out.println("\nNotificação de TUBERCULOSE registrada com sucesso!");
     }
 
     @Override
@@ -473,18 +472,28 @@ public class NotificacaoTuberculose extends Notificacao {
             System.out.println("1 - Consultar pelo nome do paciente");
             System.out.println("2 - Consultar por bairro");
             System.out.println("3 - Consultar por período");
-            System.out.println("4 - Consultar todos os casos de Tuberculose");
+            System.out.println("4 - Consultar todos os casos de Hanseníase");
             System.out.print("Escolha uma opção: ");
             opcao = sc.nextInt();
             sc.nextLine();
 
             switch (opcao) {
                 case 1 -> {
-                    System.out.print("Digite o nome do paciente: ");
-                    String nome = sc.nextLine();
+                    String nome;
+                    while (true) {
+                        System.out.print("Digite o nome do paciente: ");
+                        nome = sc.nextLine();
+                        if (nome.isEmpty()) {
+                            System.out.println("O campo Nome do paciente é obrigatório, tente novamente!");
+                        } else {
+                            break;
+                        }
+                    }
+
                     System.out.println("\nResultados da consulta pelo nome: " + nome);
+
                     int encontrados = 0;
-                    for (NotificacaoTuberculose n : todasNotificacoes) {
+                    for (NotificacaoHansieniase n : todasNotificacoes) {
                         if (n.dadosIndividuais.getNome().equalsIgnoreCase(nome)) {
                             System.out.println("-> " + n.dadosIndividuais.getNome()
                                     + " | Bairro: " + n.dadosResidenciais.getBairro()
@@ -492,33 +501,43 @@ public class NotificacaoTuberculose extends Notificacao {
                             encontrados++;
                         }
                     }
+
                     if (encontrados == 0) {
                         System.out.println("Nenhuma notificação encontrada para o paciente: " + nome);
                     } else {
                         System.out.println("Total de notificações encontradas: " + encontrados);
                     }
                 }
-
                 case 2 -> {
-                    System.out.print("Digite o bairro: ");
-                    String bairro = sc.nextLine();
+                    String bairro;
+                    while (true) {
+                        System.out.print("Digite o bairro: ");
+                        bairro = sc.nextLine();
+                        if (bairro.isEmpty()) {
+                            System.out.println("O campo Bairro é obrigatório, tente novamente!");
+                        } else {
+                            break;
+                        }
+                    }
+
                     System.out.println("\nResultados da consulta pelo bairro: " + bairro);
+
                     int encontrados = 0;
-                    for (NotificacaoTuberculose n : todasNotificacoes) {
+                    for (NotificacaoHansieniase n : todasNotificacoes) {
                         if (n.dadosResidenciais.getBairro().equalsIgnoreCase(bairro)) {
-                            System.out.println("-> " + n.dadosIndividuais.getNome()
+                            System.out.println("->" + n.dadosIndividuais.getNome()
                                     + " | Bairro: " + n.dadosResidenciais.getBairro()
                                     + " | Data Notificação: " + n.dadosGerais.getDataNotificacao());
                             encontrados++;
                         }
                     }
+
                     if (encontrados == 0) {
                         System.out.println("Nenhuma notificação encontrada para o bairro: " + bairro);
                     } else {
                         System.out.println("Total de notificações encontradas: " + encontrados);
                     }
                 }
-
                 case 3 -> {
                     LocalDate inicio;
                     while (true) {
@@ -543,43 +562,45 @@ public class NotificacaoTuberculose extends Notificacao {
                     }
 
                     System.out.println("\nResultados da consulta por período: " + inicio + " a " + fim);
+
                     int encontrados = 0;
-                    for (NotificacaoTuberculose n : todasNotificacoes) {
+                    for (NotificacaoHansieniase n : todasNotificacoes) {
                         LocalDate data = n.dadosGerais.getDataNotificacao();
                         if ((data.isEqual(inicio) || data.isAfter(inicio)) &&
                                 (data.isEqual(fim) || data.isBefore(fim))) {
-                            System.out.println("-> " + n.dadosIndividuais.getNome()
+                            System.out.println("->" + n.dadosIndividuais.getNome()
                                     + " | Bairro: " + n.dadosResidenciais.getBairro()
                                     + " | Data Notificação: " + data);
                             encontrados++;
                         }
                     }
+
                     if (encontrados == 0) {
                         System.out.println("Nenhuma notificação encontrada no período especificado.");
                     } else {
                         System.out.println("Total de notificações encontradas: " + encontrados);
                     }
                 }
-
                 case 4 -> {
-                    Doenca agravo = Doenca.TUBERCULOSE;
+                    Doenca agravo = Doenca.HANSENIASE;
                     System.out.println("\nResultados da consulta por agravo: " + agravo);
+
                     int encontrados = 0;
-                    for (NotificacaoTuberculose n : todasNotificacoes) {
+                    for (NotificacaoHansieniase n : todasNotificacoes) {
                         if (n.dadosGerais.getAgravo() == agravo) {
-                            System.out.println("-> " + n.dadosIndividuais.getNome()
+                            System.out.println("- " + n.dadosIndividuais.getNome()
                                     + " | Bairro: " + n.dadosResidenciais.getBairro()
                                     + " | Data Notificação: " + n.dadosGerais.getDataNotificacao());
                             encontrados++;
                         }
                     }
+
                     if (encontrados == 0) {
                         System.out.println("Nenhuma notificação encontrada para o agravo: " + agravo);
                     } else {
                         System.out.println("Total de notificações encontradas: " + encontrados);
                     }
                 }
-
                 default -> System.out.println("Opção inválida!");
             }
         } while (opcao < 1 || opcao > 4);
@@ -587,10 +608,10 @@ public class NotificacaoTuberculose extends Notificacao {
 
     @Override
     public void gerarRelatorio() {
-        System.out.println("\n=== RELATÓRIO ESTATÍSTICO DE TUBERCULOSE ===");
+        System.out.println("\n=== RELATÓRIO ESTATÍSTICO DE HANSENÍASE ===");
 
         if (todasNotificacoes.isEmpty()) {
-            System.out.println("Não há notificações de Tuberculose para gerar relatório.");
+            System.out.println("Não há notificações de Hanseníase para gerar relatório.");
             return;
         }
 
@@ -612,12 +633,12 @@ public class NotificacaoTuberculose extends Notificacao {
         System.out.println("Hanseníase: " + totalAgravo);
 
         System.out.println("\nTotal de notificações por bairro:");
-        for (NotificacaoTuberculose n : todasNotificacoes) {
+        for (NotificacaoHansieniase n : todasNotificacoes) {
             System.out.println("-> " + n.dadosResidenciais.getBairro());
         }
 
         System.out.println("\nTotal de notificações por sexo:");
-        for (NotificacaoTuberculose n : todasNotificacoes) {
+        for (NotificacaoHansieniase n : todasNotificacoes) {
             if (n.dadosIndividuais.getSexo() == Sexo.M) totalSexoM++;
             if (n.dadosIndividuais.getSexo() == Sexo.F) totalSexoF++;
         }
@@ -625,7 +646,7 @@ public class NotificacaoTuberculose extends Notificacao {
         System.out.println("Feminino: " + totalSexoF);
 
         System.out.println("\nTotal de notificações por idade: ");
-        for(NotificacaoTuberculose n : todasNotificacoes){
+        for(NotificacaoHansieniase n : todasNotificacoes){
             if(n.dadosIndividuais.getIdade() >= 0 && n.dadosIndividuais.getIdade() <= 18){
                 criancaAdolescente++;
             } else if (n.dadosIndividuais.getIdade() > 18 && n.dadosIndividuais.getIdade() <= 64) {
@@ -640,7 +661,7 @@ public class NotificacaoTuberculose extends Notificacao {
         System.out.println("Total de idosos: " + idoso);
 
         System.out.println("\nTotal de notificações por raça/cor:");
-        for (NotificacaoTuberculose n : todasNotificacoes) {
+        for (NotificacaoHansieniase n : todasNotificacoes) {
             switch (n.dadosIndividuais.getRacaCor()) {
                 case BRANCA -> totalBranca++;
                 case PRETA -> totalPreta++;
@@ -658,7 +679,7 @@ public class NotificacaoTuberculose extends Notificacao {
         System.out.println("Não informado: " + totalNaoInformadoRaca);
 
         System.out.println("\nTotal de notificações por escolaridade:");
-        for (NotificacaoTuberculose n : todasNotificacoes) {
+        for (NotificacaoHansieniase n : todasNotificacoes) {
             System.out.println("-> " + n.dadosIndividuais.getEscolaridade());
         }
 
