@@ -28,6 +28,7 @@ public class NotificacaoHansieniase extends Notificacao {
         this.dadosGerais = dadosGerais;
         dadosGerais.setAgravo(Doenca.HANSENIASE);
 
+
         while (true) {
             try {
                 System.out.print("Data da Notificação: ");
@@ -460,22 +461,30 @@ public class NotificacaoHansieniase extends Notificacao {
 
     @Override
     public void consultarNotificacao(Scanner sc) {
-        int opcao;
-
         if (todasNotificacoes.isEmpty()) {
             System.out.println("Não há notificações registradas.");
             return;
         }
 
-        do{
+        int opcao;
+
+        do {
             System.out.println("\n=== CONSULTAR NOTIFICAÇÕES ===");
             System.out.println("1 - Consultar pelo nome do paciente");
             System.out.println("2 - Consultar por bairro");
             System.out.println("3 - Consultar por período");
             System.out.println("4 - Consultar todos os casos de Hanseníase");
             System.out.print("Escolha uma opção: ");
-            opcao = sc.nextInt();
-            sc.nextLine();
+
+            try {
+                opcao = sc.nextInt();
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Opção inválida! Por favor, digite um número.");
+                sc.nextLine();
+                opcao = 0; // Atribui um valor inválido para continuar no loop
+                continue;
+            }
 
             switch (opcao) {
                 case 1 -> {
