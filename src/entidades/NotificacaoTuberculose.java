@@ -275,33 +275,75 @@ public class NotificacaoTuberculose extends Notificacao {
     public void gerarRelatorio() {
         System.out.println("\n=== RELATÓRIO ESTATÍSTICO DE TUBERCULOSE ===");
 
-        int total = todasNotificacoes.size();
-        int masc = 0, fem = 0;
-        int criancaAdolescente = 0, adulto = 0, idoso = 0;
-        Map<String, Integer> bairros = new HashMap<>();
+        int totalAgravo = 0;
+        int totalSexoM = 0;
+        int totalSexoF = 0;
+        int criancaAdolescente = 0;
+        int adulto = 0;
+        int idoso = 0;
+        int totalBranca = 0;
+        int totalPreta = 0;
+        int totalParda = 0;
+        int totalAmarela = 0;
+        int totalIndigena = 0;
+        int totalNaoInformadoRaca = 0;
 
+        System.out.println("\nTotal de notificações por agravo:");
+        totalAgravo = todasNotificacoes.size();
+        System.out.println("Tuberculose: " + totalAgravo);
+
+        System.out.println("\nTotal de notificações por bairro:");
         for (NotificacaoTuberculose n : todasNotificacoes) {
-            if (n.dadosIndividuais.getSexo() == Sexo.M) masc++;
-            else fem++;
-
-            int idade = n.dadosIndividuais.getIdade();
-            if (idade <= 18) criancaAdolescente++;
-            else if (idade <= 64) adulto++;
-            else idoso++;
-
-            bairros.merge(n.dadosResidenciais.getBairro(), 1, Integer::sum);
+            System.out.println("-> " + n.dadosResidenciais.getBairro());
         }
 
-        System.out.println("Total de notificações: " + total);
-        System.out.println("Sexo Masculino: " + masc);
-        System.out.println("Sexo Feminino: " + fem);
-        System.out.println("Crianças e adolescentes: " + criancaAdolescente);
-        System.out.println("Adultos: " + adulto);
-        System.out.println("Idosos: " + idoso);
+        System.out.println("\nTotal de notificações por sexo:");
+        for (NotificacaoTuberculose n : todasNotificacoes) {
+            if (n.dadosIndividuais.getSexo() == Sexo.M) totalSexoM++;
+            if (n.dadosIndividuais.getSexo() == Sexo.F) totalSexoF++;
+        }
+        System.out.println("Masculino: " + totalSexoM);
+        System.out.println("Feminino: " + totalSexoF);
 
-        System.out.println("\nTotal por bairro:");
-        bairros.forEach((b, qtd) -> System.out.println("- " + b + ": " + qtd));
+        System.out.println("\nTotal de notificações por idade: ");
+        for(NotificacaoTuberculose n : todasNotificacoes){
+            if(n.dadosIndividuais.getIdade() >= 0 && n.dadosIndividuais.getIdade() <= 18){
+                criancaAdolescente++;
+            } else if (n.dadosIndividuais.getIdade() > 18 && n.dadosIndividuais.getIdade() <= 64) {
+                adulto++;
+            } else {
+                idoso++;
+            }
+        }
 
-        System.out.println("\nRelatório finalizado com sucesso!");
+        System.out.println("Total de crianças e adolescentes: " + criancaAdolescente);
+        System.out.println("Total de Adultos: " + adulto);
+        System.out.println("Total de idosos: " + idoso);
+
+        System.out.println("\nTotal de notificações por raça/cor:");
+        for (NotificacaoTuberculose n : todasNotificacoes) {
+            switch (n.dadosIndividuais.getRacaCor()) {
+                case BRANCA -> totalBranca++;
+                case PRETA -> totalPreta++;
+                case PARDA -> totalParda++;
+                case AMARELA -> totalAmarela++;
+                case INDIGENA -> totalIndigena++;
+                case NAO_INFORMADO -> totalNaoInformadoRaca++;
+            }
+        }
+
+        System.out.println("Branca: " + totalBranca);
+        System.out.println("Preta: " + totalPreta);
+        System.out.println("Parda: " + totalParda);
+        System.out.println("Amarela: " + totalAmarela);
+        System.out.println("Indígena: " + totalIndigena);
+        System.out.println("Não informado: " + totalNaoInformadoRaca);
+
+        System.out.println("\nTotal de notificações por escolaridade:");
+        for (NotificacaoTuberculose n : todasNotificacoes) {
+            System.out.println("-> " + n.dadosIndividuais.getEscolaridade());
+        }
+
+        System.out.println("\nRelatório gerado!");
     }
 }
