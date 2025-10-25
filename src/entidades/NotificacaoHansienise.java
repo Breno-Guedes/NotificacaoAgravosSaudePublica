@@ -21,41 +21,41 @@ public class NotificacaoHansienise extends Notificacao {
         System.out.println("=== REGISTRO DE NOTIFICAÇÃO: HANSENÍASE ===");
 
         // --- DADOS GERAIS ---
-        DadosGerais dadosGerais = new DadosGerais();
-        dadosGerais.setAgravo(Doenca.HANSENIASE);
+        this.dadosGerais = new DadosGerais();
+        this.dadosGerais.setAgravo(Doenca.HANSENIASE);
 
         System.out.print("Data da Notificação: ");
         String dataNotificacaoStr = sc.nextLine();
-        dadosGerais.setDataNotificacao(LocalDate.parse(dataNotificacaoStr));
+        this.dadosGerais.setDataNotificacao(LocalDate.parse(dataNotificacaoStr));
 
         System.out.print("UF: ");
-        dadosGerais.setUf(sc.nextLine());
+        this.dadosGerais.setUf(sc.nextLine());
 
         System.out.print("Município de Notificação: ");
-        dadosGerais.setMunicipio(sc.nextLine());
+        this.dadosGerais.setMunicipio(sc.nextLine());
 
         System.out.print("Unidade de Saúde: ");
-        dadosGerais.setUbs(sc.nextLine());
+        this.dadosGerais.setUbs(sc.nextLine());
 
         System.out.print("Data dos primeiros sintomas: ");
         String dataSintomasStr = sc.nextLine();
-        dadosGerais.setDataSintomas(LocalDate.parse(dataSintomasStr));
+        this.dadosGerais.setDataSintomas(LocalDate.parse(dataSintomasStr));
 
         // --- DADOS INDIVIDUAIS ---
-        DadosIndividuais dadosIndividuais = new DadosIndividuais();
+        this.dadosIndividuais = new DadosIndividuais();
 
         System.out.print("Nome do paciente: ");
-        dadosIndividuais.setNome(sc.nextLine());
+        this.dadosIndividuais.setNome(sc.nextLine());
 
         System.out.print("Data de nascimento: ");
-        dadosIndividuais.setDataNascimento(sc.nextLine());
+        this.dadosIndividuais.setDataNascimento(sc.nextLine());
 
         while (true) {
             System.out.print("Idade: ");
-            dadosIndividuais.setIdade(sc.nextInt());
+            this.dadosIndividuais.setIdade(sc.nextInt());
             sc.nextLine();
 
-            if(dadosIndividuais.getIdade() > 0 && dadosIndividuais.getIdade() <= 115){
+            if(this.dadosIndividuais.getIdade() > 0 && this.dadosIndividuais.getIdade() <= 115){
                 break;
             } else {
                 System.out.println("Idade inválida, tente novamente!");
@@ -63,7 +63,7 @@ public class NotificacaoHansienise extends Notificacao {
         }
 
         System.out.print("Sexo (M/F): ");
-        dadosIndividuais.setSexo(Sexo.valueOf(sc.nextLine().toUpperCase()));
+        this.dadosIndividuais.setSexo(Sexo.valueOf(sc.nextLine().toUpperCase()));
 
         System.out.println("""
                   1 - 1º trimestre
@@ -73,7 +73,7 @@ public class NotificacaoHansienise extends Notificacao {
                   5 - Não gestante
               """);
         System.out.print("Gestante (1-5): ");
-        dadosIndividuais.setGestante(Gestante.values()[sc.nextInt() - 1]);
+        this.dadosIndividuais.setGestante(Gestante.values()[sc.nextInt() - 1]);
         sc.nextLine();
 
         System.out.println("""
@@ -85,7 +85,7 @@ public class NotificacaoHansienise extends Notificacao {
                   6 - Não informado
               """);
         System.out.print("Raça/Cor (1-6): ");
-        dadosIndividuais.setRacaCor(RacaCor.values()[sc.nextInt() - 1]);
+        this.dadosIndividuais.setRacaCor(RacaCor.values()[sc.nextInt() - 1]);
         sc.nextLine();
 
         System.out.println("""
@@ -101,56 +101,56 @@ public class NotificacaoHansienise extends Notificacao {
                   10 - Não informado
               """);
         System.out.print("Escolaridade (1-10): ");
-        dadosIndividuais.setEscolaridade(Escolaridade.values()[sc.nextInt() - 1]);
+        this.dadosIndividuais.setEscolaridade(Escolaridade.values()[sc.nextInt() - 1]);
         sc.nextLine();
 
         System.out.print("Nome da mãe: ");
-        dadosIndividuais.setNomeMae(sc.nextLine());
+        this.dadosIndividuais.setNomeMae(sc.nextLine());
 
         // --- DADOS RESIDENCIAIS ---
-        DadosResidenciais dadosResidenciais = new DadosResidenciais();
+        this.dadosResidenciais = new DadosResidenciais();
         System.out.print("UF de residência: ");
-        dadosResidenciais.setUf(sc.nextLine());
+        this.dadosResidenciais.setUf(sc.nextLine());
 
         System.out.print("Município de residência: ");
-        dadosResidenciais.setMunicipio(sc.nextLine());
+        this.dadosResidenciais.setMunicipio(sc.nextLine());
 
         System.out.print("Bairro: ");
-        dadosResidenciais.setBairro(sc.nextLine());
+        this.dadosResidenciais.setBairro(sc.nextLine());
 
         System.out.print("Logradouro: ");
-        dadosResidenciais.setLogradouro(sc.nextLine());
+        this.dadosResidenciais.setLogradouro(sc.nextLine());
 
         System.out.print("Número: ");
-        dadosResidenciais.setNumero(sc.nextLine());
+        this.dadosResidenciais.setNumero(sc.nextLine());
 
         System.out.print("CEP: ");
-        dadosResidenciais.setCep(sc.nextInt());
+        this.dadosResidenciais.setCep(sc.nextInt());
 
         System.out.print("Telefone: ");
-        dadosResidenciais.setDdd(sc.nextInt());
+        this.dadosResidenciais.setDdd(sc.nextInt());
 
         System.out.println("""
                   1 - Urbana
                   2 - Rural
                 """);
         System.out.print("Zona (1-2): ");
-        dadosResidenciais.setZona(Zona.values()[sc.nextInt() - 1]);
+        this.dadosResidenciais.setZona(Zona.values()[sc.nextInt() - 1]);
         sc.nextLine();
 
         // --- DADOS EPIDEMIOLÓGICOS ---
-        DadosEpidemiologicos dadosEpidemiologicos = new DadosEpidemiologicos();
+        this.dadosEpidemiologicos = new DadosEpidemiologicos();
 
         System.out.print("Data da Investigação: ");
         String dataInvestigacaoStr = sc.nextLine();
-        dadosEpidemiologicos.setDataInvestigacao(LocalDate.parse(dataInvestigacaoStr));
+        this.dadosEpidemiologicos.setDataInvestigacao(LocalDate.parse(dataInvestigacaoStr));
 
         System.out.print("Ocupação: ");
-        dadosEpidemiologicos.setOcupacao(sc.nextLine());
+        this.dadosEpidemiologicos.setOcupacao(sc.nextLine());
 
         System.out.print("Data do exame: ");
         String dataExameStr = sc.nextLine();
-        dadosEpidemiologicos.setDataExame(LocalDate.parse(dataExameStr));
+        this.dadosEpidemiologicos.setDataExame(LocalDate.parse(dataExameStr));
 
         System.out.println("""
                   1 - Positivo
@@ -158,30 +158,30 @@ public class NotificacaoHansienise extends Notificacao {
                   3 - Indeterminado
               """);
         System.out.print("Resultado do exame (1-3): ");
-        dadosEpidemiologicos.setResultadoExame(ResultadoExame.values()[sc.nextInt() - 1]);
+        this.dadosEpidemiologicos.setResultadoExame(ResultadoExame.values()[sc.nextInt() - 1]);
         sc.nextLine();
 
         // --- DADOS DO TRATAMENTO ---
-        DadosTratamento dadosTratamento = new DadosTratamento();
+        this.dadosTratamento = new DadosTratamento();
 
         System.out.print("Data de início do tratamento: ");
         String dataInicioStr = sc.nextLine();
-        dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
+        this.dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
 
         // --- CONCLUSÃO / ENCERRAMENTO ---
-        ConclusaoEncerramento conclusaoEncerramento = new ConclusaoEncerramento();
+        this.conclusaoEncerramento = new ConclusaoEncerramento();
 
         System.out.println("""
                   1 - Caso confirmado
                   2 - Caso descartado
               """);
         System.out.print("Classificação final (1-2): ");
-        conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[sc.nextInt() - 1]);
+        this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[sc.nextInt() - 1]);
         sc.nextLine();
 
         System.out.print("Data de encerramento: ");
         String dataEncerramentoStr = sc.nextLine();
-        conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
+        this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
 
         System.out.println("\nNotificação de HANSENÍASE registrada com sucesso!");
         todasNotificacoes.add(this);
