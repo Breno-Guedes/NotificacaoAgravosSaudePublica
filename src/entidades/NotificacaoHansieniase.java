@@ -292,11 +292,11 @@ public class NotificacaoHansieniase extends Notificacao {
 
         while (true) {
             System.out.print("CEP: ");
-            dadosResidenciais.setCep(sc.nextLine());
-
-            if (dadosResidenciais.getCep().length() != 8) {
-                System.out.println("CEP inválido, tente novamente!");
+            String cepStr = sc.nextLine();
+            if (cepStr.length() != 8 || !cepStr.matches("\\d+")) {
+                System.out.println("CEP inválido, tente novamente! Deve conter 8 dígitos.");
             } else {
+                dadosResidenciais.setCep(cepStr);
                 break;
             }
         }
@@ -305,10 +305,12 @@ public class NotificacaoHansieniase extends Notificacao {
             try {
                 System.out.print("DDD: ");
                 String dddStr = sc.nextLine();
+
                 if (dddStr.isEmpty() || !dddStr.matches("\\d+")) {
                     System.out.println("DDD inválido, tente novamente!");
                     continue;
                 }
+
                 int ddd = Integer.parseInt(dddStr);
                 if (ddd >= 11 && ddd <= 99) {
                     dadosResidenciais.setDdd(ddd);
@@ -346,6 +348,7 @@ public class NotificacaoHansieniase extends Notificacao {
             try {
                 System.out.print("Data da Investigação: ");
                 String dataInvestigacaoStr = sc.nextLine();
+
                 if (dataInvestigacaoStr.isEmpty()) {
                     System.out.println("O campo Data da Investigação é obrigatório, tente novamente!");
                 } else {
@@ -360,6 +363,7 @@ public class NotificacaoHansieniase extends Notificacao {
         while (true) {
             System.out.print("Ocupação: ");
             dadosEpidemiologicos.setOcupacao(sc.nextLine());
+
             if (dadosEpidemiologicos.getOcupacao().isEmpty()) {
                 System.out.println("O campo Ocupação é obrigatório, tente novamente!");
             } else {
@@ -371,6 +375,7 @@ public class NotificacaoHansieniase extends Notificacao {
             try {
                 System.out.print("Data do exame: ");
                 String dataExameStr = sc.nextLine();
+
                 if (dataExameStr.isEmpty()) {
                     System.out.println("O campo Data do exame é obrigatório, tente novamente!");
                 } else {
@@ -408,6 +413,7 @@ public class NotificacaoHansieniase extends Notificacao {
             try {
                 System.out.print("Data de início do tratamento: ");
                 String dataInicioStr = sc.nextLine();
+
                 if (dataInicioStr.isEmpty()) {
                     System.out.println("O campo Data de início do tratamento é obrigatório, tente novamente!");
                 } else {
@@ -444,6 +450,7 @@ public class NotificacaoHansieniase extends Notificacao {
             try {
                 System.out.print("Data de encerramento: ");
                 String dataEncerramentoStr = sc.nextLine();
+
                 if (dataEncerramentoStr.isEmpty()) {
                     System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
                 } else {
@@ -461,12 +468,12 @@ public class NotificacaoHansieniase extends Notificacao {
 
     @Override
     public void consultarNotificacao(Scanner sc) {
+        int opcao;
+
         if (todasNotificacoes.isEmpty()) {
             System.out.println("Não há notificações registradas.");
             return;
         }
-
-        int opcao;
 
         do {
             System.out.println("\n=== CONSULTAR NOTIFICAÇÕES ===");
@@ -480,10 +487,9 @@ public class NotificacaoHansieniase extends Notificacao {
                 opcao = sc.nextInt();
                 sc.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("Opção inválida! Por favor, digite um número.");
+                System.out.println("Entrada inválida. Por favor, insira um número.");
                 sc.nextLine();
-                opcao = 0; // Atribui um valor inválido para continuar no loop
-                continue;
+                opcao = 0;
             }
 
             switch (opcao) {
@@ -492,6 +498,7 @@ public class NotificacaoHansieniase extends Notificacao {
                     while (true) {
                         System.out.print("Digite o nome do paciente: ");
                         nome = sc.nextLine();
+
                         if (nome.isEmpty()) {
                             System.out.println("O campo Nome do paciente é obrigatório, tente novamente!");
                         } else {
@@ -522,6 +529,7 @@ public class NotificacaoHansieniase extends Notificacao {
                     while (true) {
                         System.out.print("Digite o bairro: ");
                         bairro = sc.nextLine();
+
                         if (bairro.isEmpty()) {
                             System.out.println("O campo Bairro é obrigatório, tente novamente!");
                         } else {
