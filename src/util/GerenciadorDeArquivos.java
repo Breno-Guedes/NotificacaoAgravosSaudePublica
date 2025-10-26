@@ -1,4 +1,4 @@
-package GerenciadorDeArquivos;
+package util;
 
 import entidades.*;
 import entidadesDeDados.*;
@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -18,7 +17,7 @@ public class GerenciadorDeArquivos {
 
     private static final String DIR = "database/";
     private static final String MALARIA_FILE = DIR + "malaria.txt";
-    private static final String HANSENIASE_FILE = DIR + "hansieniase.txt";
+    private static final String HANSENIASE_FILE = DIR + "hanseniase.txt";
     private static final String TUBERCULOSE_FILE = DIR + "tuberculose.txt";
 
     static {
@@ -42,21 +41,20 @@ public class GerenciadorDeArquivos {
     }
 
     public static void carregarNotificacoes() {
-        carregarArquivo(MALARIA_FILE, NotificacaoMalaria.todasNotificacoes, GerenciadorDeArquivos::parseMalaria);
-        carregarArquivo(HANSENIASE_FILE, NotificacaoHansieniase.todasNotificacoes, GerenciadorDeArquivos::parseHanseniase);
-        carregarArquivo(TUBERCULOSE_FILE, NotificacaoTuberculose.todasNotificacoes, GerenciadorDeArquivos::parseTuberculose);
+        Notificacao.todasAsNotificacoes.clear();
 
-        int maxCodigo = Math.max(
-                NotificacaoMalaria.todasNotificacoes.stream().mapToInt(Notificacao::getCodigo).max().orElse(0),
-                Math.max(
-                        NotificacaoHansieniase.todasNotificacoes.stream().mapToInt(Notificacao::getCodigo).max().orElse(0),
-                        NotificacaoTuberculose.todasNotificacoes.stream().mapToInt(Notificacao::getCodigo).max().orElse(0)
-                )
-        );
+        carregarArquivo(MALARIA_FILE, GerenciadorDeArquivos::parseMalaria);
+        carregarArquivo(HANSENIASE_FILE, GerenciadorDeArquivos::parseHanseniase);
+        carregarArquivo(TUBERCULOSE_FILE, GerenciadorDeArquivos::parseTuberculose);
+
+        int maxCodigo = Notificacao.todasAsNotificacoes.stream()
+                .mapToInt(Notificacao::getCodigo)
+                .max()
+                .orElse(0);
         Notificacao.setContadorCodigo(maxCodigo + 1);
     }
 
-    private static <T extends Notificacao> void carregarArquivo(String arquivo, List<T> lista, Function<Map<String, String>, T> parser) {
+    private static void carregarArquivo(String arquivo, Function<Map<String, String>, Notificacao> parser) {
         File f = new File(arquivo);
         if (!f.exists()) return;
 
@@ -71,10 +69,10 @@ public class GerenciadorDeArquivos {
                     if (chaveValor.length == 2) {
                         dados.put(chaveValor[0], chaveValor[1]);
                     } else {
-                        dados.put(chaveValor[0], ""); // Lida com valores nulos/vazios
+                        dados.put(chaveValor[0], "");
                     }
                 }
-                lista.add(parser.apply(dados));
+                Notificacao.todasAsNotificacoes.add(parser.apply(dados));
             }
         } catch (IOException e) {
             System.err.println("Erro ao carregar notificações do arquivo " + arquivo + ": " + e.getMessage());
@@ -90,62 +88,62 @@ public class GerenciadorDeArquivos {
 
     private static String formatarParaSalvar(Notificacao n) {
         StringBuilder sb = new StringBuilder();
-        // Dados Gerais
         append(sb, "codigo", n.getCodigo());
-        append(sb, "dataNotificacao", n.getDadosGerais().getDataNotificacao());
-        append(sb, "uf", n.getDadosGerais().getUf());
-        append(sb, "municipio", n.getDadosGerais().getMunicipio());
-        append(sb, "ubs", n.getDadosGerais().getUbs());
-        append(sb, "dataSintomas", n.getDadosGerais().getDataSintomas());
-
-        // Dados Individuais
-        append(sb, "nome", n.getDadosIndividuais().getNome());
-        append(sb, "dataNascimento", n.getDadosIndividuais().getDataNascimento());
-        append(sb, "idade", n.getDadosIndividuais().getIdade());
-        append(sb, "sexo", n.getDadosIndividuais().getSexo());
-        append(sb, "gestante", n.getDadosIndividuais().getGestante());
-        append(sb, "racaCor", n.getDadosIndividuais().getRacaCor());
-        append(sb, "escolaridade", n.getDadosIndividuais().getEscolaridade());
-        append(sb, "nomeMae", n.getDadosIndividuais().getNomeMae());
-
-        // Dados Residenciais
-        append(sb, "residenciaUf", n.getDadosResidenciais().getUf());
-        append(sb, "residenciaMunicipio", n.getDadosResidenciais().getMunicipio());
-        append(sb, "bairro", n.getDadosResidenciais().getBairro());
-        append(sb, "logradouro", n.getDadosResidenciais().getLogradouro());
-        append(sb, "numero", n.getDadosResidenciais().getNumero());
-        append(sb, "cep", n.getDadosResidenciais().getCep());
-        append(sb, "ddd", n.getDadosResidenciais().getDdd());
-        append(sb, "zona", n.getDadosResidenciais().getZona());
-
-        // Dados Epidemiológicos e Tratamento (se existirem)
+        if (n.getDadosGerais() != null) {
+            append(sb, "dataNotificacao", n.getDadosGerais().getDataNotificacao());
+            append(sb, "uf", n.getDadosGerais().getUf());
+            append(sb, "municipio", n.getDadosGerais().getMunicipio());
+            append(sb, "ubs", n.getDadosGerais().getUbs());
+            append(sb, "dataSintomas", n.getDadosGerais().getDataSintomas());
+        }
+        if (n.getDadosIndividuais() != null) {
+            append(sb, "nome", n.getDadosIndividuais().getNome());
+            append(sb, "dataNascimento", n.getDadosIndividuais().getDataNascimento());
+            append(sb, "idade", n.getDadosIndividuais().getIdade());
+            append(sb, "sexo", n.getDadosIndividuais().getSexo());
+            append(sb, "gestante", n.getDadosIndividuais().getGestante());
+            append(sb, "racaCor", n.getDadosIndividuais().getRacaCor());
+            append(sb, "escolaridade", n.getDadosIndividuais().getEscolaridade());
+            append(sb, "nomeMae", n.getDadosIndividuais().getNomeMae());
+        }
+        if (n.getDadosResidenciais() != null) {
+            append(sb, "residenciaUf", n.getDadosResidenciais().getUf());
+            append(sb, "residenciaMunicipio", n.getDadosResidenciais().getMunicipio());
+            append(sb, "bairro", n.getDadosResidenciais().getBairro());
+            append(sb, "logradouro", n.getDadosResidenciais().getLogradouro());
+            append(sb, "numero", n.getDadosResidenciais().getNumero());
+            append(sb, "cep", n.getDadosResidenciais().getCep());
+            append(sb, "ddd", n.getDadosResidenciais().getDdd());
+            append(sb, "zona", n.getDadosResidenciais().getZona());
+        }
         if (n.getDadosEpidemiologicos() != null) {
             append(sb, "dataInvestigacao", n.getDadosEpidemiologicos().getDataInvestigacao());
             append(sb, "ocupacao", n.getDadosEpidemiologicos().getOcupacao());
             append(sb, "dataExame", n.getDadosEpidemiologicos().getDataExame());
             append(sb, "resultadoExame", n.getDadosEpidemiologicos().getResultadoExame());
         }
-        if (n instanceof NotificacaoMalaria nm) {
+        if (n instanceof NotificacaoMalaria nm && nm.getDadosEpidemiologicos() != null) {
             append(sb, "atividade", nm.getDadosEpidemiologicos().getAtividade());
             append(sb, "tipoLamina", nm.getDadosEpidemiologicos().getTipoLamina());
             append(sb, "sintomas", nm.getDadosEpidemiologicos().getSintomas());
             append(sb, "parasitasMm3", nm.getDadosEpidemiologicos().getParasitasMetroCubico());
             append(sb, "parasitemia", nm.getDadosEpidemiologicos().getParasitemia());
-            append(sb, "esquemaTratamento", nm.getDadosTratamento().getEsquemaTratamento());
         }
         if (n.getDadosTratamento() != null) {
             append(sb, "dataInicioTratamento", n.getDadosTratamento().getDataInicioTratamento());
+            if (n instanceof NotificacaoMalaria nm) {
+                append(sb, "esquemaTratamento", nm.getDadosTratamento().getEsquemaTratamento());
+            }
         }
-
-        // Conclusão
-        append(sb, "classificacaoFinal", n.getConclusaoEncerramento().getClassificacaoFinal());
-        append(sb, "dataEncerramento", n.getConclusaoEncerramento().getDataEncerramento());
-        if (n instanceof NotificacaoMalaria nm) {
-            append(sb, "autoctone", nm.getConclusaoEncerramento().getAutoctone());
-            append(sb, "provavelUfInfeccao", nm.getConclusaoEncerramento().getProvavelUFinfeccao());
-            append(sb, "provavelMunicipioInfeccao", nm.getConclusaoEncerramento().getProvavelMunicipioInfeccao());
+        if (n.getConclusaoEncerramento() != null) {
+            append(sb, "classificacaoFinal", n.getConclusaoEncerramento().getClassificacaoFinal());
+            append(sb, "dataEncerramento", n.getConclusaoEncerramento().getDataEncerramento());
+            if (n instanceof NotificacaoMalaria nm) {
+                append(sb, "autoctone", nm.getConclusaoEncerramento().getAutoctone());
+                append(sb, "provavelUfInfeccao", nm.getConclusaoEncerramento().getProvavelUFinfeccao());
+                append(sb, "provavelMunicipioInfeccao", nm.getConclusaoEncerramento().getProvavelMunicipioInfeccao());
+            }
         }
-
         return sb.toString();
     }
 
@@ -154,7 +152,7 @@ public class GerenciadorDeArquivos {
     }
 
     private static <E extends Enum<E>> E parseEnum(Class<E> enumClass, String value) {
-        if (value == null || value.isEmpty()) return null;
+        if (value == null || value.isEmpty() || value.equals("null")) return null;
         try {
             return Enum.valueOf(enumClass, value);
         } catch (IllegalArgumentException e) {
@@ -164,8 +162,9 @@ public class GerenciadorDeArquivos {
 
     private static NotificacaoMalaria parseMalaria(Map<String, String> dados) {
         NotificacaoMalaria n = new NotificacaoMalaria();
+        n.setDadosGerais(new DadosGerais());
+        n.getDadosGerais().setAgravo(Doenca.MALARIA);
         preencherDadosComuns(n, dados);
-        // Específico Malária
         applyIfPresent(dados, "atividade", v -> n.getDadosEpidemiologicos().setAtividade(parseEnum(AtividadesUltimos15Dias.class, v)));
         applyIfPresent(dados, "tipoLamina", v -> n.getDadosEpidemiologicos().setTipoLamina(parseEnum(TiposLamina.class, v)));
         applyIfPresent(dados, "sintomas", v -> n.getDadosEpidemiologicos().setSintomas(parseEnum(Sintomas.class, v)));
@@ -180,19 +179,22 @@ public class GerenciadorDeArquivos {
 
     private static NotificacaoHansieniase parseHanseniase(Map<String, String> dados) {
         NotificacaoHansieniase n = new NotificacaoHansieniase();
+        n.setDadosGerais(new DadosGerais());
+        n.getDadosGerais().setAgravo(Doenca.HANSENIASE);
         preencherDadosComuns(n, dados);
         return n;
     }
 
     private static NotificacaoTuberculose parseTuberculose(Map<String, String> dados) {
         NotificacaoTuberculose n = new NotificacaoTuberculose();
+        n.setDadosGerais(new DadosGerais());
+        n.getDadosGerais().setAgravo(Doenca.TUBERCULOSE);
         preencherDadosComuns(n, dados);
         return n;
     }
 
     private static void preencherDadosComuns(Notificacao n, Map<String, String> dados) {
         n.setCodigo(Integer.parseInt(dados.get("codigo")));
-        n.setDadosGerais(new DadosGerais());
         n.setDadosIndividuais(new DadosIndividuais());
         n.setDadosResidenciais(new DadosResidenciais());
         n.setDadosEpidemiologicos(new DadosEpidemiologicos());
@@ -235,7 +237,7 @@ public class GerenciadorDeArquivos {
     }
 
     private static void applyIfPresent(Map<String, String> map, String key, Consumer<String> consumer) {
-        if (map.containsKey(key) && map.get(key) != null && !map.get(key).isEmpty()) {
+        if (map.containsKey(key) && map.get(key) != null && !map.get(key).isEmpty() && !map.get(key).equals("null")) {
             consumer.accept(map.get(key));
         }
     }

@@ -1,11 +1,14 @@
-import entidades.*;
-import java.util.Scanner;
-import GerenciadorDeArquivos.GerenciadorDeArquivos;
+import enums.*;
+import entidades.Notificacao;
+import entidades.NotificacaoHansieniase;
+import entidades.NotificacaoMalaria;
+import entidades.NotificacaoTuberculose;
+import util.GerenciadorDeArquivos;
 
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         GerenciadorDeArquivos.carregarNotificacoes();
 
         Scanner sc = new Scanner(System.in);
@@ -71,24 +74,15 @@ public class Main {
             return;
         }
 
-        Notificacao notificacao;
         switch (tipoAgravo) {
-            case 1 -> notificacao = new NotificacaoMalaria();
-            case 2 -> notificacao = new NotificacaoHansieniase();
-            case 3 -> notificacao = new NotificacaoTuberculose();
-            default -> {
-                System.out.println("Opção inválida!");
-                return;
-            }
+            case 1 -> new NotificacaoMalaria().registrarNotificacao(sc);
+            case 2 -> new NotificacaoHansieniase().registrarNotificacao(sc);
+            case 3 -> new NotificacaoTuberculose().registrarNotificacao(sc);
+            default -> System.out.println("Opção inválida!");
         }
-
-        notificacao.registrarNotificacao(sc);
     }
 
     private static void consultarNotificacao(Scanner sc) {
-
-        GerenciadorDeArquivos.carregarNotificacoes();
-
         System.out.println("\n=== SELECIONE O TIPO DE AGRAVO PARA CONSULTA ===");
         System.out.println("1 - Malária");
         System.out.println("2 - Hanseníase");
@@ -105,24 +99,15 @@ public class Main {
             return;
         }
 
-        Notificacao notificacaoConsulta;
         switch (tipoAgravo) {
-            case 1 -> notificacaoConsulta = new NotificacaoMalaria();
-            case 2 -> notificacaoConsulta = new NotificacaoHansieniase();
-            case 3 -> notificacaoConsulta = new NotificacaoTuberculose();
-            default -> {
-                System.out.println("Opção inválida!");
-                return;
-            }
+            case 1 -> Notificacao.consultarNotificacoes(sc, Doenca.MALARIA);
+            case 2 -> Notificacao.consultarNotificacoes(sc, Doenca.HANSENIASE);
+            case 3 -> Notificacao.consultarNotificacoes(sc, Doenca.TUBERCULOSE);
+            default -> System.out.println("Opção inválida!");
         }
-
-        notificacaoConsulta.consultarNotificacao(sc);
     }
 
     private static void gerarRelatorio(Scanner sc) {
-
-        GerenciadorDeArquivos.carregarNotificacoes();
-
         System.out.println("\n=== SELECIONE O TIPO DE AGRAVO PARA RELATÓRIO ===");
         System.out.println("1 - Malária");
         System.out.println("2 - Hanseníase");
@@ -139,17 +124,11 @@ public class Main {
             return;
         }
 
-        Notificacao notificacaoRelatorio;
         switch (tipoAgravo) {
-            case 1 -> notificacaoRelatorio = new NotificacaoMalaria();
-            case 2 -> notificacaoRelatorio = new NotificacaoHansieniase();
-            case 3 -> notificacaoRelatorio = new NotificacaoTuberculose();
-            default -> {
-                System.out.println("Opção inválida!");
-                return;
-            }
+            case 1 -> Notificacao.gerarRelatorio(Doenca.MALARIA);
+            case 2 -> Notificacao.gerarRelatorio(Doenca.HANSENIASE);
+            case 3 -> Notificacao.gerarRelatorio(Doenca.TUBERCULOSE);
+            default -> System.out.println("Opção inválida!");
         }
-
-        notificacaoRelatorio.gerarRelatorio();
     }
 }
