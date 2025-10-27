@@ -4,7 +4,6 @@ import entidades.NotificacaoHanseniase;
 import entidades.NotificacaoMalaria;
 import entidades.NotificacaoTuberculose;
 import util.GerenciadorDeArquivos;
-
 import java.util.Scanner;
 
 public class Main {

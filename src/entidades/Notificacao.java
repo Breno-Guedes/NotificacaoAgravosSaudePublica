@@ -1,9 +1,7 @@
 package entidades;
 
 import entidadesDeDados.*;
-import enums.Doenca;
-import enums.RacaCor;
-
+import enums.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -164,7 +162,7 @@ public abstract class Notificacao {
                     System.out.println("\nResultados da consulta por agravo: " + tipoAgravo);
                     int encontrados = 0;
                     for (Notificacao n : notificacoesDoTipo) {
-                        System.out.println("- Cód: " + n.getCodigo()
+                        System.out.println("-> Cód: " + n.getCodigo()
                                 + " | Paciente: " + n.getDadosIndividuais().getNome()
                                 + " | Sexo: " + n.getDadosIndividuais().getSexo()
                                 + " | Bairro: " + n.getDadosResidenciais().getBairro()

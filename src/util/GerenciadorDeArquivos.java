@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 public class GerenciadorDeArquivos {
 
-    private static final String DIR = "database/";
+    private static final String DIR = "src/database/";
     private static final String MALARIA_FILE = DIR + "malaria.txt";
     private static final String HANSENIASE_FILE = DIR + "hanseniase.txt";
     private static final String TUBERCULOSE_FILE = DIR + "tuberculose.txt";
