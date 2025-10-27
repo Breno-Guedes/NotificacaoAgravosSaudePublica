@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-public class NotificacaoHansieniase extends Notificacao {
+public class NotificacaoHanseniase extends Notificacao {
 
-    public NotificacaoHansieniase() {
+    public NotificacaoHanseniase() {
     }
 
     @Override

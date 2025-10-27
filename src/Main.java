@@ -1,6 +1,6 @@
 import enums.*;
 import entidades.Notificacao;
-import entidades.NotificacaoHansieniase;
+import entidades.NotificacaoHanseniase;
 import entidades.NotificacaoMalaria;
 import entidades.NotificacaoTuberculose;
 import util.GerenciadorDeArquivos;
@@ -76,7 +76,7 @@ public class Main {
 
         switch (tipoAgravo) {
             case 1 -> new NotificacaoMalaria().registrarNotificacao(sc);
-            case 2 -> new NotificacaoHansieniase().registrarNotificacao(sc);
+            case 2 -> new NotificacaoHanseniase().registrarNotificacao(sc);
             case 3 -> new NotificacaoTuberculose().registrarNotificacao(sc);
             default -> System.out.println("Opção inválida!");
         }

@@ -81,7 +81,7 @@ public class GerenciadorDeArquivos {
 
     private static String getArquivoPorInstancia(Notificacao n) {
         if (n instanceof NotificacaoMalaria) return MALARIA_FILE;
-        if (n instanceof NotificacaoHansieniase) return HANSENIASE_FILE;
+        if (n instanceof NotificacaoHanseniase) return HANSENIASE_FILE;
         if (n instanceof NotificacaoTuberculose) return TUBERCULOSE_FILE;
         return null;
     }
@@ -177,8 +177,8 @@ public class GerenciadorDeArquivos {
         return n;
     }
 
-    private static NotificacaoHansieniase parseHanseniase(Map<String, String> dados) {
-        NotificacaoHansieniase n = new NotificacaoHansieniase();
+    private static NotificacaoHanseniase parseHanseniase(Map<String, String> dados) {
+        NotificacaoHanseniase n = new NotificacaoHanseniase();
         n.setDadosGerais(new DadosGerais());
         n.getDadosGerais().setAgravo(Doenca.HANSENIASE);
         preencherDadosComuns(n, dados);
