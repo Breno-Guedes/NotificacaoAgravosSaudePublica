@@ -21,6 +21,8 @@ public class NotificacaoMalaria extends Notificacao {
         this.dadosGerais = new DadosGerais();
         this.dadosGerais.setAgravo(Doenca.MALARIA);
 
+        System.out.println("\n--- DADOS GERAIS ---");
+
         while (true) {
             try {
                 System.out.print("Data da Notificação: ");
@@ -86,6 +88,8 @@ public class NotificacaoMalaria extends Notificacao {
 
         // --- DADOS INDIVIDUAIS ---
         this.dadosIndividuais = new DadosIndividuais();
+
+        System.out.println("\n--- DADOS INDIVIDUAIS ---");
 
         while (true) {
             System.out.print("Nome do paciente: ");
@@ -217,6 +221,8 @@ public class NotificacaoMalaria extends Notificacao {
         // --- DADOS RESIDENCIAIS ---
         this.dadosResidenciais = new DadosResidenciais();
 
+        System.out.println("\n--- DADOS RESIDENCIAIS ---");
+
         while (true) {
             System.out.print("UF de residência: ");
             String uf = sc.nextLine();
@@ -316,6 +322,8 @@ public class NotificacaoMalaria extends Notificacao {
 
         // --- DADOS EPIDEMIOLÓGICOS ---
         this.dadosEpidemiologicos = new DadosEpidemiologicos();
+
+        System.out.println("\n--- DADOS EPIDEMIOLÓGICOS ---");
 
         while (true) {
             try {
@@ -435,151 +443,161 @@ public class NotificacaoMalaria extends Notificacao {
             }
         }
 
-        while (true) {
-            try {
-                System.out.print("Parasitos por mm³: ");
-                this.dadosEpidemiologicos.setParasitasMetroCubico(Float.parseFloat(sc.nextLine()));
-                break;
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, insira um número.");
-            }
-        }
-
-        while (true) {
-            try {
-                System.out.println("""
-
-                        ------------------ PARASITEMIA ------------------
-                        1 - Menor que meia cruz
-                        2 - Meia cruz
-                        3 - Uma cruz
-                        4 - Duas cruzes
-                        5 - Três cruzes
-                        6 - Quatro cruzes
-                        """);
-                System.out.print("Parasitemia (1-6): ");
-                this.dadosEpidemiologicos.setParasitemia(Parasitemia.values()[Integer.parseInt(sc.nextLine()) - 1]);
-                break;
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                System.out.println("Opção inválida, tente novamente!");
-            }
-        }
-
-        // --- DADOS DO TRATAMENTO ---
-        this.dadosTratamento = new DadosTratamento();
-
-        while (true) {
-            try {
-                System.out.println("""
-
-                        ------------------ ESQUEMA DE TRATAMENTO ------------------
-                        1 - Pv Cloroquina Primaquina
-                        2 - Pf Quinina Doxiciclina Primaquina
-                        3 - Mistas Pv Pf Mefloquina Primaquina
-                        4 - Pm Cloroquina
-                        5 - Pv Criancas Vomitos
-                        6 - Pf Mefloquina Primaquina
-                        7 - Pf Quinina 7 Dias
-                        8 - Pf Criancas Artesunato Retal
-                        9 - Mistas Pv Pf Quinina 3 Dias
-                        10 - Prevencao Recaida Pv
-                        11 - Malaria Grave Complicada
-                        12 - Pf Artemeter Lumerfantrina
-                        13 - Outro
-                        """);
-                System.out.print("Esquema de tratamento (1-13): ");
-                this.dadosTratamento.setEsquemaTratamento(EsquemaTratamento.values()[Integer.parseInt(sc.nextLine()) - 1]);
-                break;
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                System.out.println("Opção inválida, tente novamente!");
-            }
-        }
-
-        while (true) {
-            try {
-                System.out.print("Data de início do tratamento: ");
-                String dataInicioStr = sc.nextLine();
-                if (dataInicioStr.isEmpty()) {
-                    System.out.println("O campo Data de início do tratamento é obrigatório, tente novamente!");
-                } else {
-                    this.dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
+        if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
+            while (true) {
+                try {
+                    System.out.print("Parasitas por mm³: ");
+                    this.dadosEpidemiologicos.setParasitasMetroCubico(Float.parseFloat(sc.nextLine()));
                     break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Entrada inválida. Por favor, insira um número.");
                 }
-            } catch (DateTimeParseException e) {
-                System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
+            }
+
+            while (true) {
+                try {
+                    System.out.println("""
+                            
+                            ------------------ PARASITEMIA ------------------
+                            1 - Menor que meia cruz
+                            2 - Meia cruz
+                            3 - Uma cruz
+                            4 - Duas cruzes
+                            5 - Três cruzes
+                            6 - Quatro cruzes
+                            """);
+                    System.out.print("Parasitemia (1-6): ");
+                    this.dadosEpidemiologicos.setParasitemia(Parasitemia.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Opção inválida, tente novamente!");
+                }
+            }
+
+            // --- DADOS DO TRATAMENTO ---
+            this.dadosTratamento = new DadosTratamento();
+
+            System.out.println("\n--- DADOS DO TRATAMENTO ---");
+
+            while (true) {
+                try {
+                    System.out.println("""
+                            
+                            ------------------ ESQUEMA DE TRATAMENTO ------------------
+                            1 - Pv Cloroquina Primaquina
+                            2 - Pf Quinina Doxiciclina Primaquina
+                            3 - Mistas Pv Pf Mefloquina Primaquina
+                            4 - Pm Cloroquina
+                            5 - Pv Criancas Vomitos
+                            6 - Pf Mefloquina Primaquina
+                            7 - Pf Quinina 7 Dias
+                            8 - Pf Criancas Artesunato Retal
+                            9 - Mistas Pv Pf Quinina 3 Dias
+                            10 - Prevencao Recaida Pv
+                            11 - Malaria Grave Complicada
+                            12 - Pf Artemeter Lumerfantrina
+                            13 - Outro
+                            """);
+                    System.out.print("Esquema de tratamento (1-13): ");
+                    this.dadosTratamento.setEsquemaTratamento(EsquemaTratamento.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Opção inválida, tente novamente!");
+                }
+            }
+
+            while (true) {
+                try {
+                    System.out.print("Data de início do tratamento: ");
+                    String dataInicioStr = sc.nextLine();
+                    if (dataInicioStr.isEmpty()) {
+                        System.out.println("O campo Data de início do tratamento é obrigatório, tente novamente!");
+                    } else {
+                        this.dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
+                        break;
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
+                }
             }
         }
 
         // --- CONCLUSÃO / ENCERRAMENTO ---
         this.conclusaoEncerramento = new ConclusaoEncerramento();
 
-        while (true) {
-            try {
-                System.out.println("""
+        System.out.println("\n--- CONCLUSÃO / ENCERRAMENTO ---");
 
-                        ------------------ CLASSIFICAÇÃO FINAL ------------------
-                        1 - Caso confirmado
-                        2 - Caso descartado
-                        """);
-                System.out.print("Classificação final (1-2): ");
-                this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
-                break;
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                System.out.println("Opção inválida, tente novamente!");
-            }
-        }
-
-        while (true) {
-            try {
-                System.out.println("""
-
-                        ------------------ CASO AUTÓCTONE ------------------
-                        1 - Sim
-                        2 - Não
-                        3 - Indeterminado
-                        """);
-                System.out.print("Caso autóctone (1-3): ");
-                this.conclusaoEncerramento.setAutoctone(Autoctone.values()[Integer.parseInt(sc.nextLine()) - 1]);
-                break;
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                System.out.println("Opção inválida, tente novamente!");
-            }
-        }
-
-        while (true) {
-            System.out.print("UF provável de infecção: ");
-            String ufProvavel = sc.nextLine();
-            if (ufProvavel.isEmpty()) {
-                System.out.println("O campo UF provável de infecção é obrigatório, tente novamente!");
-            } else {
-                this.conclusaoEncerramento.setProvavelUFinfeccao(ufProvavel);
-                break;
-            }
-        }
-
-        while (true) {
-            System.out.print("Município provável de infecção: ");
-            String municipioProvavel = sc.nextLine();
-            if (municipioProvavel.isEmpty()) {
-                System.out.println("O campo Município provável de infecção é obrigatório, tente novamente!");
-            } else {
-                this.conclusaoEncerramento.setProvavelMunicipioInfeccao(municipioProvavel);
-                break;
-            }
-        }
-
-        while (true) {
-            try {
-                System.out.print("Data de encerramento: ");
-                String dataEncerramentoStr = sc.nextLine();
-                if (dataEncerramentoStr.isEmpty()) {
-                    System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
-                } else {
-                    this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
+            while (true) {
+                try {
+                    System.out.println("""
+                            
+                            ------------------ CLASSIFICAÇÃO FINAL ------------------
+                            1 - Caso confirmado
+                            2 - Caso descartado
+                            """);
+                    System.out.print("Classificação final (1-2): ");
+                    this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
                     break;
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Opção inválida, tente novamente!");
                 }
-            } catch (DateTimeParseException e) {
-                System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
+            }
+
+        if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
+            while (true) {
+                try {
+                    System.out.println("""
+                            
+                            ------------------ CASO AUTÓCTONE ------------------
+                            1 - Sim
+                            2 - Não
+                            3 - Indeterminado
+                            """);
+                    System.out.print("Caso autóctone (1-3): ");
+                    this.conclusaoEncerramento.setAutoctone(Autoctone.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Opção inválida, tente novamente!");
+                }
+            }
+
+            if (this.conclusaoEncerramento.getAutoctone() == Autoctone.SIM || this.conclusaoEncerramento.getAutoctone() == Autoctone.NAO) {
+                while (true) {
+                    System.out.print("UF provável de infecção: ");
+                    String ufProvavel = sc.nextLine();
+                    if (ufProvavel.isEmpty()) {
+                        System.out.println("O campo UF provável de infecção é obrigatório, tente novamente!");
+                    } else {
+                        this.conclusaoEncerramento.setProvavelUFinfeccao(ufProvavel);
+                        break;
+                    }
+                }
+
+                while (true) {
+                    System.out.print("Município provável de infecção: ");
+                    String municipioProvavel = sc.nextLine();
+                    if (municipioProvavel.isEmpty()) {
+                        System.out.println("O campo Município provável de infecção é obrigatório, tente novamente!");
+                    } else {
+                        this.conclusaoEncerramento.setProvavelMunicipioInfeccao(municipioProvavel);
+                        break;
+                    }
+                }
+            }
+
+            while (true) {
+                try {
+                    System.out.print("Data de encerramento: ");
+                    String dataEncerramentoStr = sc.nextLine();
+                    if (dataEncerramentoStr.isEmpty()) {
+                        System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
+                    } else {
+                        this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
+                        break;
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
+                }
             }
         }
 

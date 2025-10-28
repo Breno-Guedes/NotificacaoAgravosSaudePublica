@@ -21,6 +21,8 @@ public class NotificacaoTuberculose extends Notificacao {
         this.dadosGerais = new DadosGerais();
         this.dadosGerais.setAgravo(Doenca.TUBERCULOSE);
 
+        System.out.println("\n--- DADOS GERAIS ---");
+
         while (true) {
             try {
                 System.out.print("Data da Notificação: ");
@@ -86,6 +88,8 @@ public class NotificacaoTuberculose extends Notificacao {
 
         // --- DADOS INDIVIDUAIS ---
         this.dadosIndividuais = new DadosIndividuais();
+
+        System.out.println("\n--- DADOS INDIVIDUAIS ---");
 
         while (true) {
             System.out.print("Nome do paciente: ");
@@ -217,6 +221,8 @@ public class NotificacaoTuberculose extends Notificacao {
         // --- DADOS RESIDENCIAIS ---
         this.dadosResidenciais = new DadosResidenciais();
 
+        System.out.println("\n--- DADOS RESIDENCIAIS ---");
+
         while (true) {
             System.out.print("UF de residência: ");
             String uf = sc.nextLine();
@@ -317,6 +323,8 @@ public class NotificacaoTuberculose extends Notificacao {
         // --- DADOS EPIDEMIOLÓGICOS ---
         this.dadosEpidemiologicos = new DadosEpidemiologicos();
 
+        System.out.println("\n--- DADOS EPIDEMIOLÓGICOS ---");
+
         while (true) {
             try {
                 System.out.print("Data da Investigação: ");
@@ -375,60 +383,68 @@ public class NotificacaoTuberculose extends Notificacao {
             }
         }
 
-        // --- DADOS DO TRATAMENTO ---
-        this.dadosTratamento = new DadosTratamento();
+        if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
+            // --- DADOS DO TRATAMENTO ---
+            this.dadosTratamento = new DadosTratamento();
 
-        while (true) {
-            try {
-                System.out.print("Data de início do tratamento: ");
-                String dataInicioStr = sc.nextLine();
-                if (dataInicioStr.isEmpty()) {
-                    System.out.println("O campo Data de início do tratamento é obrigatório, tente novamente!");
-                } else {
-                    this.dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
-                    break;
+            System.out.println("\n--- DADOS DO TRATAMENTO ---");
+
+            while (true) {
+                try {
+                    System.out.print("Data de início do tratamento: ");
+                    String dataInicioStr = sc.nextLine();
+                    if (dataInicioStr.isEmpty()) {
+                        System.out.println("O campo Data de início do tratamento é obrigatório, tente novamente!");
+                    } else {
+                        this.dadosTratamento.setDataInicioTratamento(LocalDate.parse(dataInicioStr));
+                        break;
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
                 }
-            } catch (DateTimeParseException e) {
-                System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
             }
         }
 
         // --- CONCLUSÃO / ENCERRAMENTO ---
         this.conclusaoEncerramento = new ConclusaoEncerramento();
 
-        while (true) {
-            try {
-                System.out.println("""
+            System.out.println("\n--- CONCLUSÃO / ENCERRAMENTO ---");
 
-                        ------------------ CLASSIFICAÇÃO FINAL ------------------
-                        1 - Caso confirmado
-                        2 - Caso descartado
-                        """);
-                System.out.print("Classificação final (1-2): ");
-                this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
-                break;
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                System.out.println("Opção inválida, tente novamente!");
-            }
-        }
-
-        while (true) {
-            try {
-                System.out.print("Data de encerramento: ");
-                String dataEncerramentoStr = sc.nextLine();
-                if (dataEncerramentoStr.isEmpty()) {
-                    System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
-                } else {
-                    this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
+            while (true) {
+                try {
+                    System.out.println("""
+                            
+                            ------------------ CLASSIFICAÇÃO FINAL ------------------
+                            1 - Caso confirmado
+                            2 - Caso descartado
+                            """);
+                    System.out.print("Classificação final (1-2): ");
+                    this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
                     break;
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Opção inválida, tente novamente!");
                 }
-            } catch (DateTimeParseException e) {
-                System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
+            }
+
+        if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
+            while (true) {
+                try {
+                    System.out.print("Data de encerramento: ");
+                    String dataEncerramentoStr = sc.nextLine();
+                    if (dataEncerramentoStr.isEmpty()) {
+                        System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
+                    } else {
+                        this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
+                        break;
+                    }
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
+                }
             }
         }
 
         System.out.println("\nNotificação de TUBERCULOSE registrada com sucesso!");
         Notificacao.todasAsNotificacoes.add(this);
-        GerenciadorDeArquivos.salvarNotificacao(this);
-    }
+        GerenciadorDeArquivos.salvarNotificacao(this);}
+
 }
