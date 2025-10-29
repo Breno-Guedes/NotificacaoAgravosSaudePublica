@@ -60,8 +60,8 @@ NotificacaoAgravosSaudePublica/
 │   │   └── GerenciadorDeArquivos.java
 │   └── Main.java
 ├── .gitignore
-└── poo-agravos-de-notificacao.iml
-```
+└── poo-agravos-de-notificacao.iml```
+
 # Descrição
 
 Esta atividade tem como objetivo desenvolver um sistema simples para notificar agravos de saúde pública.
