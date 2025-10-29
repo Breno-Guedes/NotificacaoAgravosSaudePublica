@@ -1,5 +1,5 @@
 # Atividade Prática - Sistema de Notificação de Agravos de Saúde Pública
-#
+
 
 # Autores
 - **Breno de Souza Guedes**  
@@ -9,15 +9,17 @@
 
 # Estrutura do Projeto
 
+```plaintext
+NotificacaoAgravosSaudePublica/
 ├── .idea/
-│   ├─.gitignore
-│   ├─copilot.data.migration.agent.xml
-│   ├─copilot.data.migration.ask2agent.xml
-│   ├─copilot.data.migration.edit.xml
-│   ├─material_theme_project_new.xml
-│   ├─misc.xml
-│   ├─modules.xml
-│   └─vcs.xml
+│   ├── .gitignore
+│   ├── copilot.data.migration.agent.xml
+│   ├── copilot.data.migration.ask2agent.xml
+│   ├── copilot.data.migration.edit.xml
+│   ├── material_theme_project_new.xml
+│   ├── misc.xml
+│   ├── modules.xml
+│   └── vcs.xml
 ├── docs/
 │   ├── ENTREGRA.md
 │   ├── README.md
