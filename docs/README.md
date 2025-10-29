@@ -1,5 +1,67 @@
 # Atividade Prática - Sistema de Notificação de Agravos de Saúde Pública
-## Descrição
+#
+
+# Autores
+- **Breno de Souza Guedes**  
+- **Mauro Gutemberg Magalhães Barros**
+
+---
+
+# Estrutura do Projeto
+
+├── .idea/
+│   ├─.gitignore
+│   ├─copilot.data.migration.agent.xml
+│   ├─copilot.data.migration.ask2agent.xml
+│   ├─copilot.data.migration.edit.xml
+│   ├─material_theme_project_new.xml
+│   ├─misc.xml
+│   ├─modules.xml
+│   └─vcs.xml
+├── docs/
+│   ├── ENTREGRA.md
+│   ├── README.md
+│   └── entidades.md
+├── src/
+│   ├── database/
+│   │   ├── hanseniase.txt
+│   │   ├── malaria.txt
+│   │   └── tuberculose.txt
+│   ├── entidades/
+│   │   ├── Notificacao.java
+│   │   ├── NotificacaoHanseniase.java
+│   │   ├── NotificacaoMalaria.java
+│   │   └── NotificacaoTuberculose.java
+│   ├── entidadesDeDados/
+│   │   ├── ConclusaoEncerramento.java
+│   │   ├── DadosEpidemiologicos.java
+│   │   ├── DadosGerais.java
+│   │   ├── DadosIndividuais.java
+│   │   ├── DadosResidenciais.java
+│   │   └── DadosTratamento.java
+│   ├── enums/
+│   │   ├── AtividadesUltimos15Dias.java
+│   │   ├── Autoctone.java
+│   │   ├── ClassificacaoFinal.java
+│   │   ├── Doenca.java
+│   │   ├── Escolaridade.java
+│   │   ├── EsquemaTratamento.java
+│   │   ├── Gestante.java
+│   │   ├── Parasitemia.java
+│   │   ├── RacaCor.java
+│   │   ├── ResultadoExame.java
+│   │   ├── Sexo.java
+│   │   ├── Sintomas.java
+│   │   ├── TiposLamina.java
+│   │   └── Zona.java
+│   ├── util/
+│   │   └── GerenciadorDeArquivos.java
+│   └── Main.java
+├── .gitignore
+└── poo-agravos-de-notificacao.iml
+
+# Descrição
+
 Esta atividade tem como objetivo desenvolver um sistema simples para notificar agravos de saúde pública.
 O sistema deve permitir o registro e geração de relatórios das notificações abaixo:
 - [Hanseniase](https://portalsinan.saude.gov.br/hanseniase)
