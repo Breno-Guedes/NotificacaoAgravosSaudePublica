@@ -42,40 +42,41 @@ NotificacaoAgravosSaudePublica/
 │   │   ├── DadosResidenciais.java
 │   │   └── DadosTratamento.java
 │   ├── enums/
-│   ├── AtividadesUltimos15Dias.java
-│   ├── Autoctone.java
-│   ├── ClassificacaoFinal.java
-│   ├── ClassificacaoOperacionalHanseniase.java
-│   ├── Doenca.java
-│   ├── DoencaAgravoAssociado.java
-│   ├── Escolaridade.java
-│   ├── EsquemaTerapeuticoInicial.java
-│   ├── EsquemaTratamento.java
-│   ├── FormaClinicaHanseniase.java
-│   ├── FormaTuberculose.java
-│   ├── Gestante.java
-│   ├── GrauIncapacidadeFisica.java
-│   ├── LocalExtrapulmonar.java
-│   ├── ModoDeteccaoCasoNovo.java
-│   ├── ModoEntradaHanseniase.java
-│   ├── Parasitemia.java
-│   ├── PopNacoesEspeciais.java
-│   ├── RacaCor.java
-│   ├── ResultadoBaciloscopiaDiagnostico.java
-│   ├── ResultadoBaciloscopiaHanseniase.java
-│   ├── ResultadoCultura.java
-│   ├── ResultadoExame.java
-│   ├── ResultadoHistopatologia.java
-│   ├── ResultadoHIV.java
-│   ├── ResultadoRadiografiaTorax.java
-│   ├── ResultadoTesteMolecularRapido.java
-│   ├── ResultadoTesteSensibilidade.java
-│   ├── Sexo.java
-│   ├── SimNaoIgnorado.java
-│   ├── Sintomas.java
-│   ├── TipoDeEntradaTuberculose.java
-│   ├── TiposLamina.java
-│   └── Zona.java
+│   │   ├── AtividadesUltimos15Dias.java
+│   │   ├── Autoctone.java
+│   │   ├── ClassificacaoFinal.java
+│   │   ├── ClassificacaoOperacionalHanseniase.java
+│   │   ├── Doenca.java
+│   │   ├── DoencaAgravoAssociado.java
+│   │   ├── Escolaridade.java
+│   │   ├── EsquemaTerapeuticoInicial.java
+│   │   ├── EsquemaTratamento.java
+│   │   ├── FormaClinicaHanseniase.java
+│   │   ├── FormaTuberculose.java
+│   │   ├── Gestante.java
+│   │   ├── GrauIncapacidadeFisica.java
+│   │   ├── LocalExtrapulmonar.java
+│   │   ├── ModoDeteccaoCasoNovo.java
+│   │   ├── ModoEntradaHanseniase.java
+│   │   ├── Parasitemia.java
+│   │   ├── PopNacoesEspeciais.java
+│   │   ├── RacaCor.java
+│   │   ├── ResultadoBaciloscopiaDiagnostico.java
+│   │   ├── ResultadoBaciloscopiaHanseniase.java
+│   │   ├── ResultadoCultura.java
+│   │   ├── ResultadoExame.java
+│   │   ├── ResultadoHistopatologia.java
+│   │   ├── ResultadoHIV.java
+│   │   ├── ResultadoRadiografiaTorax.java
+│   │   ├── ResultadoTesteMolecularRapido.java
+│   │   ├── ResultadoTesteSensibilidade.java
+│   │   ├── Sexo.java
+│   │   ├── SimNaoIgnorado.java
+│   │   ├── SimNaoIgnorado.java
+│   │   ├── Sintomas.java
+│   │   ├── TipoDeEntradaTuberculose.java
+│   │   ├── TiposLamina.java
+│   │   └── Zona.java
 │   ├── util/
 │   │   └── GerenciadorDeArquivos.java
 │   └── Main.java
