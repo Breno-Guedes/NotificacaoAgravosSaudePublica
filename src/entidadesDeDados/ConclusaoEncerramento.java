@@ -1,97 +1,134 @@
 package entidadesDeDados;
 
-import java.time.LocalDate;
-
 import enums.*;
+import java.time.LocalDate;
 
 public class ConclusaoEncerramento {
 
-  private ClassificacaoFinal classificacaoFinal;
-  private Autoctone autoctone;
-  private String provavelUFinfeccao;
-  private String provavelPaisInfeccao;
-  private String provavelMunicipioInfeccao;
-  private LocalDate dataEncerramento;
-  private String matriculaExaminador;
-  private String nomeExaminador;
+    private ClassificacaoFinal classificacaoFinal;
+    private Autoctone autoctone;
+    private String provavelUFinfeccao;
+    private String provavelPaisInfeccao;
+    private String provavelMunicipioInfeccao;
+    private LocalDate dataEncerramento;
+    private String matriculaExaminador;
+    private String nomeExaminador;
+    private FormaClinicaHanseniase formaClinicaHanseniase;
+    private ClassificacaoOperacionalHanseniase classificacaoOperacionalHanseniase;
+    private GrauIncapacidadeFisica grauIncapacidadeFisica;
 
-  public ConclusaoEncerramento(){}
-  public ConclusaoEncerramento(
-    ClassificacaoFinal classificacaoFinal, 
-    Autoctone autoctone, 
-    String provavelUFinfeccao, 
-    String provavelPaisInfeccao, 
-    String provavelMunicipioInfeccao, 
-    LocalDate dataEncerramento, 
-    String matriculaExaminador, 
-    String nomeExaminador) {
+    public ConclusaoEncerramento() {
 
-    this.classificacaoFinal = classificacaoFinal;
-    this.autoctone = autoctone;
-    this.provavelUFinfeccao = provavelUFinfeccao;
-    this.provavelPaisInfeccao = provavelPaisInfeccao;
-    this.provavelMunicipioInfeccao = provavelMunicipioInfeccao;
-    this.dataEncerramento = dataEncerramento;
-    this.matriculaExaminador = matriculaExaminador;
-    this.nomeExaminador = nomeExaminador;
-  }
+    }
 
-  // --- setters and getters --- //
-  
-  public void setClassificacaoFinal(ClassificacaoFinal classificacaoFinal) {
-    this.classificacaoFinal = classificacaoFinal;
-  }
-  public ClassificacaoFinal getClassificacaoFinal() {
-    return classificacaoFinal;
-  }
+    public ConclusaoEncerramento(ClassificacaoFinal classificacaoFinal,
+                                 Autoctone autoctone,
+                                 String provavelUFinfeccao,
+                                 String provavelPaisInfeccao,
+                                 String provavelMunicipioInfeccao,
+                                 LocalDate dataEncerramento,
+                                 String matriculaExaminador,
+                                 String nomeExaminador,
+                                 FormaClinicaHanseniase formaClinicaHanseniase,
+                                 ClassificacaoOperacionalHanseniase classificacaoOperacionalHanseniase,
+                                 GrauIncapacidadeFisica grauIncapacidadeFisica) {
 
-  public void setAutoctone(Autoctone autoctone) {
-    this.autoctone = autoctone;
-  }
-  public Autoctone getAutoctone() {
-    return autoctone;
-  }
+        this.classificacaoFinal = classificacaoFinal;
+        this.autoctone = autoctone;
+        this.provavelUFinfeccao = provavelUFinfeccao;
+        this.provavelPaisInfeccao = provavelPaisInfeccao;
+        this.provavelMunicipioInfeccao = provavelMunicipioInfeccao;
+        this.dataEncerramento = dataEncerramento;
+        this.matriculaExaminador = matriculaExaminador;
+        this.nomeExaminador = nomeExaminador;
+        this.formaClinicaHanseniase = formaClinicaHanseniase;
+        this.classificacaoOperacionalHanseniase = classificacaoOperacionalHanseniase;
+        this.grauIncapacidadeFisica = grauIncapacidadeFisica;
+    }
 
-  public void setProvavelUFinfeccao(String provavelUFinfeccao) {
-    this.provavelUFinfeccao = provavelUFinfeccao;
-  }
-  public String getProvavelUFinfeccao() {
-    return provavelUFinfeccao;
-  }
+    public Autoctone getAutoctone() {
+        return autoctone;
+    }
 
-  public void setProvavelPaisInfeccao(String provavelPaisInfeccao) {
-    this.provavelPaisInfeccao = provavelPaisInfeccao;
-  }
-  public String getProvavelPaisInfeccao() {
-    return provavelPaisInfeccao;
-  }
+    public void setAutoctone(Autoctone autoctone) {
+        this.autoctone = autoctone;
+    }
 
-  public void setProvavelMunicipioInfeccao(String provavelMunicipioInfeccao) {
-    this.provavelMunicipioInfeccao = provavelMunicipioInfeccao;
-  }
-  public String getProvavelMunicipioInfeccao() {
-    return provavelMunicipioInfeccao;
-  }
+    public String getProvavelUFinfeccao() {
+        return provavelUFinfeccao;
+    }
 
-  public void setDataEncerramento(LocalDate dataEncerramento) {
-    this.dataEncerramento = dataEncerramento;
-  }
-  public LocalDate getDataEncerramento() {
-    return dataEncerramento;
-  }
+    public void setProvavelUFinfeccao(String provavelUFinfeccao) {
+        this.provavelUFinfeccao = provavelUFinfeccao;
+    }
 
-  public void setNomeExaminador(String nomeExaminador) {
-    this.nomeExaminador = nomeExaminador;
-  }
-  public String getNomeExaminador() {
-    return nomeExaminador;
-  }
+    public String getMatriculaExaminador() {
+        return matriculaExaminador;
+    }
 
-  public void setMatriculaExaminador(String matriculaExaminador) {
-    this.matriculaExaminador = matriculaExaminador;
-  }
-  public String getMatriculaExaminador() {
-    return matriculaExaminador;
-  }
+    public void setMatriculaExaminador(String matriculaExaminador) {
+        this.matriculaExaminador = matriculaExaminador;
+    }
+
+    public String getNomeExaminador() {
+        return nomeExaminador;
+    }
+
+    public void setNomeExaminador(String nomeExaminador) {
+        this.nomeExaminador = nomeExaminador;
+    }
+
+    public void setProvavelPaisInfeccao(String provavelPaisInfeccao) {
+        this.provavelPaisInfeccao = provavelPaisInfeccao;
+    }
+    public String getProvavelPaisInfeccao() {
+        return provavelPaisInfeccao;
+    }
+
+    public void setProvavelMunicipioInfeccao(String provavelMunicipioInfeccao) {
+        this.provavelMunicipioInfeccao = provavelMunicipioInfeccao;
+    }
+    public String getProvavelMunicipioInfeccao() {
+        return provavelMunicipioInfeccao;
+    }
+
+    public void setDataEncerramento(LocalDate dataEncerramento) {
+        this.dataEncerramento = dataEncerramento;
+    }
+    public LocalDate getDataEncerramento() {
+        return dataEncerramento;
+    }
+
+    public ClassificacaoFinal getClassificacaoFinal() {
+        return classificacaoFinal;
+    }
+
+    public void setClassificacaoFinal(ClassificacaoFinal classificacaoFinal) {
+        this.classificacaoFinal = classificacaoFinal;
+    }
+
+    public FormaClinicaHanseniase getFormaClinicaHanseniase() {
+        return formaClinicaHanseniase;
+    }
+
+    public void setFormaClinicaHanseniase(FormaClinicaHanseniase formaClinicaHanseniase) {
+        this.formaClinicaHanseniase = formaClinicaHanseniase;
+    }
+
+    public ClassificacaoOperacionalHanseniase getClassificacaoOperacionalHanseniase() {
+        return classificacaoOperacionalHanseniase;
+    }
+
+    public void setClassificacaoOperacionalHanseniase(ClassificacaoOperacionalHanseniase classificacaoOperacionalHanseniase) {
+        this.classificacaoOperacionalHanseniase = classificacaoOperacionalHanseniase;
+    }
+
+    public GrauIncapacidadeFisica getGrauIncapacidadeFisica() {
+        return grauIncapacidadeFisica;
+    }
+
+    public void setGrauIncapacidadeFisica(GrauIncapacidadeFisica grauIncapacidadeFisica) {
+        this.grauIncapacidadeFisica = grauIncapacidadeFisica;
+    }
 
 }

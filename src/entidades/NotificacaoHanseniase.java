@@ -146,7 +146,7 @@ public class NotificacaoHanseniase extends Notificacao {
             while (true) {
                 try {
                     System.out.println("""
-
+                            
                             ------------------ GESTANTE ------------------
                             1 - 1º trimestre
                             2 - 2º trimestre
@@ -166,7 +166,7 @@ public class NotificacaoHanseniase extends Notificacao {
         while (true) {
             try {
                 System.out.println("""
-
+                        
                         ------------------ RAÇA/COR ------------------
                         1 - Branca
                         2 - Preta
@@ -188,18 +188,19 @@ public class NotificacaoHanseniase extends Notificacao {
                 System.out.println("""
 
                         ------------------ ESCOLARIDADE ------------------
-                        1 - Fundamental incompleto
-                        2 - Fundamental completo
-                        3 - Médio incompleto
-                        4 - Médio completo
-                        5 - Superior incompleto
-                        6 - Superior completo
-                        7 - Pós-graduação
-                        8 - Mestrado
-                        9 - Doutorado
-                        10 - Não informado
+                        1 - Analfabeto
+                        2 - Fundamental incompleto
+                        3 - Fundamental completo
+                        4 - Médio incompleto
+                        5 - Médio completo
+                        6 - Superior incompleto
+                        7 - Superior completo
+                        8 - Pós-graduação
+                        9 - Mestrado
+                        10 - Doutorado
+                        11 - Não informado
                         """);
-                System.out.print("Escolaridade (1-10): ");
+                System.out.print("Escolaridade (1-11): ");
                 this.dadosIndividuais.setEscolaridade(Escolaridade.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
@@ -291,23 +292,36 @@ public class NotificacaoHanseniase extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("DDD: ");
-                String dddStr = sc.nextLine();
-                if (dddStr.isEmpty() || !dddStr.matches("\\d{2}")) {
-                    System.out.println("DDD inválido, tente novamente!");
-                } else {
-                    this.dadosResidenciais.setDdd(Integer.parseInt(dddStr));
-                    break;
+                System.out.print("Digite o DDD e o telefone (apenas números): ");
+                String telefoneCompleto = sc.nextLine().trim();
+
+                if (telefoneCompleto.isEmpty()) {
+                    System.out.println("Campo vazio! Digite novamente.");
+                    continue;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("DDD inválido, tente novamente!");
+
+                if (!telefoneCompleto.matches("\\d+")) {
+                    System.out.println("Número inválido! Digite apenas números (sem letras ou símbolos).");
+                    continue;
+                }
+
+                if (telefoneCompleto.length() < 10 || telefoneCompleto.length() > 11) {
+                    System.out.println("Tamanho inválido! O número deve ter entre 10 e 11 dígitos.");
+                    continue;
+                }
+
+                this.dadosResidenciais.setTelefone(telefoneCompleto);
+                break;
+
+            } catch (Exception e) {
+                System.out.println("Erro inesperado! Tente novamente.");
             }
         }
 
         while (true) {
             try {
                 System.out.println("""
-
+                        
                         ------------------ ZONA ------------------
                         1 - Urbana
                         2 - Rural
@@ -324,7 +338,6 @@ public class NotificacaoHanseniase extends Notificacao {
         this.dadosEpidemiologicos = new DadosEpidemiologicos();
 
         System.out.println("\n--- DADOS EPIDEMIOLÓGICOS ---");
-
         while (true) {
             try {
                 System.out.print("Data da Investigação: ");
@@ -369,7 +382,7 @@ public class NotificacaoHanseniase extends Notificacao {
         while (true) {
             try {
                 System.out.println("""
-
+                        
                         ------------------ RESULTADO DO EXAME ------------------
                         1 - Positivo
                         2 - Negativo
@@ -383,11 +396,89 @@ public class NotificacaoHanseniase extends Notificacao {
             }
         }
 
-        if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
-            // --- DADOS DO TRATAMENTO ---
+        // --- ENUMS / DADOS COMPLEMENTARES ESPECÍFICOS DE HANSENÍASE ---
+        while (true) {
+            try {
+                System.out.println("""
+                        
+                        ------------------ MODO DE ENTRADA ------------------
+                        1 - Caso novo
+                        2 - Transferência mesmo município
+                        3 - Transferência outro município
+                        4 - Transferência outro estado
+                        5 - Transferência outro país
+                        6 - Recidiva
+                        7 - Outros reingressos
+                        8 - Ignorado
+                        """);
+                System.out.print("Modo de entrada (1-8): ");
+                this.dadosEpidemiologicos.setModoEntradaHanseniase(ModoEntradaHanseniase.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                        
+                        ------------------ MODO DE DETECÇÃO ------------------
+                        1 - Encaminhamento
+                        2 - Demanda espontânea
+                        3 - Exame de coletividade
+                        4 - Exame de contatos
+                        5 - Outros modos
+                        6 - Ignorado
+                        """);
+                System.out.print("Modo de detecção (1-6): ");
+                this.dadosEpidemiologicos.setModoDeteccao(ModoDeteccaoCasoNovo.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                        
+                        ------------------ RESULTADO BACILOSCOPIA ------------------
+                        1 - Positiva
+                        2 - Negativa
+                        3 - Não realizada
+                        4 - Ignorado
+                        """);
+                System.out.print("Resultado baciloscopia (1-4): ");
+                this.dadosEpidemiologicos.setResultadoBaciloscopiaHanseniase(ResultadoBaciloscopiaHanseniase.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        // --- DADOS DO TRATAMENTO ---
+        if (this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
             this.dadosTratamento = new DadosTratamento();
 
             System.out.println("\n--- DADOS DO TRATAMENTO ---");
+
+            while (true) {
+                try {
+                    System.out.println("""
+                            
+                            ------------------ ESQUEMA TERAPÊUTICO INICIAL ------------------
+                            1 - PQT/PB/6 doses
+                            2 - PQT/MB/12 doses
+                            3 - Outros esquemas substitutos
+                            """);
+                    System.out.print("Esquema terapêutico inicial (1-3): ");
+                    this.dadosTratamento.setEsquemaTerapeuticoInicial(EsquemaTerapeuticoInicial.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Opção inválida, tente novamente!");
+                }
+            }
 
             while (true) {
                 try {
@@ -403,6 +494,8 @@ public class NotificacaoHanseniase extends Notificacao {
                     System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
                 }
             }
+        } else {
+            this.dadosTratamento = new DadosTratamento();
         }
 
         // --- CONCLUSÃO / ENCERRAMENTO ---
@@ -410,23 +503,77 @@ public class NotificacaoHanseniase extends Notificacao {
 
         System.out.println("\n--- CONCLUSÃO / ENCERRAMENTO ---");
 
-            while (true) {
-                try {
-                    System.out.println("""
-                            
-                            ------------------ CLASSIFICAÇÃO FINAL ------------------
-                            1 - Caso confirmado
-                            2 - Caso descartado
-                            """);
-                    System.out.print("Classificação final (1-2): ");
-                    this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
-                    break;
-                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                    System.out.println("Opção inválida, tente novamente!");
-                }
+        while (true) {
+            try {
+                System.out.println("""
+                        
+                        ------------------ CLASSIFICAÇÃO FINAL ------------------
+                        1 - Caso confirmado
+                        2 - Caso descartado
+                        """);
+                System.out.print("Classificação final (1-2): ");
+                this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
             }
+        }
 
-        if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
+        while (true) {
+            try {
+                System.out.println("""
+                        
+                        ------------------ FORMA CLÍNICA ------------------
+                        1 - Indeterminada
+                        2 - Tuberculoide
+                        3 - Dimorfa
+                        4 - Virchowiana
+                        5 - Não classificado
+                        """);
+                System.out.print("Forma clínica (1-5): ");
+                this.conclusaoEncerramento.setFormaClinicaHanseniase(FormaClinicaHanseniase.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                        
+                        ------------------ CLASSIFICAÇÃO OPERACIONAL ------------------
+                        1 - Paucibacilar (PB)
+                        2 - Multibacilar (MB)
+                        """);
+                System.out.print("Classificação operacional (1-2): ");
+                this.conclusaoEncerramento.setClassificacaoOperacionalHanseniase(ClassificacaoOperacionalHanseniase.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                        
+                        ------------------ GRAU DE INCAPACIDADE FÍSICA ------------------
+                        1 - Grau zero
+                        2 - Grau I
+                        3 - Grau II
+                        4 - Não avaliado
+                        """);
+                System.out.print("Grau de incapacidade (1-4): ");
+                this.conclusaoEncerramento.setGrauIncapacidadeFisica(GrauIncapacidadeFisica.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        if (this.conclusaoEncerramento.getClassificacaoFinal() == ClassificacaoFinal.CONFIRMADO ||
+                this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
             while (true) {
                 try {
                     System.out.print("Data de encerramento: ");

@@ -10,7 +10,7 @@ public class DadosResidenciais {
   private String logradouro;
   private String numero;
   private String cep;
-  private Integer ddd;
+  private String telefone;
   private Zona zona;
 
   public DadosResidenciais(){}
@@ -22,7 +22,7 @@ public class DadosResidenciais {
       String logradouro,
       String numero,
       String cep,
-      Integer ddd,
+      String telefone,
       Zona zona) {
 
     this.uf = uf;
@@ -32,7 +32,7 @@ public class DadosResidenciais {
     this.logradouro = logradouro;
     this.numero = numero;
     this.cep = cep;
-    this.ddd = ddd;
+    this.telefone = telefone;
     this.zona = zona;
   }
 
@@ -94,12 +94,12 @@ public class DadosResidenciais {
     this.cep = cep;
   }
 
-  public Integer getDdd() {
-    return ddd;
+  public String getTelefone() {
+    return telefone;
   }
 
-  public void setDdd(Integer ddd) {
-    this.ddd = ddd;
+  public void setTelefone(String telefone) {
+    this.telefone = telefone;
   }
 
   public Zona getZona() {

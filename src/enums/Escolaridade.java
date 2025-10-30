@@ -1,6 +1,7 @@
 package enums;
 
 public enum Escolaridade {
+    ANALFABETO,
     FUNDAMENTAL_INCOMPLETO,
     FUNDAMENTAL_COMPLETO,
     MEDIO_INCOMPLETO,

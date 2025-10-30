@@ -6,34 +6,46 @@ import enums.*;
 
 public class DadosTratamento {
 
-  private EsquemaTratamento esquemaTratamento;
-  private LocalDate dataInicioTratamento;
+    private EsquemaTratamento esquemaTratamento;
+    private LocalDate dataInicioTratamento;
+    private EsquemaTerapeuticoInicial esquemaTerapeuticoInicial;
 
-  public DadosTratamento(){}
-  public DadosTratamento(
-      EsquemaTratamento esquemaTratamento,
-      LocalDate dataInicioTratamento) {
+    public DadosTratamento(){
 
-    this.esquemaTratamento = esquemaTratamento;
-    this.dataInicioTratamento = dataInicioTratamento;
-  }
+    }
+    public DadosTratamento(
+            EsquemaTratamento esquemaTratamento,
+            LocalDate dataInicioTratamento, EsquemaTerapeuticoInicial esquemaTerapeuticoInicial) {
 
-  // --- setters e getters --- //
+        this.esquemaTratamento = esquemaTratamento;
+        this.dataInicioTratamento = dataInicioTratamento;
+        this.esquemaTerapeuticoInicial = esquemaTerapeuticoInicial;
+    }
 
-  public void setEsquemaTratamento(EsquemaTratamento esquemaTratamento) {
-    this.esquemaTratamento = esquemaTratamento;
-  }
+    // --- setters e getters --- //
 
-  public EsquemaTratamento getEsquemaTratamento() {
-    return esquemaTratamento;
-  }
+    public void setEsquemaTratamento(EsquemaTratamento esquemaTratamento) {
+        this.esquemaTratamento = esquemaTratamento;
+    }
 
-  public void setDataInicioTratamento(LocalDate dataInicioTratamento) {
-    this.dataInicioTratamento = dataInicioTratamento;
-  }
+    public EsquemaTratamento getEsquemaTratamento() {
+        return esquemaTratamento;
+    }
 
-  public LocalDate getDataInicioTratamento() {
-    return dataInicioTratamento;
-  }
+    public void setDataInicioTratamento(LocalDate dataInicioTratamento) {
+        this.dataInicioTratamento = dataInicioTratamento;
+    }
+
+    public LocalDate getDataInicioTratamento() {
+        return dataInicioTratamento;
+    }
+
+    public EsquemaTerapeuticoInicial getEsquemaTerapeuticoInicial() {
+        return esquemaTerapeuticoInicial;
+    }
+
+    public void setEsquemaTerapeuticoInicial(EsquemaTerapeuticoInicial esquemaTerapeuticoInicial) {
+        this.esquemaTerapeuticoInicial = esquemaTerapeuticoInicial;
+    }
 
 }

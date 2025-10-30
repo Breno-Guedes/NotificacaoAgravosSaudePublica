@@ -188,18 +188,19 @@ public class NotificacaoMalaria extends Notificacao {
                 System.out.println("""
 
                         ------------------ ESCOLARIDADE ------------------
-                        1 - Fundamental incompleto
-                        2 - Fundamental completo
-                        3 - Médio incompleto
-                        4 - Médio completo
-                        5 - Superior incompleto
-                        6 - Superior completo
-                        7 - Pós-graduação
-                        8 - Mestrado
-                        9 - Doutorado
-                        10 - Não informado
+                        1 - Analfabeto
+                        2 - Fundamental incompleto
+                        3 - Fundamental completo
+                        4 - Médio incompleto
+                        5 - Médio completo
+                        6 - Superior incompleto
+                        7 - Superior completo
+                        8 - Pós-graduação
+                        9 - Mestrado
+                        10 - Doutorado
+                        11 - Não informado
                         """);
-                System.out.print("Escolaridade (1-10): ");
+                System.out.print("Escolaridade (1-11): ");
                 this.dadosIndividuais.setEscolaridade(Escolaridade.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
@@ -291,16 +292,29 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("DDD: ");
-                String dddStr = sc.nextLine();
-                if (dddStr.isEmpty() || !dddStr.matches("\\d{2}")) {
-                    System.out.println("DDD inválido, tente novamente!");
-                } else {
-                    this.dadosResidenciais.setDdd(Integer.parseInt(dddStr));
-                    break;
+                System.out.print("Digite o DDD e o telefone (apenas números): ");
+                String telefoneCompleto = sc.nextLine().trim();
+
+                if (telefoneCompleto.isEmpty()) {
+                    System.out.println("Campo vazio! Digite novamente.");
+                    continue;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("DDD inválido, tente novamente!");
+
+                if (!telefoneCompleto.matches("\\d+")) {
+                    System.out.println("Número inválido! Digite apenas números (sem letras ou símbolos).");
+                    continue;
+                }
+
+                if (telefoneCompleto.length() < 10 || telefoneCompleto.length() > 11) {
+                    System.out.println("Tamanho inválido! O número deve ter entre 10 e 11 dígitos.");
+                    continue;
+                }
+
+                this.dadosResidenciais.setTelefone(telefoneCompleto);
+                break;
+
+            } catch (Exception e) {
+                System.out.println("Erro inesperado! Tente novamente.");
             }
         }
 
@@ -585,22 +599,24 @@ public class NotificacaoMalaria extends Notificacao {
                 }
             }
 
-            while (true) {
-                try {
-                    System.out.print("Data de encerramento: ");
-                    String dataEncerramentoStr = sc.nextLine();
-                    if (dataEncerramentoStr.isEmpty()) {
-                        System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
-                    } else {
-                        this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
-                        break;
+            if (this.conclusaoEncerramento.getClassificacaoFinal() == ClassificacaoFinal.CONFIRMADO ||
+                    this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
+                while (true) {
+                    try {
+                        System.out.print("Data de encerramento: ");
+                        String dataEncerramentoStr = sc.nextLine();
+                        if (dataEncerramentoStr.isEmpty()) {
+                            System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
+                        } else {
+                            this.conclusaoEncerramento.setDataEncerramento(LocalDate.parse(dataEncerramentoStr));
+                            break;
+                        }
+                    } catch (DateTimeParseException e) {
+                        System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
                     }
-                } catch (DateTimeParseException e) {
-                    System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
                 }
             }
         }
-
         System.out.println("\nNotificação de MALÁRIA registrada com sucesso!");
         Notificacao.todasAsNotificacoes.add(this);
         GerenciadorDeArquivos.salvarNotificacao(this);

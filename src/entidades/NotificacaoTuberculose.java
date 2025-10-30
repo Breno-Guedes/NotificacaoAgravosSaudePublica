@@ -188,18 +188,19 @@ public class NotificacaoTuberculose extends Notificacao {
                 System.out.println("""
 
                         ------------------ ESCOLARIDADE ------------------
-                        1 - Fundamental incompleto
-                        2 - Fundamental completo
-                        3 - Médio incompleto
-                        4 - Médio completo
-                        5 - Superior incompleto
-                        6 - Superior completo
-                        7 - Pós-graduação
-                        8 - Mestrado
-                        9 - Doutorado
-                        10 - Não informado
+                        1 - Analfabeto
+                        2 - Fundamental incompleto
+                        3 - Fundamental completo
+                        4 - Médio incompleto
+                        5 - Médio completo
+                        6 - Superior incompleto
+                        7 - Superior completo
+                        8 - Pós-graduação
+                        9 - Mestrado
+                        10 - Doutorado
+                        11 - Não informado
                         """);
-                System.out.print("Escolaridade (1-10): ");
+                System.out.print("Escolaridade (1-11): ");
                 this.dadosIndividuais.setEscolaridade(Escolaridade.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
@@ -291,16 +292,29 @@ public class NotificacaoTuberculose extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("DDD: ");
-                String dddStr = sc.nextLine();
-                if (dddStr.isEmpty() || !dddStr.matches("\\d{2}")) {
-                    System.out.println("DDD inválido, tente novamente!");
-                } else {
-                    this.dadosResidenciais.setDdd(Integer.parseInt(dddStr));
-                    break;
+                System.out.print("Digite o DDD e o telefone: ");
+                String telefoneCompleto = sc.nextLine().trim();
+
+                if (telefoneCompleto.isEmpty()) {
+                    System.out.println("Campo vazio! Digite novamente.");
+                    continue;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("DDD inválido, tente novamente!");
+
+                if (!telefoneCompleto.matches("\\d+")) {
+                    System.out.println("Número inválido! Digite apenas números (sem letras ou símbolos).");
+                    continue;
+                }
+
+                if (telefoneCompleto.length() < 10 || telefoneCompleto.length() > 11) {
+                    System.out.println("Tamanho inválido! O número deve ter entre 10 e 11 dígitos.");
+                    continue;
+                }
+
+                this.dadosResidenciais.setTelefone(telefoneCompleto);
+                break;
+
+            } catch (Exception e) {
+                System.out.println("Erro inesperado! Tente novamente.");
             }
         }
 
@@ -369,12 +383,12 @@ public class NotificacaoTuberculose extends Notificacao {
         while (true) {
             try {
                 System.out.println("""
-
-                        ------------------ RESULTADO DO EXAME ------------------
-                        1 - Positivo
-                        2 - Negativo
-                        3 - Indeterminado
-                        """);
+                            
+                            ------------------ RESULTADO DO EXAME ------------------
+                            1 - Positivo
+                            2 - Negativo
+                            3 - Indeterminado
+                            """);
                 System.out.print("Resultado do exame (1-3): ");
                 this.dadosEpidemiologicos.setResultadoExame(ResultadoExame.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
@@ -383,8 +397,232 @@ public class NotificacaoTuberculose extends Notificacao {
             }
         }
 
+        // --- ENUNS / DADOS COMPLEMENTARES ESPECÍFICOS DE TUBERCULOSE ---
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ TIPO DE ENTRADA ------------------
+                            1 - Caso novo
+                            2 - Recidiva
+                            3 - Reingresso após abandono
+                            4 - Não sabe
+                            5 - Transferência
+                            6 - Pós-óbito
+                            """);
+                System.out.print("Tipo de entrada (1-6): ");
+                this.dadosEpidemiologicos.setTipoEntrada(TipoDeEntradaTuberculose.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ POPULAÇÕES ESPECIAIS (opcional) ------------------
+                            1 - População privada de liberdade
+                            2 - Profissional de saúde
+                            3 - População em situação de rua
+                            4 - Imigrante
+                            """);
+                System.out.print("População especial (1-4) ou ENTER para nenhum: ");
+                String line = sc.nextLine();
+                if (line.isEmpty()) {
+                    break;
+                }
+                this.dadosEpidemiologicos.setPopulacaoEspecial(PopNacoesEspeciais.values()[Integer.parseInt(line) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
         if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
-            // --- DADOS DO TRATAMENTO ---
+            while (true) {
+                try {
+                    System.out.println("""
+                            
+                            ------------------ FORMA DE TUBERCULOSE ------------------
+                            1 - Pulmonar
+                            2 - Extrapulmonar
+                            3 - Pulmonar mais extrapulmonar
+                            """);
+                    System.out.print("Forma de tuberculose (1-3): ");
+                    FormaTuberculose forma = FormaTuberculose.values()[Integer.parseInt(sc.nextLine()) - 1];
+                    this.dadosEpidemiologicos.setFormaTuberculose(forma);
+
+                    if (forma == FormaTuberculose.EXTRAPULMONAR || forma == FormaTuberculose.PULMONAR_MAIS_EXTRAPULMONAR) {
+                        while (true) {
+                            try {
+                                System.out.println("""
+                                        
+                                        ------------------ LOCAL EXTRAPULMONAR ------------------
+                                        1 - Pleural
+                                        2 - Ganglionar periférica
+                                        3 - Geniturinária
+                                        4 - Óssea
+                                        5 - Ocular
+                                        6 - Miliar
+                                        7 - Meningoencefálico
+                                        8 - Cutânea
+                                        9 - Laríngea
+                                        10 - Outra
+                                        """);
+                                System.out.print("Local extrapulmonar (1-10): ");
+                                this.dadosEpidemiologicos.setLocalExtrapulmonar(LocalExtrapulmonar.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                                break;
+                            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                                System.out.println("Opção inválida, tente novamente!");
+                            }
+                        }
+                    }
+                    break;
+                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                    System.out.println("Opção inválida, tente novamente!");
+                }
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ RESULTADO BACILOSCOPIA DIAGNÓSTICO ------------------
+                            1 - Positiva
+                            2 - Negativa
+                            3 - Não realizada
+                            4 - Não se aplica
+                            """);
+                System.out.print("Resultado baciloscopia diagnóstico (1-4): ");
+                this.dadosEpidemiologicos.setResultadoBaciloscopiaDiagnostico(ResultadoBaciloscopiaDiagnostico.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ RESULTADO RADIOGRAFIA DE TÓRAX ------------------
+                            1 - Suspeito
+                            2 - Normal
+                            3 - Outra patologia
+                            4 - Não realizado
+                            """);
+                System.out.print("Resultado radiografia (1-4): ");
+                this.dadosEpidemiologicos.setResultadoRadiografiaTorax(ResultadoRadiografiaTorax.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ RESULTADO HIV ------------------
+                            1 - Positivo
+                            2 - Negativo
+                            3 - Em andamento
+                            4 - Não realizado
+                            """);
+                System.out.print("Resultado HIV (1-4): ");
+                this.dadosEpidemiologicos.setResultadoHiv(ResultadoHIV.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ RESULTADO HISTOPATOLOGIA (opcional) ------------------
+                            1 - BAAR positivo
+                            2 - Sugestivo de TB
+                            3 - Não sugestivo de TB
+                            4 - Em andamento
+                            5 - Não realizado
+                            """);
+                System.out.print("Resultado histopatologia (1-5) ou ENTER para pular: ");
+                String line = sc.nextLine();
+                if (line.isEmpty()) break;
+                this.dadosEpidemiologicos.setResultadoHistopatologia(ResultadoHistopatologia.values()[Integer.parseInt(line) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ RESULTADO CULTURA (opcional) ------------------
+                            1 - Positivo
+                            2 - Negativo
+                            3 - Em andamento
+                            4 - Não realizado
+                            """);
+                System.out.print("Resultado cultura (1-4) ou ENTER para pular: ");
+                String line = sc.nextLine();
+                if (line.isEmpty()) break;
+                this.dadosEpidemiologicos.setResultadoCultura(ResultadoCultura.values()[Integer.parseInt(line) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ RESULTADO TESTE MOLECULAR RÁPIDO ------------------
+                            1 - Detectável sensível a rifampicina
+                            2 - Detectável resistente a rifampicina
+                            3 - Não detectável
+                            4 - Inconclusivo
+                            5 - Não realizado
+                            """);
+                System.out.print("Resultado teste molecular rápido (1-5): ");
+                this.dadosEpidemiologicos.setResultadoTesteMolecularRapido(ResultadoTesteMolecularRapido.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println("""
+                            
+                            ------------------ RESULTADO TESTE DE SENSIBILIDADE ------------------
+                            1 - Resistente somente a isoniazida
+                            2 - Resistente somente a rifampicina
+                            3 - Resistente a isoniazida e rifampicina
+                            4 - Resistente a outras drogas de primeira linha
+                            5 - Sensível
+                            6 - Em andamento
+                            7 - Não realizado
+                            """);
+                System.out.print("Resultado teste de sensibilidade (1-7): ");
+                this.dadosEpidemiologicos.setResultadoTesteSensibilidade(ResultadoTesteSensibilidade.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
+            }
+        }
+
+        // --- DADOS DO TRATAMENTO ---
+        if (this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
             this.dadosTratamento = new DadosTratamento();
 
             System.out.println("\n--- DADOS DO TRATAMENTO ---");
@@ -403,30 +641,33 @@ public class NotificacaoTuberculose extends Notificacao {
                     System.out.println("Formato de data inválido. Use AAAA-MM-DD. Tente novamente!");
                 }
             }
+        } else {
+            this.dadosTratamento = new DadosTratamento();
         }
 
         // --- CONCLUSÃO / ENCERRAMENTO ---
         this.conclusaoEncerramento = new ConclusaoEncerramento();
 
-            System.out.println("\n--- CONCLUSÃO / ENCERRAMENTO ---");
+        System.out.println("\n--- CONCLUSÃO / ENCERRAMENTO ---");
 
-            while (true) {
-                try {
-                    System.out.println("""
+        while (true) {
+            try {
+                System.out.println("""
                             
                             ------------------ CLASSIFICAÇÃO FINAL ------------------
                             1 - Caso confirmado
                             2 - Caso descartado
                             """);
-                    System.out.print("Classificação final (1-2): ");
-                    this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
-                    break;
-                } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-                    System.out.println("Opção inválida, tente novamente!");
-                }
+                System.out.print("Classificação final (1-2): ");
+                this.conclusaoEncerramento.setClassificacaoFinal(ClassificacaoFinal.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                break;
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Opção inválida, tente novamente!");
             }
+        }
 
-        if(this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
+        if (this.conclusaoEncerramento.getClassificacaoFinal() == ClassificacaoFinal.CONFIRMADO ||
+                this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
             while (true) {
                 try {
                     System.out.print("Data de encerramento: ");
@@ -445,6 +686,6 @@ public class NotificacaoTuberculose extends Notificacao {
 
         System.out.println("\nNotificação de TUBERCULOSE registrada com sucesso!");
         Notificacao.todasAsNotificacoes.add(this);
-        GerenciadorDeArquivos.salvarNotificacao(this);}
-
+        GerenciadorDeArquivos.salvarNotificacao(this);
+    }
 }

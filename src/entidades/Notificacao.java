@@ -205,6 +205,17 @@ public abstract class Notificacao {
         int totalAmarela = 0;
         int totalIndigena = 0;
         int totalNaoInformadoRaca = 0;
+        int totalA = 0;
+        int totalFI = 0;
+        int totalFC = 0;
+        int totalMI = 0;
+        int totalMC = 0;
+        int totalSI = 0;
+        int totalSC = 0;
+        int totalPG = 0;
+        int totalM = 0;
+        int totalD = 0;
+        int totalNI = 0;
 
         System.out.println("\nTotal de notificações por agravo:");
         totalAgravo = notificacoesDoTipo.size();
@@ -260,8 +271,34 @@ public abstract class Notificacao {
 
         System.out.println("\nTotal de notificações por escolaridade:");
         for (Notificacao n : notificacoesDoTipo) {
-            System.out.println("-> " + n.getDadosIndividuais().getEscolaridade());
+            if (n.getDadosIndividuais().getEscolaridade() != null){
+                switch (n.getDadosIndividuais().getEscolaridade()) {
+                    case ANALFABETO -> totalA++;
+                    case FUNDAMENTAL_INCOMPLETO -> totalFI++;
+                    case FUNDAMENTAL_COMPLETO -> totalFC++;
+                    case MEDIO_INCOMPLETO -> totalMI++;
+                    case MEDIO_COMPLETO -> totalMC++;
+                    case SUPERIOR_INCOMPLETO -> totalSI++;
+                    case SUPERIOR_COMPLETO -> totalSC++;
+                    case POS_GRADUACAO -> totalPG++;
+                    case MESTRADO -> totalM++;
+                    case DOUTORADO -> totalD++;
+                    case NAO_INFORMADO -> totalNI++;
+                }
+            }
         }
+        System.out.println("Analfabeto: " + totalA);
+        System.out.println("Fundamental incompleto: " + totalFI);
+        System.out.println("Fundamental completo: " + totalFC);
+        System.out.println("Médio incompleto: " + totalMI);
+        System.out.println("Médio completo: " + totalMC);
+        System.out.println("Superior incompleto: " + totalSI);
+        System.out.println("Superior completo: " + totalSC);
+        System.out.println("Pós graduação: " + totalPG);
+        System.out.println("Mestrado: " + totalM);
+        System.out.println("Doutorado: " + totalD);
+        System.out.println("Não informado: " + totalNI);
+
 
         System.out.println("\nRelatório gerado!");
     }

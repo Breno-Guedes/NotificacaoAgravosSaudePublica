@@ -113,7 +113,7 @@ public class GerenciadorDeArquivos {
             append(sb, "logradouro", n.getDadosResidenciais().getLogradouro());
             append(sb, "numero", n.getDadosResidenciais().getNumero());
             append(sb, "cep", n.getDadosResidenciais().getCep());
-            append(sb, "ddd", n.getDadosResidenciais().getDdd());
+            append(sb, "ddd", n.getDadosResidenciais().getTelefone());
             append(sb, "zona", n.getDadosResidenciais().getZona());
         }
         if (n.getDadosEpidemiologicos() != null) {
@@ -121,16 +121,36 @@ public class GerenciadorDeArquivos {
             append(sb, "ocupacao", n.getDadosEpidemiologicos().getOcupacao());
             append(sb, "dataExame", n.getDadosEpidemiologicos().getDataExame());
             append(sb, "resultadoExame", n.getDadosEpidemiologicos().getResultadoExame());
-        }
-        if (n instanceof NotificacaoMalaria nm && nm.getDadosEpidemiologicos() != null) {
-            append(sb, "atividade", nm.getDadosEpidemiologicos().getAtividade());
-            append(sb, "tipoLamina", nm.getDadosEpidemiologicos().getTipoLamina());
-            append(sb, "sintomas", nm.getDadosEpidemiologicos().getSintomas());
-            append(sb, "parasitasMm3", nm.getDadosEpidemiologicos().getParasitasMetroCubico());
-            append(sb, "parasitemia", nm.getDadosEpidemiologicos().getParasitemia());
+
+            if (n instanceof NotificacaoTuberculose) {
+                DadosEpidemiologicos de = n.getDadosEpidemiologicos();
+                append(sb, "tipoEntrada", de.getTipoEntrada());
+                append(sb, "populacaoEspecial", de.getPopulacaoEspecial());
+                append(sb, "formaTuberculose", de.getFormaTuberculose());
+                append(sb, "localExtrapulmonar", de.getLocalExtrapulmonar());
+                append(sb, "resultadoBaciloscopiaDiagnostico", de.getResultadoBaciloscopiaDiagnostico());
+                append(sb, "resultadoRadiografiaTorax", de.getResultadoRadiografiaTorax());
+                append(sb, "resultadoHiv", de.getResultadoHiv());
+                append(sb, "resultadoHistopatologia", de.getResultadoHistopatologia());
+                append(sb, "resultadoCultura", de.getResultadoCultura());
+                append(sb, "resultadoTesteMolecularRapido", de.getResultadoTesteMolecularRapido());
+                append(sb, "resultadoTesteSensibilidade", de.getResultadoTesteSensibilidade());
+            }
+
+            if (n instanceof NotificacaoHanseniase) {
+                DadosEpidemiologicos de = n.getDadosEpidemiologicos();
+                append(sb, "modoEntradaHanseniase", de.getModoEntradaHanseniase());
+                append(sb, "modoDeteccao", de.getModoDeteccao());
+                append(sb, "resultadoBaciloscopiaHanseniase", de.getResultadoBaciloscopiaHanseniase());
+            }
         }
         if (n.getDadosTratamento() != null) {
             append(sb, "dataInicioTratamento", n.getDadosTratamento().getDataInicioTratamento());
+
+            if (n instanceof NotificacaoHanseniase) {
+                append(sb, "esquemaTerapeuticoInicial", n.getDadosTratamento().getEsquemaTerapeuticoInicial());
+            }
+
             if (n instanceof NotificacaoMalaria nm) {
                 append(sb, "esquemaTratamento", nm.getDadosTratamento().getEsquemaTratamento());
             }
@@ -138,6 +158,14 @@ public class GerenciadorDeArquivos {
         if (n.getConclusaoEncerramento() != null) {
             append(sb, "classificacaoFinal", n.getConclusaoEncerramento().getClassificacaoFinal());
             append(sb, "dataEncerramento", n.getConclusaoEncerramento().getDataEncerramento());
+
+            if (n instanceof NotificacaoHanseniase) {
+                ConclusaoEncerramento ce = n.getConclusaoEncerramento();
+                append(sb, "formaClinicaHanseniase", ce.getFormaClinicaHanseniase());
+                append(sb, "classificacaoOperacionalHanseniase", ce.getClassificacaoOperacionalHanseniase());
+                append(sb, "grauIncapacidadeFisica", ce.getGrauIncapacidadeFisica());
+            }
+
             if (n instanceof NotificacaoMalaria nm) {
                 append(sb, "autoctone", nm.getConclusaoEncerramento().getAutoctone());
                 append(sb, "provavelUfInfeccao", nm.getConclusaoEncerramento().getProvavelUFinfeccao());
@@ -182,6 +210,14 @@ public class GerenciadorDeArquivos {
         n.setDadosGerais(new DadosGerais());
         n.getDadosGerais().setAgravo(Doenca.HANSENIASE);
         preencherDadosComuns(n, dados);
+
+        applyIfPresent(dados, "modoEntradaHanseniase", v -> n.getDadosEpidemiologicos().setModoEntradaHanseniase(parseEnum(ModoEntradaHanseniase.class, v)));
+        applyIfPresent(dados, "modoDeteccao", v -> n.getDadosEpidemiologicos().setModoDeteccao(parseEnum(ModoDeteccaoCasoNovo.class, v)));
+        applyIfPresent(dados, "resultadoBaciloscopiaHanseniase", v -> n.getDadosEpidemiologicos().setResultadoBaciloscopiaHanseniase(parseEnum(ResultadoBaciloscopiaHanseniase.class, v)));
+        applyIfPresent(dados, "esquemaTerapeuticoInicial", v -> n.getDadosTratamento().setEsquemaTerapeuticoInicial(parseEnum(EsquemaTerapeuticoInicial.class, v)));
+        applyIfPresent(dados, "formaClinicaHanseniase", v -> n.getConclusaoEncerramento().setFormaClinicaHanseniase(parseEnum(FormaClinicaHanseniase.class, v)));
+        applyIfPresent(dados, "classificacaoOperacionalHanseniase", v -> n.getConclusaoEncerramento().setClassificacaoOperacionalHanseniase(parseEnum(ClassificacaoOperacionalHanseniase.class, v)));
+        applyIfPresent(dados, "grauIncapacidadeFisica", v -> n.getConclusaoEncerramento().setGrauIncapacidadeFisica(parseEnum(GrauIncapacidadeFisica.class, v)));
         return n;
     }
 
@@ -190,6 +226,18 @@ public class GerenciadorDeArquivos {
         n.setDadosGerais(new DadosGerais());
         n.getDadosGerais().setAgravo(Doenca.TUBERCULOSE);
         preencherDadosComuns(n, dados);
+
+        applyIfPresent(dados, "tipoEntrada", v -> n.getDadosEpidemiologicos().setTipoEntrada(parseEnum(TipoDeEntradaTuberculose.class, v)));
+        applyIfPresent(dados, "populacaoEspecial", v -> n.getDadosEpidemiologicos().setPopulacaoEspecial(parseEnum(PopNacoesEspeciais.class, v)));
+        applyIfPresent(dados, "formaTuberculose", v -> n.getDadosEpidemiologicos().setFormaTuberculose(parseEnum(FormaTuberculose.class, v)));
+        applyIfPresent(dados, "localExtrapulmonar", v -> n.getDadosEpidemiologicos().setLocalExtrapulmonar(parseEnum(LocalExtrapulmonar.class, v)));
+        applyIfPresent(dados, "resultadoBaciloscopiaDiagnostico", v -> n.getDadosEpidemiologicos().setResultadoBaciloscopiaDiagnostico(parseEnum(ResultadoBaciloscopiaDiagnostico.class, v)));
+        applyIfPresent(dados, "resultadoRadiografiaTorax", v -> n.getDadosEpidemiologicos().setResultadoRadiografiaTorax(parseEnum(ResultadoRadiografiaTorax.class, v)));
+        applyIfPresent(dados, "resultadoHiv", v -> n.getDadosEpidemiologicos().setResultadoHiv(parseEnum(ResultadoHIV.class, v)));
+        applyIfPresent(dados, "resultadoHistopatologia", v -> n.getDadosEpidemiologicos().setResultadoHistopatologia(parseEnum(ResultadoHistopatologia.class, v)));
+        applyIfPresent(dados, "resultadoCultura", v -> n.getDadosEpidemiologicos().setResultadoCultura(parseEnum(ResultadoCultura.class, v)));
+        applyIfPresent(dados, "resultadoTesteMolecularRapido", v -> n.getDadosEpidemiologicos().setResultadoTesteMolecularRapido(parseEnum(ResultadoTesteMolecularRapido.class, v)));
+        applyIfPresent(dados, "resultadoTesteSensibilidade", v -> n.getDadosEpidemiologicos().setResultadoTesteSensibilidade(parseEnum(ResultadoTesteSensibilidade.class, v)));
         return n;
     }
 
@@ -222,7 +270,7 @@ public class GerenciadorDeArquivos {
         applyIfPresent(dados, "logradouro", v -> n.getDadosResidenciais().setLogradouro(v));
         applyIfPresent(dados, "numero", v -> n.getDadosResidenciais().setNumero(v));
         applyIfPresent(dados, "cep", v -> n.getDadosResidenciais().setCep(v));
-        applyIfPresent(dados, "ddd", v -> n.getDadosResidenciais().setDdd(Integer.parseInt(v)));
+        applyIfPresent(dados, "telefone", v -> n.getDadosResidenciais().setTelefone(v));
         applyIfPresent(dados, "zona", v -> n.getDadosResidenciais().setZona(parseEnum(Zona.class, v)));
 
         applyIfPresent(dados, "dataInvestigacao", v -> n.getDadosEpidemiologicos().setDataInvestigacao(LocalDate.parse(v)));
@@ -232,8 +280,30 @@ public class GerenciadorDeArquivos {
 
         applyIfPresent(dados, "dataInicioTratamento", v -> n.getDadosTratamento().setDataInicioTratamento(LocalDate.parse(v)));
 
+        applyIfPresent(dados, "esquemaTerapeuticoInicial", v -> n.getDadosTratamento().setEsquemaTerapeuticoInicial(parseEnum(EsquemaTerapeuticoInicial.class, v)));
+
         applyIfPresent(dados, "classificacaoFinal", v -> n.getConclusaoEncerramento().setClassificacaoFinal(parseEnum(ClassificacaoFinal.class, v)));
         applyIfPresent(dados, "dataEncerramento", v -> n.getConclusaoEncerramento().setDataEncerramento(LocalDate.parse(v)));
+
+        applyIfPresent(dados, "formaClinicaHanseniase", v -> n.getConclusaoEncerramento().setFormaClinicaHanseniase(parseEnum(FormaClinicaHanseniase.class, v)));
+        applyIfPresent(dados, "classificacaoOperacionalHanseniase", v -> n.getConclusaoEncerramento().setClassificacaoOperacionalHanseniase(parseEnum(ClassificacaoOperacionalHanseniase.class, v)));
+        applyIfPresent(dados, "grauIncapacidadeFisica", v -> n.getConclusaoEncerramento().setGrauIncapacidadeFisica(parseEnum(GrauIncapacidadeFisica.class, v)));
+
+        applyIfPresent(dados, "tipoEntrada", v -> n.getDadosEpidemiologicos().setTipoEntrada(parseEnum(TipoDeEntradaTuberculose.class, v)));
+        applyIfPresent(dados, "populacaoEspecial", v -> n.getDadosEpidemiologicos().setPopulacaoEspecial(parseEnum(PopNacoesEspeciais.class, v)));
+        applyIfPresent(dados, "formaTuberculose", v -> n.getDadosEpidemiologicos().setFormaTuberculose(parseEnum(FormaTuberculose.class, v)));
+        applyIfPresent(dados, "localExtrapulmonar", v -> n.getDadosEpidemiologicos().setLocalExtrapulmonar(parseEnum(LocalExtrapulmonar.class, v)));
+        applyIfPresent(dados, "resultadoBaciloscopiaDiagnostico", v -> n.getDadosEpidemiologicos().setResultadoBaciloscopiaDiagnostico(parseEnum(ResultadoBaciloscopiaDiagnostico.class, v)));
+        applyIfPresent(dados, "resultadoRadiografiaTorax", v -> n.getDadosEpidemiologicos().setResultadoRadiografiaTorax(parseEnum(ResultadoRadiografiaTorax.class, v)));
+        applyIfPresent(dados, "resultadoHiv", v -> n.getDadosEpidemiologicos().setResultadoHiv(parseEnum(ResultadoHIV.class, v)));
+        applyIfPresent(dados, "resultadoHistopatologia", v -> n.getDadosEpidemiologicos().setResultadoHistopatologia(parseEnum(ResultadoHistopatologia.class, v)));
+        applyIfPresent(dados, "resultadoCultura", v -> n.getDadosEpidemiologicos().setResultadoCultura(parseEnum(ResultadoCultura.class, v)));
+        applyIfPresent(dados, "resultadoTesteMolecularRapido", v -> n.getDadosEpidemiologicos().setResultadoTesteMolecularRapido(parseEnum(ResultadoTesteMolecularRapido.class, v)));
+        applyIfPresent(dados, "resultadoTesteSensibilidade", v -> n.getDadosEpidemiologicos().setResultadoTesteSensibilidade(parseEnum(ResultadoTesteSensibilidade.class, v)));
+
+        applyIfPresent(dados, "modoEntradaHanseniase", v -> n.getDadosEpidemiologicos().setModoEntradaHanseniase(parseEnum(ModoEntradaHanseniase.class, v)));
+        applyIfPresent(dados, "modoDeteccao", v -> n.getDadosEpidemiologicos().setModoDeteccao(parseEnum(ModoDeteccaoCasoNovo.class, v)));
+        applyIfPresent(dados, "resultadoBaciloscopiaHanseniase", v -> n.getDadosEpidemiologicos().setResultadoBaciloscopiaHanseniase(parseEnum(ResultadoBaciloscopiaHanseniase.class, v)));
     }
 
     private static void applyIfPresent(Map<String, String> map, String key, Consumer<String> consumer) {
