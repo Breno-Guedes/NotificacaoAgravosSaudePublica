@@ -292,7 +292,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Digite o DDD e o telefone (apenas números): ");
+                System.out.print("Digite o DDD e o telefone: ");
                 String telefoneCompleto = sc.nextLine().trim();
 
                 if (telefoneCompleto.isEmpty()) {
@@ -541,6 +541,28 @@ public class NotificacaoMalaria extends Notificacao {
 
         System.out.println("\n--- CONCLUSÃO / ENCERRAMENTO ---");
 
+            while (true){
+                System.out.print("Matrícula do examinador: ");
+                String matriculaExaminador = sc.nextLine();
+                if (matriculaExaminador.isEmpty()) {
+                    System.out.println("O campo Matrícula do examinador é obrigatório, tente novamente!");
+                } else {
+                this.conclusaoEncerramento.setMatriculaExaminador(matriculaExaminador);
+                break;
+                }
+            }
+
+            while (true){
+                System.out.print("Nome do examinador: ");
+                String nomeExaminador = sc.nextLine();
+                if (nomeExaminador.isEmpty()) {
+                    System.out.println("O campo Nome do examinador é obrigatório, tente novamente!");
+                } else {
+                this.conclusaoEncerramento.setNomeExaminador(nomeExaminador);
+                break;
+                }
+            }
+
             while (true) {
                 try {
                     System.out.println("""
@@ -576,6 +598,17 @@ public class NotificacaoMalaria extends Notificacao {
             }
 
             if (this.conclusaoEncerramento.getAutoctone() == Autoctone.SIM || this.conclusaoEncerramento.getAutoctone() == Autoctone.NAO) {
+                while (true){
+                    System.out.print("Provável país de infecção: ");
+                    String provavelPaisInfeccao = sc.nextLine();
+                    if (provavelPaisInfeccao.isEmpty()) {
+                        System.out.println("O campo Provável país de infecção é obrigatório, tente novamente!");
+                    } else {
+                        this.conclusaoEncerramento.setProvavelPaisInfeccao(provavelPaisInfeccao);
+                        break;
+                    }
+                }
+
                 while (true) {
                     System.out.print("UF provável de infecção: ");
                     String ufProvavel = sc.nextLine();

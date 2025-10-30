@@ -327,15 +327,11 @@ public abstract class Notificacao {
     public DadosResidenciais getDadosResidenciais() {
         return dadosResidenciais;
     }
-    public void setDadosResidenciais(DadosResidenciais dadosResidenciais) {
-        this.dadosResidenciais = dadosResidenciais;
-    }
+    public void setDadosResidenciais(DadosResidenciais dadosResidenciais) {this.dadosResidenciais = dadosResidenciais;}
     public DadosEpidemiologicos getDadosEpidemiologicos() {
         return dadosEpidemiologicos;
     }
-    public void setDadosEpidemiologicos(DadosEpidemiologicos dadosEpidemiologicos) {
-        this.dadosEpidemiologicos = dadosEpidemiologicos;
-    }
+    public void setDadosEpidemiologicos(DadosEpidemiologicos dadosEpidemiologicos) {this.dadosEpidemiologicos = dadosEpidemiologicos;}
     public DadosTratamento getDadosTratamento() {
         return dadosTratamento;
     }
@@ -345,7 +341,5 @@ public abstract class Notificacao {
     public ConclusaoEncerramento getConclusaoEncerramento() {
         return conclusaoEncerramento;
     }
-    public void setConclusaoEncerramento(ConclusaoEncerramento conclusaoEncerramento) {
-        this.conclusaoEncerramento = conclusaoEncerramento;
-    }
+    public void setConclusaoEncerramento(ConclusaoEncerramento conclusaoEncerramento) {this.conclusaoEncerramento = conclusaoEncerramento;}
 }

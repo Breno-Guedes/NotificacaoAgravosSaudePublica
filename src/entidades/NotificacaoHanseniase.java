@@ -292,7 +292,7 @@ public class NotificacaoHanseniase extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Digite o DDD e o telefone (apenas números): ");
+                System.out.print("Digite o DDD e o telefone: ");
                 String telefoneCompleto = sc.nextLine().trim();
 
                 if (telefoneCompleto.isEmpty()) {
