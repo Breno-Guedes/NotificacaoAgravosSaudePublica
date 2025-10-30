@@ -47,7 +47,6 @@ NotificacaoAgravosSaudePublica/
 │   │   ├── ClassificacaoFinal.java
 │   │   ├── ClassificacaoOperacionalHanseniase.java
 │   │   ├── Doenca.java
-│   │   ├── DoencaAgravoAssociado.java
 │   │   ├── Escolaridade.java
 │   │   ├── EsquemaTerapeuticoInicial.java
 │   │   ├── EsquemaTratamento.java
@@ -71,8 +70,6 @@ NotificacaoAgravosSaudePublica/
 │   │   ├── ResultadoTesteMolecularRapido.java
 │   │   ├── ResultadoTesteSensibilidade.java
 │   │   ├── Sexo.java
-│   │   ├── SimNaoIgnorado.java
-│   │   ├── SimNaoIgnorado.java
 │   │   ├── Sintomas.java
 │   │   ├── TipoDeEntradaTuberculose.java
 │   │   ├── TiposLamina.java
