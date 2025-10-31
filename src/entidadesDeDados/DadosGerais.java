@@ -1,6 +1,6 @@
 package entidadesDeDados;
 
-import enums.*;
+import enums.gerais.Doenca;
 import java.time.LocalDate;
 
 public class DadosGerais {

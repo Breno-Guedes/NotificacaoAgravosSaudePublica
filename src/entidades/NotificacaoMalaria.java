@@ -1,8 +1,10 @@
 package entidades;
 
+import enums.gerais.*;
+import enums.malaria.*;
 import util.GerenciadorDeArquivos;
 import entidadesDeDados.*;
-import enums.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -590,7 +592,7 @@ public class NotificacaoMalaria extends Notificacao {
                             3 - Indeterminado
                             """);
                     System.out.print("Caso autóctone (1-3): ");
-                    this.conclusaoEncerramento.setAutoctone(Autoctone.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                    this.conclusaoEncerramento.setAutoctone(enums.malaria.Autoctone.values()[Integer.parseInt(sc.nextLine()) - 1]);
                     break;
                 } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                     System.out.println("Opção inválida, tente novamente!");

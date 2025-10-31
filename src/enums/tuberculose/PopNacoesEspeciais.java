@@ -1,0 +1,8 @@
+package enums.tuberculose;
+
+public enum PopNacoesEspeciais {
+    POPULACAO_PRIVADA_DE_LIBERDADE,
+    PROFISSIONAL_DE_SAUDE,
+    POPULACAO_EM_SITUACAO_DE_RUA,
+    IMIGRANTE
+}

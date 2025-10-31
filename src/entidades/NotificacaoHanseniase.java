@@ -1,8 +1,11 @@
 package entidades;
 
+import enums.gerais.*;
+import enums.hanseniase.*;
+import enums.hanseniase.ClassificacaoOperacionalHanseniase;
 import util.GerenciadorDeArquivos;
 import entidadesDeDados.*;
-import enums.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -473,7 +476,7 @@ public class NotificacaoHanseniase extends Notificacao {
                             3 - Outros esquemas substitutos
                             """);
                     System.out.print("Esquema terapêutico inicial (1-3): ");
-                    this.dadosTratamento.setEsquemaTerapeuticoInicial(EsquemaTerapeuticoInicial.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                    this.dadosTratamento.setEsquemaTerapeuticoInicial(enums.hanseniase.EsquemaTerapeuticoInicial.values()[Integer.parseInt(sc.nextLine()) - 1]);
                     break;
                 } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                     System.out.println("Opção inválida, tente novamente!");

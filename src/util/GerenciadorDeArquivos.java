@@ -2,7 +2,11 @@ package util;
 
 import entidades.*;
 import entidadesDeDados.*;
-import enums.*;
+import enums.gerais.*;
+import enums.hanseniase.*;
+import enums.hanseniase.ClassificacaoOperacionalHanseniase;
+import enums.malaria.*;
+import enums.tuberculose.*;
 
 import java.io.*;
 import java.nio.file.Files;

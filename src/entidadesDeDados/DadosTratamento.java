@@ -1,11 +1,10 @@
 package entidadesDeDados;
 
 import java.time.LocalDate;
-
-import enums.*;
+import enums.hanseniase.EsquemaTerapeuticoInicial;
+import enums.malaria.EsquemaTratamento;
 
 public class DadosTratamento {
-
     private EsquemaTratamento esquemaTratamento;
     private LocalDate dataInicioTratamento;
     private EsquemaTerapeuticoInicial esquemaTerapeuticoInicial;

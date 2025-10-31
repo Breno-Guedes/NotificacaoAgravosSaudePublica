@@ -1,12 +1,23 @@
 package entidadesDeDados;
 
-import enums.*;
+import enums.gerais.ResultadoExame;
+import enums.hanseniase.ModoDeteccaoCasoNovo;
+import enums.hanseniase.ModoEntradaHanseniase;
+import enums.hanseniase.ResultadoBaciloscopiaHanseniase;
+import enums.malaria.AtividadesUltimos15Dias;
+import enums.malaria.Parasitemia;
+import enums.malaria.Sintomas;
+import enums.malaria.TiposLamina;
+import enums.tuberculose.*;
+
 import java.time.LocalDate;
 
 public class DadosEpidemiologicos {
-
+    // Gerais
     private LocalDate dataInvestigacao;
     private String ocupacao;
+
+    // Malária
     private AtividadesUltimos15Dias atividade;
     private String dadosDoExame;
     private TiposLamina tipoLamina;
@@ -15,6 +26,8 @@ public class DadosEpidemiologicos {
     private ResultadoExame resultadoExame;
     private Float parasitasMetroCubico;
     private Parasitemia parasitemia;
+
+    // Tuberculose
     private TipoDeEntradaTuberculose tipoEntrada;
     private PopNacoesEspeciais populacaoEspecial;
     private FormaTuberculose formaTuberculose;
@@ -26,6 +39,8 @@ public class DadosEpidemiologicos {
     private ResultadoCultura resultadoCultura;
     private ResultadoTesteMolecularRapido resultadoTesteMolecularRapido;
     private ResultadoTesteSensibilidade resultadoTesteSensibilidade;
+
+    // Hanseníase
     private ModoEntradaHanseniase modoEntradaHanseniase;
     private ModoDeteccaoCasoNovo modoDeteccao;
     private ResultadoBaciloscopiaHanseniase resultadoBaciloscopiaHanseniase;
@@ -84,7 +99,6 @@ public class DadosEpidemiologicos {
     }
 
     // --- getters e setters --- //
-
     public LocalDate getDataInvestigacao() {
         return dataInvestigacao;
     }

@@ -1,6 +1,11 @@
 package entidadesDeDados;
 
-import enums.*;
+import enums.gerais.ClassificacaoFinal;
+import enums.hanseniase.ClassificacaoOperacionalHanseniase;
+import enums.hanseniase.FormaClinicaHanseniase;
+import enums.hanseniase.GrauIncapacidadeFisica;
+import enums.malaria.Autoctone;
+
 import java.time.LocalDate;
 
 public class ConclusaoEncerramento {

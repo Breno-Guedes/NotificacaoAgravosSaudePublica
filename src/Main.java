@@ -1,8 +1,8 @@
-import enums.*;
 import entidades.Notificacao;
 import entidades.NotificacaoHanseniase;
 import entidades.NotificacaoMalaria;
 import entidades.NotificacaoTuberculose;
+import enums.gerais.Doenca;
 import util.GerenciadorDeArquivos;
 import java.util.Scanner;
 

@@ -1,8 +1,9 @@
 package entidades;
 
+import enums.gerais.*;
+import enums.tuberculose.*;
 import util.GerenciadorDeArquivos;
 import entidadesDeDados.*;
-import enums.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -411,7 +412,7 @@ public class NotificacaoTuberculose extends Notificacao {
                             6 - Pós-óbito
                             """);
                 System.out.print("Tipo de entrada (1-6): ");
-                this.dadosEpidemiologicos.setTipoEntrada(TipoDeEntradaTuberculose.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                this.dadosEpidemiologicos.setTipoEntrada(enums.tuberculose.TipoDeEntradaTuberculose.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -433,7 +434,7 @@ public class NotificacaoTuberculose extends Notificacao {
                 if (line.isEmpty()) {
                     break;
                 }
-                this.dadosEpidemiologicos.setPopulacaoEspecial(PopNacoesEspeciais.values()[Integer.parseInt(line) - 1]);
+                this.dadosEpidemiologicos.setPopulacaoEspecial(enums.tuberculose.PopNacoesEspeciais.values()[Integer.parseInt(line) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -472,7 +473,7 @@ public class NotificacaoTuberculose extends Notificacao {
                                         10 - Outra
                                         """);
                                 System.out.print("Local extrapulmonar (1-10): ");
-                                this.dadosEpidemiologicos.setLocalExtrapulmonar(LocalExtrapulmonar.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                                this.dadosEpidemiologicos.setLocalExtrapulmonar(enums.tuberculose.LocalExtrapulmonar.values()[Integer.parseInt(sc.nextLine()) - 1]);
                                 break;
                             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                                 System.out.println("Opção inválida, tente novamente!");
@@ -497,7 +498,7 @@ public class NotificacaoTuberculose extends Notificacao {
                             4 - Não se aplica
                             """);
                 System.out.print("Resultado baciloscopia diagnóstico (1-4): ");
-                this.dadosEpidemiologicos.setResultadoBaciloscopiaDiagnostico(ResultadoBaciloscopiaDiagnostico.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                this.dadosEpidemiologicos.setResultadoBaciloscopiaDiagnostico(enums.tuberculose.ResultadoBaciloscopiaDiagnostico.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -515,7 +516,7 @@ public class NotificacaoTuberculose extends Notificacao {
                             4 - Não realizado
                             """);
                 System.out.print("Resultado radiografia (1-4): ");
-                this.dadosEpidemiologicos.setResultadoRadiografiaTorax(ResultadoRadiografiaTorax.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                this.dadosEpidemiologicos.setResultadoRadiografiaTorax(enums.tuberculose.ResultadoRadiografiaTorax.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -533,7 +534,7 @@ public class NotificacaoTuberculose extends Notificacao {
                             4 - Não realizado
                             """);
                 System.out.print("Resultado HIV (1-4): ");
-                this.dadosEpidemiologicos.setResultadoHiv(ResultadoHIV.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                this.dadosEpidemiologicos.setResultadoHiv(enums.tuberculose.ResultadoHIV.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -554,7 +555,7 @@ public class NotificacaoTuberculose extends Notificacao {
                 System.out.print("Resultado histopatologia (1-5) ou ENTER para pular: ");
                 String line = sc.nextLine();
                 if (line.isEmpty()) break;
-                this.dadosEpidemiologicos.setResultadoHistopatologia(ResultadoHistopatologia.values()[Integer.parseInt(line) - 1]);
+                this.dadosEpidemiologicos.setResultadoHistopatologia(enums.tuberculose.ResultadoHistopatologia.values()[Integer.parseInt(line) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -574,7 +575,7 @@ public class NotificacaoTuberculose extends Notificacao {
                 System.out.print("Resultado cultura (1-4) ou ENTER para pular: ");
                 String line = sc.nextLine();
                 if (line.isEmpty()) break;
-                this.dadosEpidemiologicos.setResultadoCultura(ResultadoCultura.values()[Integer.parseInt(line) - 1]);
+                this.dadosEpidemiologicos.setResultadoCultura(enums.tuberculose.ResultadoCultura.values()[Integer.parseInt(line) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -593,7 +594,7 @@ public class NotificacaoTuberculose extends Notificacao {
                             5 - Não realizado
                             """);
                 System.out.print("Resultado teste molecular rápido (1-5): ");
-                this.dadosEpidemiologicos.setResultadoTesteMolecularRapido(ResultadoTesteMolecularRapido.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                this.dadosEpidemiologicos.setResultadoTesteMolecularRapido(enums.tuberculose.ResultadoTesteMolecularRapido.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");
@@ -614,7 +615,7 @@ public class NotificacaoTuberculose extends Notificacao {
                             7 - Não realizado
                             """);
                 System.out.print("Resultado teste de sensibilidade (1-7): ");
-                this.dadosEpidemiologicos.setResultadoTesteSensibilidade(ResultadoTesteSensibilidade.values()[Integer.parseInt(sc.nextLine()) - 1]);
+                this.dadosEpidemiologicos.setResultadoTesteSensibilidade(enums.tuberculose.ResultadoTesteSensibilidade.values()[Integer.parseInt(sc.nextLine()) - 1]);
                 break;
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Opção inválida, tente novamente!");

@@ -1,6 +1,6 @@
 package entidadesDeDados;
 
-import enums.*;
+import enums.gerais.Zona;
 
 public class DadosResidenciais {
   private String uf;
@@ -13,7 +13,10 @@ public class DadosResidenciais {
   private String telefone;
   private Zona zona;
 
-  public DadosResidenciais(){}
+  public DadosResidenciais(){
+
+  }
+
   public DadosResidenciais(
       String uf,
       String municipio,

@@ -1,9 +1,9 @@
 package entidadesDeDados;
 
-import enums.Escolaridade;
-import enums.Gestante;
-import enums.RacaCor;
-import enums.Sexo;
+import enums.gerais.Escolaridade;
+import enums.gerais.Gestante;
+import enums.gerais.RacaCor;
+import enums.gerais.Sexo;
 
 import java.time.LocalDate;
 

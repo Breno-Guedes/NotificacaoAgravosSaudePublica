@@ -1,11 +1,12 @@
 package entidades;
 
 import entidadesDeDados.*;
-import enums.*;
+import enums.gerais.Doenca;
+import enums.gerais.Sexo;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -228,8 +229,8 @@ public abstract class Notificacao {
 
         System.out.println("\nTotal de notificações por sexo:");
         for (Notificacao n : notificacoesDoTipo) {
-            if (n.getDadosIndividuais().getSexo() == enums.Sexo.M) totalSexoM++;
-            if (n.getDadosIndividuais().getSexo() == enums.Sexo.F) totalSexoF++;
+            if (n.getDadosIndividuais().getSexo() == Sexo.M) totalSexoM++;
+            if (n.getDadosIndividuais().getSexo() == Sexo.F) totalSexoF++;
         }
         System.out.println("Masculino: " + totalSexoM);
         System.out.println("Feminino: " + totalSexoF);
