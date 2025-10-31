@@ -11,15 +11,6 @@
 
 ```plaintext
 NotificacaoAgravosSaudePublica/
-├── .idea/
-│   ├── .gitignore
-│   ├── copilot.data.migration.agent.xml
-│   ├── copilot.data.migration.ask2agent.xml
-│   ├── copilot.data.migration.edit.xml
-│   ├── material_theme_project_new.xml
-│   ├── misc.xml
-│   ├── modules.xml
-│   └── vcs.xml
 ├── docs/
 │   ├── ENTREGRA.md
 │   ├── README.md
@@ -42,43 +33,45 @@ NotificacaoAgravosSaudePublica/
 │   │   ├── DadosResidenciais.java
 │   │   └── DadosTratamento.java
 │   ├── enums/
-│   │   ├── AtividadesUltimos15Dias.java
-│   │   ├── Autoctone.java
-│   │   ├── ClassificacaoFinal.java
-│   │   ├── ClassificacaoOperacionalHanseniase.java
-│   │   ├── Doenca.java
-│   │   ├── Escolaridade.java
-│   │   ├── EsquemaTerapeuticoInicial.java
-│   │   ├── EsquemaTratamento.java
-│   │   ├── FormaClinicaHanseniase.java
-│   │   ├── FormaTuberculose.java
-│   │   ├── Gestante.java
-│   │   ├── GrauIncapacidadeFisica.java
-│   │   ├── LocalExtrapulmonar.java
-│   │   ├── ModoDeteccaoCasoNovo.java
-│   │   ├── ModoEntradaHanseniase.java
-│   │   ├── Parasitemia.java
-│   │   ├── PopNacoesEspeciais.java
-│   │   ├── RacaCor.java
-│   │   ├── ResultadoBaciloscopiaDiagnostico.java
-│   │   ├── ResultadoBaciloscopiaHanseniase.java
-│   │   ├── ResultadoCultura.java
-│   │   ├── ResultadoExame.java
-│   │   ├── ResultadoHistopatologia.java
-│   │   ├── ResultadoHIV.java
-│   │   ├── ResultadoRadiografiaTorax.java
-│   │   ├── ResultadoTesteMolecularRapido.java
-│   │   ├── ResultadoTesteSensibilidade.java
-│   │   ├── Sexo.java
-│   │   ├── Sintomas.java
-│   │   ├── TipoDeEntradaTuberculose.java
-│   │   ├── TiposLamina.java
-│   │   └── Zona.java
-│   ├── util/
-│   │   └── GerenciadorDeArquivos.java
-│   └── Main.java
-├── .gitignore
-└── poo-agravos-de-notificacao.iml
+│   │   ├── gerais/
+│   │   │   ├── ClassificacaoFinal.java
+│   │   │   ├── Doenca.java
+│   │   │   ├── Escolaridade.java
+│   │   │   ├── Gestante.java
+│   │   │   ├── RacaCor.java
+│   │   │   ├── ResultadoExame.java
+│   │   │   ├── Sexo.java
+│   │   │   └── Zona.java
+│   │   ├── hanseniase/
+│   │   │   ├── ClassificacaoOperacionalHanseniase.java
+│   │   │   ├── EsquemaTerapeuticoInicial.java
+│   │   │   ├── FormaClinicaHanseniase.java
+│   │   │   ├── GrauIncapacidadeFisica.java
+│   │   │   ├── ModoDeteccaoCasoNovo.java
+│   │   │   ├── ModoEntradaHanseniase.java
+│   │   │   └── ResultadoBaciloscopiaHanseniase.java
+│   │   ├── malaria/
+│   │   │   ├── AtividadesUltimos15Dias.java
+│   │   │   ├── Autoctone.java
+│   │   │   ├── EsquemaTratamento.java
+│   │   │   ├── Parasitemia.java
+│   │   │   ├── Sintomas.java
+│   │   │   └── TiposLamina.java
+│   │   └── tuberculose/
+│   │       ├── FormaTuberculose.java
+│   │       ├── LocalExtrapulmonar.java
+│   │       ├── PopNacoesEspeciais.java
+│   │       ├── ResultadoBaciloscopiaDiagnostico.java
+│   │       ├── ResultadoCultura.java
+│   │       ├── ResultadoHIV.java
+│   │       ├── ResultadoHistopatologia.java
+│   │       ├── ResultadoRadiografiaTorax.java
+│   │       ├── ResultadoTesteMolecularRapido.java
+│   │       ├── ResultadoTesteSensibilidade.java
+│   │       └── TipoDeEntradaTuberculose.java
+├── util/
+│   └── GerenciadorDeArquivos.java
+└── Main.java
 ```
 
 # Descrição
