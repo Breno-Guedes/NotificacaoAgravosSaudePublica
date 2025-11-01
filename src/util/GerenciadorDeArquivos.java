@@ -7,7 +7,6 @@ import enums.hanseniase.*;
 import enums.hanseniase.ClassificacaoOperacionalHanseniase;
 import enums.malaria.*;
 import enums.tuberculose.*;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -117,7 +116,7 @@ public class GerenciadorDeArquivos {
             append(sb, "logradouro", n.getDadosResidenciais().getLogradouro());
             append(sb, "numero", n.getDadosResidenciais().getNumero());
             append(sb, "cep", n.getDadosResidenciais().getCep());
-            append(sb, "ddd", n.getDadosResidenciais().getTelefone());
+            append(sb, "telefone", n.getDadosResidenciais().getTelefone());
             append(sb, "zona", n.getDadosResidenciais().getZona());
         }
         if (n.getDadosEpidemiologicos() != null) {
@@ -172,6 +171,7 @@ public class GerenciadorDeArquivos {
 
             if (n instanceof NotificacaoMalaria nm) {
                 append(sb, "autoctone", nm.getConclusaoEncerramento().getAutoctone());
+                append(sb, "provavelPaisInfeccao", nm.getConclusaoEncerramento().getProvavelPaisInfeccao());
                 append(sb, "provavelUfInfeccao", nm.getConclusaoEncerramento().getProvavelUFinfeccao());
                 append(sb, "provavelMunicipioInfeccao", nm.getConclusaoEncerramento().getProvavelMunicipioInfeccao());
             }
@@ -204,6 +204,7 @@ public class GerenciadorDeArquivos {
         applyIfPresent(dados, "parasitemia", v -> n.getDadosEpidemiologicos().setParasitemia(parseEnum(Parasitemia.class, v)));
         applyIfPresent(dados, "esquemaTratamento", v -> n.getDadosTratamento().setEsquemaTratamento(parseEnum(EsquemaTratamento.class, v)));
         applyIfPresent(dados, "autoctone", v -> n.getConclusaoEncerramento().setAutoctone(parseEnum(Autoctone.class, v)));
+        applyIfPresent(dados, "provavelPaisInfeccao", v -> n.getConclusaoEncerramento().setProvavelPaisInfeccao(v));
         applyIfPresent(dados, "provavelUfInfeccao", v -> n.getConclusaoEncerramento().setProvavelUFinfeccao(v));
         applyIfPresent(dados, "provavelMunicipioInfeccao", v -> n.getConclusaoEncerramento().setProvavelMunicipioInfeccao(v));
         return n;
@@ -283,12 +284,10 @@ public class GerenciadorDeArquivos {
         applyIfPresent(dados, "resultadoExame", v -> n.getDadosEpidemiologicos().setResultadoExame(parseEnum(ResultadoExame.class, v)));
 
         applyIfPresent(dados, "dataInicioTratamento", v -> n.getDadosTratamento().setDataInicioTratamento(LocalDate.parse(v)));
-
         applyIfPresent(dados, "esquemaTerapeuticoInicial", v -> n.getDadosTratamento().setEsquemaTerapeuticoInicial(parseEnum(EsquemaTerapeuticoInicial.class, v)));
 
         applyIfPresent(dados, "classificacaoFinal", v -> n.getConclusaoEncerramento().setClassificacaoFinal(parseEnum(ClassificacaoFinal.class, v)));
         applyIfPresent(dados, "dataEncerramento", v -> n.getConclusaoEncerramento().setDataEncerramento(LocalDate.parse(v)));
-
         applyIfPresent(dados, "formaClinicaHanseniase", v -> n.getConclusaoEncerramento().setFormaClinicaHanseniase(parseEnum(FormaClinicaHanseniase.class, v)));
         applyIfPresent(dados, "classificacaoOperacionalHanseniase", v -> n.getConclusaoEncerramento().setClassificacaoOperacionalHanseniase(parseEnum(ClassificacaoOperacionalHanseniase.class, v)));
         applyIfPresent(dados, "grauIncapacidadeFisica", v -> n.getConclusaoEncerramento().setGrauIncapacidadeFisica(parseEnum(GrauIncapacidadeFisica.class, v)));
