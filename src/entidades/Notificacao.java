@@ -227,15 +227,7 @@ public abstract class Notificacao {
             System.out.println("-> " + n.getDadosResidenciais().getBairro());
         }
 
-        System.out.println("\nTotal de notificações por sexo:");
-        for (Notificacao n : notificacoesDoTipo) {
-            if (n.getDadosIndividuais().getSexo() == Sexo.M) totalSexoM++;
-            if (n.getDadosIndividuais().getSexo() == Sexo.F) totalSexoF++;
-        }
-        System.out.println("Masculino: " + totalSexoM);
-        System.out.println("Feminino: " + totalSexoF);
-
-        System.out.println("\nTotal de notificações por idade: ");
+        System.out.println("\nTotal de notificações por faixa etária: ");
         for(Notificacao n : notificacoesDoTipo){
             if(n.getDadosIndividuais().getIdade() >= 0 && n.getDadosIndividuais().getIdade() <= 18){
                 criancaAdolescente++;
@@ -249,6 +241,14 @@ public abstract class Notificacao {
         System.out.println("Total de crianças e adolescentes: " + criancaAdolescente);
         System.out.println("Total de Adultos: " + adulto);
         System.out.println("Total de idosos: " + idoso);
+
+        System.out.println("\nTotal de notificações por sexo:");
+        for (Notificacao n : notificacoesDoTipo) {
+            if (n.getDadosIndividuais().getSexo() == Sexo.M) totalSexoM++;
+            if (n.getDadosIndividuais().getSexo() == Sexo.F) totalSexoF++;
+        }
+        System.out.println("Masculino: " + totalSexoM);
+        System.out.println("Feminino: " + totalSexoF);
 
         System.out.println("\nTotal de notificações por raça/cor:");
         for (Notificacao n : notificacoesDoTipo) {

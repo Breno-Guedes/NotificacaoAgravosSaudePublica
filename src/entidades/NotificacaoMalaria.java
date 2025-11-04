@@ -27,7 +27,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data da Notificação: ");
+                System.out.print("Data da Notificação (AAAA-MM-DD): ");
                 String dataNotificacaoStr = sc.nextLine();
                 if (dataNotificacaoStr.isEmpty()) {
                     System.out.println("O campo Data da Notificação é obrigatório, tente novamente!");
@@ -75,7 +75,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data dos primeiros sintomas: ");
+                System.out.print("Data dos primeiros sintomas (AAAA-MM-DD): ");
                 String dataSintomasStr = sc.nextLine();
                 if (dataSintomasStr.isEmpty()) {
                     System.out.println("O campo Data dos primeiros sintomas é obrigatório, tente novamente!");
@@ -106,7 +106,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data de nascimento: ");
+                System.out.print("Data de nascimento (AAAA-MM-DD): ");
                 String dataNascimentoStr = sc.nextLine();
                 if (dataNascimentoStr.isEmpty()) {
                     System.out.println("O campo Data de nascimento é obrigatório, tente novamente!");
@@ -343,7 +343,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data da Investigação: ");
+                System.out.print("Data da Investigação (AAAA-MM-DD): ");
                 String dataInvestigacaoStr = sc.nextLine();
                 if (dataInvestigacaoStr.isEmpty()) {
                     System.out.println("O campo Data da Investigação é obrigatório, tente novamente!");
@@ -429,7 +429,7 @@ public class NotificacaoMalaria extends Notificacao {
 
         while (true) {
             try {
-                System.out.print("Data do exame: ");
+                System.out.print("Data do exame (AAAA-MM-DD): ");
                 String dataExameStr = sc.nextLine();
                 if (dataExameStr.isEmpty()) {
                     System.out.println("O campo Data do exame é obrigatório, tente novamente!");
@@ -524,7 +524,7 @@ public class NotificacaoMalaria extends Notificacao {
 
             while (true) {
                 try {
-                    System.out.print("Data de início do tratamento: ");
+                    System.out.print("Data de início do tratamento (AAAA-MM-DD): ");
                     String dataInicioStr = sc.nextLine();
                     if (dataInicioStr.isEmpty()) {
                         System.out.println("O campo Data de início do tratamento é obrigatório, tente novamente!");
@@ -638,7 +638,7 @@ public class NotificacaoMalaria extends Notificacao {
                     this.dadosEpidemiologicos.getResultadoExame() == ResultadoExame.POSITIVO) {
                 while (true) {
                     try {
-                        System.out.print("Data de encerramento: ");
+                        System.out.print("Data de encerramento (AAAA-MM-DD): ");
                         String dataEncerramentoStr = sc.nextLine();
                         if (dataEncerramentoStr.isEmpty()) {
                             System.out.println("O campo Data de encerramento é obrigatório, tente novamente!");
