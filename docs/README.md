@@ -57,20 +57,20 @@ NotificacaoAgravosSaudePublica/
 │   │   │   ├── Parasitemia.java
 │   │   │   ├── Sintomas.java
 │   │   │   └── TiposLamina.java
-│   │   └── tuberculose/
-│   │       ├── FormaTuberculose.java
-│   │       ├── LocalExtrapulmonar.java
-│   │       ├── PopNacoesEspeciais.java
-│   │       ├── ResultadoBaciloscopiaDiagnostico.java
-│   │       ├── ResultadoCultura.java
-│   │       ├── ResultadoHIV.java
-│   │       ├── ResultadoHistopatologia.java
-│   │       ├── ResultadoRadiografiaTorax.java
-│   │       ├── ResultadoTesteMolecularRapido.java
-│   │       ├── ResultadoTesteSensibilidade.java
-│   │       └── TipoDeEntradaTuberculose.java
-├── util/
-│   └── GerenciadorDeArquivos.java
+│   │   ├── tuberculose/
+│   │   │   ├── FormaTuberculose.java
+│   │   │   ├── LocalExtrapulmonar.java
+│   │   │   ├── PopNacoesEspeciais.java
+│   │   │   ├── ResultadoBaciloscopiaDiagnostico.java
+│   │   │   ├── ResultadoCultura.java
+│   │   │   ├── ResultadoHIV.java
+│   │   │   ├── ResultadoHistopatologia.java
+│   │   │   ├── ResultadoRadiografiaTorax.java
+│   │   │   ├── ResultadoTesteMolecularRapido.java
+│   │   │   ├── ResultadoTesteSensibilidade.java
+│   │   │   └── TipoDeEntradaTuberculose.java
+│   │   └──util/
+│   │       └── GerenciadorDeArquivos.java
 └── Main.java
 ```
 
